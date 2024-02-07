@@ -1,0 +1,109 @@
+{{ define "main" }}
+
+<style>
+    ::-webkit-scrollbar {
+        width: 0.66vw;
+        background-color: #151515;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background-color: gray;
+        border-radius: 5px;
+    }
+
+    .food {
+
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+
+    }
+
+    .recipe {
+        color: navajowhite;
+        scrollbar-color: gray #151515;
+        font-family: sans-serif;
+        font-size: medium;
+    }
+
+
+
+
+
+    h2 a {
+        text-decoration: none;
+        color: rgb(255, 136, 0);
+    }
+
+    @media (max-width: 55em) {
+        .food {
+            grid-template-columns: 1fr;
+            gap: 10px;
+        }
+
+        .recipe {
+            padding: 10px;
+            font-size: large;
+            column-count: 2;
+        }
+    }
+</style>
+
+<div
+    style="width: 100%; border: outset yellow; overflow: hidden; height: 30%; -webkit-border-radius: 20px; border-radius: 20px; margin-bottom: 20px;">
+    <center>You may also use the tags tab to quickly browse for an appropriate food:</center>
+    <ul>
+        {{ $tags := dict }}
+
+        {{ range .Pages }}
+        {{ $postTags := .Params.tags }}
+        {{ range $postTags }}
+        {{ with index $tags . }}
+        {{ $tags = merge $tags (dict . (slice ($.RelPermalink))) }}
+        {{ else }}
+        {{ $newTag := dict . (slice ($.RelPermalink)) }}
+        {{ $tags = merge $tags $newTag }}
+        {{ end }}
+        {{ end }}
+        {{ end }}
+
+        {{ $separator := "" }}
+        {{ range $tag, $pages := $tags }}
+        <li style="display: inline-block;">{{ $separator }}<a href="{{"/tags/" | relLangURL }}{{ $tag | urlize }}"
+                style="text-decoration: none; color: yellow;">{{ $tag }}</a></li>
+        {{ $separator = " || " }}
+        {{ end }}
+    </ul>
+</div>
+{{ if not (.Params.disableListTemplate) }}
+<ul class="food">
+    {{ range .Pages }}
+    <li class="recipe">
+        <h2><a href="{{ .Permalink }}">{{ .Title }}</a></h2>
+    </li>
+    {{ end }}
+</ul>
+{{.Content}}
+
+
+
+<h1 style="color: yellow;"><u>Cooking with swiftness!</u></h1>
+
+<div>
+    <p>Even at the age of 27, my cooking skills are not to be trusted, though that should not
+        prevent me from making this
+        recipes
+        section. Here you will find recipes that I have personally crafted by intuition and liked, or those that I have
+        seen
+        somewhere and tested personally. As a bonus, I will also include cooking schedules that aim to minimize the
+        makespan of the entire steps
+        chain.
+        <a href="scheduling">Click here to learn more about the thought process.</a>
+    </p>
+
+
+</div>
+
+
+{{ end }}
+{{ end }}

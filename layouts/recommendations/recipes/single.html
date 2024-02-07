@@ -1,0 +1,149 @@
+{{ define "main" }}
+
+<style>
+    .flex-container {
+        display: flex;
+        justify-content: flex-start;
+        align-items: stretch;
+
+        height: 100%;
+        padding: 15px;
+        gap: 5px;
+    }
+
+    .flex-container>div {
+        background-color: #3d3d3d;
+        border: 3px solid #000000;
+        border-radius: 5px;
+        padding: 8px;
+    }
+
+    .item1 {
+        align-self: auto;
+        display: inline-block;
+        /* Make the container only as wide as its content */
+        max-height: 100%;
+
+    }
+
+    .item2 {
+        flex-grow: 0;
+        align-self: center;
+        min-width: 220px;
+        /* Set a minimum width for item2 */
+
+        /* Set the order to 1 to appear on top on mobile */
+    }
+
+    .info {
+        display: flex;
+        flex-direction: column;
+        background-color: grey;
+        max-height: 100%;
+        padding: 15px;
+        gap: 5px;
+    }
+
+    .info>div {
+        background: #979797;
+        border: 3px solid #000000;
+        border-radius: 5px;
+        padding: 8px;
+    }
+
+    @media (max-width: 767px) {
+
+        /* Adjust styles for mobile devices */
+        .flex-container {
+            flex-direction: column;
+        }
+
+        .item2 {
+            align-self: center;
+            min-width: unset;
+            /* Remove the minimum width on mobile */
+        }
+    }
+</style>
+{{ $tasks := .Params.tasks }}
+<script>
+
+
+var processSteps = [
+    {{- range $index, $task := $tasks -}}
+      {
+        id: {{ $task.id }},
+        name: "{{ $task.name }}",
+        machine: "{{ $task.machine }}",
+        processing_time: {{ $task.processing_time }},
+        dependencies: [{{ range $task.dependencies }}{{ . }},{{ end }}],
+      },
+    {{- end -}}
+  ];
+
+
+    function calculateSchedule(processSteps) {
+        const tasks = processSteps.map((step, index) => ({
+            id: index + 1,
+            name: step.name,
+            machine: step.machine,
+            processingTime: step.processing_time,
+            dependencies: step.dependencies,
+            startTime: 0,
+            finishTime: 0,
+        }));
+
+        for (const task of tasks) {
+            task.startTime = Math.max(...task.dependencies.map(depId => tasks[depId - 1].finishTime), 0);
+            task.finishTime = task.startTime + task.processingTime;
+        }
+
+        const makespan = Math.max(...tasks.map(task => task.finishTime));
+
+        return { makespan, tasks };
+    }
+
+
+    const scheduleResult = calculateSchedule(processSteps);
+    console.log('Makespan:', scheduleResult.makespan);
+    console.log('Task Schedule:');
+    scheduleResult.tasks.forEach(task => {
+        console.log(`${task.name}: Start Time ${task.startTime}, Finish Time ${task.finishTime}, Machine ${task.machine}`);
+    });
+
+
+
+</script>
+
+
+
+<div class="flex-container">
+    <div class="item2">
+        <div class="info">
+            <img src="/{{.File.BaseFileName}}.png" width="100%" height="100%" loading="lazy"
+                style="border: 3px solid #000000;">
+            <div class="ingredients">
+                <h2 id="ingredientsTitle" style="text-align: center;">{{.Title}}</h2>
+                <p>{{ with .Params.ingredients }}
+                <ul id="ingredientsList">
+                    {{ range . }}
+                    <li>{{ . }}</li>
+                    {{ end }}
+                </ul>
+                {{ end }}</p>
+            </div>
+        </div>
+    </div>
+    <div class="item1">
+        {{.Content}}
+
+    </div>
+
+
+
+
+</div>
+
+
+
+{{ end }}

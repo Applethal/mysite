@@ -1,0 +1,163 @@
+img {
+	max-width: 100%;
+}
+
+header h1 {
+	text-align: center;
+}
+
+footer {
+	text-align: center;
+	clear: both;
+}
+
+/* For TAGLIST.HTML */
+.taglist {
+	text-align: center;
+	clear: both;
+}
+
+/* For NEXTPREV.HTML */
+#nextprev {
+	/* The container for both the previous and next articles. */
+}
+
+#prevart {
+	float: left;
+	text-align: left;
+}
+
+#nextart {
+	float: right;
+	text-align: right;
+}
+
+#nextart,
+#prevart {
+	max-width: 33%;
+}
+
+
+.navigation {
+	text-align: center;
+	font-family: 'PT Sans', sans-serif;
+	text-align: center;
+	background-color: #5C3A37;
+	color: aliceblue;
+
+}
+
+.navigation ul {
+	list-style: none;
+	padding: 0;
+	display: flex;
+	justify-content: center;
+
+
+}
+
+.navigation ul li {
+	margin: 0 10px;
+	text-decoration: none;
+}
+
+.Top {
+	background-color: #332929;
+	color: rgb(255, 255, 255);
+	font-size: smaller;
+
+}
+
+
+body {
+	background-color: #B8252F;
+	font-family: 'PT Sans', sans-serif;
+	margin: 0;
+	transition: background-color 0.3s ease;
+}
+
+
+.navigation {
+	text-align: center;
+}
+
+.navigation ul {
+	list-style: none;
+	padding: 0;
+	display: flex;
+	justify-content: center;
+}
+
+.navigation ul li {
+	margin: 0 10px;
+}
+
+.contact {
+	border-radius: 50%;
+	height: 50px;
+	width: 50px;
+	margin: 0 10px;
+}
+
+.social-icons a[href="/index.xml"] img {
+	border-radius: 50%;
+	height: 50px;
+	width: 50px;
+	margin: 0 10px;
+}
+
+
+.main {
+	background-color: #332929;
+	color: aliceblue;
+	margin-left: calc((100% - 90vw) / 2);
+	margin-right: calc((100% - 90vw) / 2);
+	padding: 10px;
+	text-align: left;
+	min-height: 100vh;
+
+
+}
+
+.posts {
+	width: 100%;
+	border: outset yellow;
+	overflow: hidden;
+	height: 30%;
+	-webkit-border-radius: 20px;
+	border-radius: 20px;
+	margin-bottom: 20px;
+	transition: background-color 0.3s;
+}
+
+.posts:hover {
+	background-color: #d1cfbd;
+}
+
+.posttitle {
+	margin: 10px;
+	font-size: 30px;
+
+}
+
+.posttext {
+	margin: 20px 0 20px 20px;
+}
+
+.postpicture {
+	height: 120px;
+	width: 120px;
+	padding: 40px;
+	float: right;
+}
+
+.postdate {
+	color: grey;
+	margin-left: 10px;
+	font-size: 18px;
+}
+
+.intro {
+	text-align: center;
+	margin-bottom: 50px;
+}

@@ -1,0 +1,64 @@
+{{ define "title" -}}
+{{ .Title | title }}
+{{- end }}
+
+{{ define "main" -}}
+{{ .Content }}
+
+
+
+
+
+
+
+
+
+
+<ul style="padding: 0;">
+    {{ range (.Paginator 5).Pages }}
+    <a href="{{ .RelPermalink }}" style="color: yellow; text-decoration: none;">
+        <div class="posts">
+            <li>
+                <div class="posttitle">
+                    {{ .Title }}
+                </div>
+                <div class="postpicture">
+                    <img src="{{.Title}}.png">
+                </div>
+                <div class="postdate">
+                    {{ if .Param "datesinlist" }}<time datetime="{{ .Date.Format " 2006-01-02T15:04:05Z07:00" }}">{{
+                        .Date.Format "2006 Jan 02" }}</time> &ndash;{{ end }}
+                </div>
+                {{- if .Param "authorsinlist" }}
+                {{ with .Params.authors }}
+                by {{ delimit . ", " " and " }}
+                {{ end }}
+                {{ end }}
+                <div class="posttext" style="color: white;">
+                    {{.Summary}}
+                </div>
+            </li>
+        </div>
+    </a>
+    {{ end }}
+</ul>
+
+{{ if gt (.Paginator 5).TotalPages 1 }}
+<center>
+    <div class="pagination">
+        {{ with .Paginator }}
+        <nav class="pagination-nav">
+            {{ if .HasPrev }}
+            <a href="{{.Prev.URL}}" style="color: yellow;">&laquo; Newer</a>
+            {{ end }}
+            <span class="page-number">Page {{.PageNumber}} of {{.TotalPages}}</span>
+            {{ if .HasNext }}
+            <a href="{{.Next.URL}}" style="color: yellow;">Older &raquo;</a>
+            {{ end }}
+        </nav>
+        {{ end }}
+    </div>
+</center>
+{{ end }}
+
+{{ end }}

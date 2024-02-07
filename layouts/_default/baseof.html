@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="{{ .Site.Language }}">
+
+<head>
+	<title>{{ if not .IsHome }}{{ .Title | title }} | {{ end }}{{ .Site.Title }}</title>
+	<link rel="canonical" href="{{ .Site.BaseURL }}">
+	<link rel='alternate' type='application/rss+xml' title="{{ .Site.Title }} RSS" href='/index.xml'>
+	<link rel='stylesheet' type='text/css' href='/style.css'>
+	{{ with .Site.Params.favicon }}
+	<link rel="icon" href="{{ . }}">
+	<!-- <script src="scripts.js" defer></script> -->
+	{{- $jsScript := resources.Get "js/scripts.js" -}}
+	{{- with $jsScript -}}
+	<script src="{{ $jsScript.RelPermalink }}" defer></script>
+	{{- end }}
+	{{ end -}}
+	<meta name="description" content="{{ with .Params.description }}{{ . }}{{ else }}{{ .Summary }}{{ end }}">
+	{{ if isset .Params "tags" }}
+	<meta name="keywords" content="{{ with .Params.tags }}{{ delimit . " , " }}{{ end }}">
+	{{ end -}}
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="robots" content="index, follow">
+	<meta charset="utf-8">
+
+
+	{{ if .Param "math" }}
+	{{ partialCached "math.html" . }}
+	{{ end }}
+
+</head>
+
+
+<body>
+
+	<main>
+		<!-------------------------- header---------------------- -->
+		<header>
+
+			{{ partial "header.html" . }}
+		</header>
+		<div class="navigation">
+			<ul>
+				<li><a href="/" style="text-decoration: none; color: yellow;">Home</a></li>
+				<li><a href="/blog/" style="text-decoration: none; color: yellow;">Blogs</a></li>
+				<li><a href="/recommendations/" style="text-decoration: none; color: yellow;">Recommendations</a></li>
+				<li><a href="/sandbox/" style="text-decoration: none; color: yellow;">Sandbox</a></li>
+				<li><a href="/misc/" style="text-decoration: none; color: yellow;">Misc</a></li>
+			</ul>
+		</div>
+
+
+
+
+		<!-------------------------- header---------------------- -->
+		<article>
+
+		</article>
+	</main>
+	<div class="main">
+		{{ block "main" . }}
+		<center>
+			<h1 id="tag_{{ .Title }}">{{ block "title" . }}{{ end }}</h1>
+		</center>
+		{{ .Content }}
+		{{ end }}
+		<div style="margin-top: 50px;">{{ if .Param "nextprev" }}{{ partial "nextprev.html" . -}}{{ end -}}
+			{{ if .Param "taglist" }}{{ partial "taglist.html" . }}{{ end -}}</div>
+	</div>
+
+	{{ block "footer" . }}
+
+	<!-------------------------- footer--------------------------------------------------------------------////-->
+
+	<footer>
+		<div class="social-icons">
+			<a href="https://twitter.com/Applethal" target="_blank"><img src="/Twitter_Logo_WhiteOnBlue-2425288278.png"
+					alt="" class="contact"></a>
+			<a href="https://open.spotify.com/user/n568fkbbfbobfth4ad6sq9yei" target="_blank"><img
+					src="/Spotify_App_Logo.svg.png" alt="" class="contact"></a>
+			<a href="https://github.com/Applethal" target="_blank"><img src="/GitHub-Mark.png" class="contact"></a>
+			{{- if .Param "showrss" }}<a href="/index.xml"><img src="/Generic_Feed-icon.svg.png" class="contact"
+					alt="RSS Feed" title="Subscribe via RSS for updates."></a>{{ end }}
+		</div>
+
+
+	</footer>
+
+	<!-------------------------- footer--------------------------------------------------------------- -->
+	{{ end }}
+</body>
+
+</html>
