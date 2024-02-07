@@ -1,0 +1,61 @@
+---
+type: "recommendations/recipes"
+title: "Chinese soup"
+date: 2024-01-30
+tags: ["soup", "yajing"]
+
+
+ingredients: ["tomatoes", "garlic","sprig onion", "eggs", "salt", "sugar", "sesame oil", "vegetable oil", "water", "soy sauce"]
+tasks:
+  - id: 1
+    name: Chop tomatoes and garlic in dices
+    machine: Human
+    processing_time: 5
+    dependencies: []
+  - id: 2
+    name: heat the pan with little oil
+    machine: Stove
+    processing_time: 5
+    dependencies: [1]
+  - id: 3
+    name: put the garlic in the pan and stir
+    machine: Human
+    processing_time: 2
+    dependencies: [2]
+  - id: 4
+    name: put the tomatoes in the pan and stir
+    machine: Human
+    processing_time: 5
+    dependencies: [3]
+  - id: 5
+    name: add water and let it boil
+    machine: Human
+    processing_time: 5
+    dependencies: [4]
+  - id: 6
+    name: mix the eggs and cut the spring onion
+    machine: Human
+    processing_time: 5
+    dependencies: [5]
+  - id: 7
+    name: season the soup with salt, sugar, soy sauce, and sesame oil
+    machine: Human
+    processing_time: 1
+    dependencies: [6]
+  - id: 8
+    name: put the mixed eggs in while stirring the soup
+    machine: Human
+    processing_time: 1
+    dependencies: [7]
+  - id: 9
+    name: put some spring onions in
+    machine: Human
+    processing_time: 10
+    dependencies: [8]
+  - id: 10
+    name: serve
+    machine: Human
+    processing_time: 10
+    dependencies: [9]
+---
+Cook yajing and enjoy!
