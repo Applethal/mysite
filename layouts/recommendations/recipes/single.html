@@ -112,12 +112,7 @@ var processSteps = [
     }
 
 
-    const scheduleResult = calculateSchedule(processSteps);
-    console.log('Makespan:', scheduleResult.makespan);
-    console.log('Task Schedule:');
-    scheduleResult.tasks.forEach(task => {
-        console.log(`${task.name}: Start Time ${task.startTime}, Finish Time ${task.finishTime}, Machine ${task.machine}`);
-    });
+    
 
 
 
@@ -156,32 +151,51 @@ var processSteps = [
     <script type="text/tikz">
         \begin{tikzpicture}[scale=0.7]
         \draw[->] (0,0) -- (14,0) node[right] {};
-    \draw[->] (0,0) -- (0,7) node[above] {};
-    
-    
-    \draw[gray!50, dashed, step=1] (0,0) grid (14,7);
-    
-    
-    \foreach \x in {1,2,...,14} {
-        \draw (\x,0) -- (\x,-0.2) node[below] {\x};
-    }
-    
-    
-    \foreach \y/\label in {3/Human, 7/Stove} {
-        \draw (0,\y) -- (-0.2,\y) node[left] {\label};
-    }
-    \draw[fill=blue!30] (0,0) rectangle (3,3) node[pos=0.5] {Egg};
-    \draw[fill=blue!30] (3,0) rectangle (5,3) node[pos=.5] {Cut};
-    
-    \draw[fill=blue!30] (5,3) rectangle (10,7) node[pos=.5] {Cook};
-    \draw[fill=blue!30] (5,0) rectangle (8,3) node[pos=.5] {Bread};
-    \draw[fill=blue!30] (10,0) rectangle (12,3) node[pos=.5] {Stuff};
-    \draw[fill=red!30, line width=1.5pt] (12,0) rectangle (12,7) node[pos=1, right=2mm] {$C_{max} = 12$};
+        \draw[->] (0,0) -- (0,7) node[above] {};
+        \draw[gray!50, dashed, step=1] (0,0) grid (14,7);
+        \foreach \x in {1,2,...,14} {
+            \draw (\x,0) -- (\x,-0.2) node[below] {\x};
+        }
+        \foreach \y/\label in {3/Human, 7/Stove} {
+            \draw (0,\y) -- (-0.2,\y) node[left] {\label};
+        }
+        \draw[fill=blue!30] (0,0) rectangle (3,3) node[pos=0.5] {Egg};
+        \draw[fill=blue!30] (3,0) rectangle (5,3) node[pos=.5] {Cut};
+        \draw[fill=blue!30] (5,3) rectangle (10,7) node[pos=.5] {Cook};
+        \draw[fill=blue!30] (5,0) rectangle (8,3) node[pos=.5] {Bread};
+        \draw[fill=blue!30] (10,0) rectangle (12,3) node[pos=.5] {Stuff};
+        
+    </script>
+    <script type="text/javascript">
+        function updateschedule() {
+            const scheduleResult = calculateSchedule(processSteps);
+            console.log('Makespan:', scheduleResult.makespan);
+            console.log('Task Schedule:');
+            scheduleResult.tasks.forEach(task => {
+                console.log(`${task.name}: Start Time ${task.startTime}, Finish Time ${task.finishTime}, Machine ${task.machine}`);
+            });
 
-    
-    \end{tikzpicture}
-      </script>
+            var tikzCook = document.querySelector('.tikzs script');
+            var tikzContent = tikzCook.innerHTML;
+            // tikzContent += `\n\\draw[->] (0,0) -- (${scheduleResult.makespan},0) node[right] {};`;
+            // tikzContent += `\n\\draw[->] (0,0) -- (0, 3 * ${tasks.machine.size} ) node[above] {}; `;
+            
+            
+            
+            
+            tikzContent += `\n\\draw[->] (0,0) -- (${scheduleResult.makespan},0) node[right] {};`;
+            tikzContent += `\n\\draw [fill=blue!30] (14,0) rectangle (16,3) node[pos=.5] {test};`;
+            
+            tikzContent += `\n\\end{tikzpicture}`;
 
+            
+            tikzCook.innerHTML = tikzContent;
+        }
+
+        
+        updateschedule();
+    </script>
 </div>
+
 
 {{ end }}
