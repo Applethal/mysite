@@ -8,6 +8,7 @@
         margin: auto;
         padding: 20px;
         border-radius: 8px;
+        
 
     }
     .flex-container {
@@ -71,6 +72,8 @@
             
         }
     }
+    
+    
 </style>
 <script src="https://tikzjax.com/v1/tikzjax.js"></script>
 {{ $tasks := .Params.tasks }}
@@ -111,7 +114,7 @@ var processSteps = [
         return { makespan, tasks };
     }
 
-
+    
     
 
 
@@ -150,20 +153,12 @@ var processSteps = [
 <div class="tikzs">
     <script type="text/tikz">
         \begin{tikzpicture}[scale=0.7]
-        \draw[->] (0,0) -- (14,0) node[right] {};
-        \draw[->] (0,0) -- (0,7) node[above] {};
-        \draw[gray!50, dashed, step=1] (0,0) grid (14,7);
-        \foreach \x in {1,2,...,14} {
-            \draw (\x,0) -- (\x,-0.2) node[below] {\x};
-        }
-        \foreach \y/\label in {3/Human, 7/Stove} {
-            \draw (0,\y) -- (-0.2,\y) node[left] {\label};
-        }
-        \draw[fill=blue!30] (0,0) rectangle (3,3) node[pos=0.5] {Egg};
-        \draw[fill=blue!30] (3,0) rectangle (5,3) node[pos=.5] {Cut};
-        \draw[fill=blue!30] (5,3) rectangle (10,7) node[pos=.5] {Cook};
-        \draw[fill=blue!30] (5,0) rectangle (8,3) node[pos=.5] {Bread};
-        \draw[fill=blue!30] (10,0) rectangle (12,3) node[pos=.5] {Stuff};
+        
+        
+        
+       
+        
+       
         
     </script>
     <script type="text/javascript">
@@ -174,17 +169,39 @@ var processSteps = [
             scheduleResult.tasks.forEach(task => {
                 console.log(`${task.name}: Start Time ${task.startTime}, Finish Time ${task.finishTime}, Machine ${task.machine}`);
             });
+            tasks = scheduleResult.tasks;
+            
 
             var tikzCook = document.querySelector('.tikzs script');
             var tikzContent = tikzCook.innerHTML;
             // tikzContent += `\n\\draw[->] (0,0) -- (${scheduleResult.makespan},0) node[right] {};`;
             // tikzContent += `\n\\draw[->] (0,0) -- (0, 3 * ${tasks.machine.size} ) node[above] {}; `;
             
+            let uniquemachines = new Set();
+            processSteps.forEach(obj => {
+                uniquemachines.add(obj.machine);
+            });
+            let machinescount = uniquemachines.size; 
+            console.log(machinescount)
             
-            
-            
+            let space = 3;
             tikzContent += `\n\\draw[->] (0,0) -- (${scheduleResult.makespan},0) node[right] {};`;
-            tikzContent += `\n\\draw [fill=blue!30] (14,0) rectangle (16,3) node[pos=.5] {test};`;
+            tikzContent += `\n\\draw[->] (0,0) -- (0,${machinescount * 3}) node[above] {};`;
+            tikzContent += `\n\\draw[gray!50, dashed, step=1] (0,0) grid (${scheduleResult.makespan},${machinescount * 3});`;
+            tikzContent += `\\foreach \\x in {1,2,...,${scheduleResult.makespan}} {`;
+tikzContent += `\n\t\\draw (\\x,0) -- (\\x,-0.2) node[below] {\\x};`;
+tikzContent += `\n}`;
+
+            uniquemachines.forEach(element => {
+            tikzContent += `\n\\draw (0,${space}) -- (-0.2,${space}) node[left] {${element}};`
+            space +=3
+            });
+            
+            tasks.forEach(element => {
+    let uniqueMachinesArray = Array.from(uniquemachines)
+    let machineOrder = uniqueMachinesArray.indexOf(element.machine) * 3
+    tikzContent += `\n\\draw[fill=blue!30] (${element.startTime},${machineOrder}) rectangle (${element.finishTime},${machineOrder + 3}) node[pos=.5] {${element.id}};`
+});
             
             tikzContent += `\n\\end{tikzpicture}`;
 
