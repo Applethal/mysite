@@ -12,11 +12,12 @@
     }
 
     .food {
+        display: block;
 
-        display: flex;
-        flex-direction: column;
         width: 100%;
+        column-count: 2;
 
+        font-size: large;
     }
 
     .recipe {
@@ -24,27 +25,27 @@
         scrollbar-color: gray #151515;
         font-family: sans-serif;
         font-size: medium;
+        margin: 0;
+
     }
 
 
 
 
 
-    h2 a {
-        text-decoration: none;
-        color: rgb(255, 136, 0);
-    }
+
+
+
 
     @media (max-width: 55em) {
         .food {
-            grid-template-columns: 1fr;
-            gap: 10px;
+            column-count: 1;
+
         }
 
         .recipe {
             padding: 10px;
             font-size: large;
-            column-count: 2;
         }
     }
 </style>
@@ -55,7 +56,8 @@
     <ul>
         {{ $tags := dict }}
 
-        {{ range .Pages }}
+        {{ $filteredPages := where .Pages "Type" "!=" "recommendations/recipes" }}
+        {{ range $filteredPages }}
         {{ $postTags := .Params.tags }}
         {{ range $postTags }}
         {{ with index $tags . }}
@@ -75,11 +77,12 @@
         {{ end }}
     </ul>
 </div>
+
 {{ if not (.Params.disableListTemplate) }}
 <ul class="food">
     {{ range .Pages }}
     <li class="recipe">
-        <h2><a href="{{ .Permalink }}">{{ .Title }}</a></h2>
+        <a href="{{ .Permalink }}" style="text-decoration: none; color: rgb(201, 100, 18);">{{ .Title }}</a>
     </li>
     {{ end }}
 </ul>
@@ -98,7 +101,7 @@
         somewhere and tested personally. As a bonus, I will also include cooking schedules that aim to minimize the
         makespan of the entire steps
         chain.
-        <a href="scheduling">Click here to learn more about the thought process.</a>
+        <a href="/sandbox/scheduling/" style="color: yellow;">Click here to learn more about the thought process.</a>
     </p>
 
 
