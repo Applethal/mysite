@@ -11,9 +11,20 @@
                 return Math.floor(Math.random() * (max - min + 1)) + min; // The maximum is inclusive and the minimum is inclusive
             }
 
-            var numImages = {{ len (readDir "static/random") }}; // Count the number of images in the "static/random" folder
+            var imagesData = [
+                {{ range readDir "static/random" }}
+            "{{ .Name }}",
+                {{ end }}
+            ];
 
-            document.write('<img src="/random/image' + getRandomInt(1, numImages) + '.png" alt="Random Image">');
+            var randomIndex = getRandomInt(0, imagesData.length - 1);
+            var randomImage = imagesData[randomIndex];
+
+
+            var caption = (randomImage === "neko-neco.gif") ? "You have layed your eyes on a rare image, consider yourself lucky!" : "";
+
+            document.write('<img src="/random/' + randomImage + '" alt="Random Image">');
+            document.write('<p>' + caption + '</p>');
         </script>
     </div>
 </main>
