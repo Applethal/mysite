@@ -2,9 +2,17 @@
 <main id="main">
     <p>It appears that you chose to enter the realm of the unknown, even I don't know what lies beyond the link that you
         are attempting to visit. Fret not, however, you shall not leave this page with empty hands. Here's some eye
-        candy
-        for you:</p>
+        candy for you:</p>
+    <div style="text-align: center;">
+        <script type="text/javascript">
+            function getRandomInt(min, max) {
+                min = Math.ceil(min);
+                max = Math.floor(max);
+                return Math.floor(Math.random() * (max - min + 1)) + min; // The maximum is inclusive and the minimum is inclusive
+            }
 
-
+            document.write('<img src="/random/image' + getRandomInt(1, 3) + '.png" alt="Random Image">');
+        </script>
+    </div>
 </main>
 {{ end }}
