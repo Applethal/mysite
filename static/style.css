@@ -65,6 +65,7 @@ footer {
 	background-color: #332929;
 	color: rgb(255, 255, 255);
 	font-size: smaller;
+	margin-bottom: 10px;
 
 }
 
@@ -79,6 +80,9 @@ body {
 
 .navigation {
 	text-align: center;
+	padding-top: 1px;
+	padding-bottom: 1px;
+	margin-bottom: 10px;
 }
 
 .navigation ul {
@@ -90,6 +94,18 @@ body {
 
 .navigation ul li {
 	margin: 0 10px;
+	font-size: 16px;
+
+}
+
+
+@media only screen and (max-width: 600px) {
+	.navigation ul li {
+		font-size: 14px;
+
+		margin: 0 10px;
+
+	}
 }
 
 .contact {
@@ -115,6 +131,7 @@ body {
 	padding: 10px;
 	text-align: left;
 	min-height: 100vh;
+	margin-bottom: 10px;
 
 
 }

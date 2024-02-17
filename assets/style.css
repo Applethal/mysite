@@ -115,6 +115,7 @@ body {
 	padding: 10px;
 	text-align: left;
 	min-height: 100vh;
+	margin-bottom: 10px;
 
 
 }
@@ -147,7 +148,7 @@ body {
 .postpicture {
 	height: 120px;
 	width: 120px;
-	padding: 40px;
+	padding: 0 40px 40px 0;
 	float: right;
 }
 
