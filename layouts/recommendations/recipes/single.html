@@ -80,45 +80,49 @@
 {{ $tasks := .Params.tasks }}
 <script>
 
-
 var processSteps = [
-    {{- range $index, $task := $tasks -}}
-      {
-        id: {{ $task.id }},
-        name: "{{ $task.name }}",
-        machine: "{{ $task.machine }}",
-        processing_time: {{ $task.processing_time }},
-        dependencies: [{{ range $task.dependencies }}{{ . }},{{ end }}],
-      },
-    {{- end -}}
-  ];
+  {{- range $index, $task := $tasks -}}
+    {
+      id: {{ $task.id }},
+      name: "{{ $task.name }}",
+      machine: "{{ $task.machine }}",
+      processing_time: {{ $task.processing_time }},
+      dependencies: [{{ range $task.dependencies }}{{ . }},{{ end }}],
+    },
+  {{- end -}}
+];
 
+function calculateSchedule(processSteps) {
+    const tasks = processSteps.map((step, index) => ({
+        id: index + 1,
+        name: step.name,
+        machine: step.machine,
+        processingTime: step.processing_time,
+        dependencies: step.dependencies,
+        startTime: 0,
+        finishTime: 0,
+        lst: 0, 
+    }));
 
-    function calculateSchedule(processSteps) {
-        const tasks = processSteps.map((step, index) => ({
-            id: index + 1,
-            name: step.name,
-            machine: step.machine,
-            processingTime: step.processing_time,
-            dependencies: step.dependencies,
-            startTime: 0,
-            finishTime: 0,
-        }));
-
-        for (const task of tasks) {
-            task.startTime = Math.max(...task.dependencies.map(depId => tasks[depId - 1].finishTime), 0);
-            task.finishTime = task.startTime + task.processingTime;
-        }
-
-        const makespan = Math.max(...tasks.map(task => task.finishTime));
-
-        return { makespan, tasks };
+    for (const task of tasks) {
+        task.startTime = Math.max(...task.dependencies.map(depId => tasks[depId - 1].finishTime), 0);
+        task.finishTime = task.startTime + task.processingTime;
     }
 
-    
-    
+    for (const task of tasks) {
+        const successors = tasks.filter(t => t.dependencies.includes(task.id));
+        const lstCandidates = successors.map(s => s.startTime - task.processingTime);
+        task.lst = Math.max(...lstCandidates, 0);
+    }
+
+    const makespan = Math.max(...tasks.map(task => task.finishTime));
+
+    return { makespan, tasks };
+}
 
 
+const scheduleResult = calculateSchedule(processSteps);
+console.log(scheduleResult);
 
 </script>
 
@@ -175,8 +179,7 @@ var processSteps = [
 
             var tikzCook = document.querySelector('.tikzs script');
             var tikzContent = tikzCook.innerHTML;
-            // tikzContent += `\n\\draw[->] (0,0) -- (${scheduleResult.makespan},0) node[right] {};`;
-            // tikzContent += `\n\\draw[->] (0,0) -- (0, 3 * ${tasks.machine.size} ) node[above] {}; `;
+            
             
             let uniquemachines = new Set();
             processSteps.forEach(obj => {
@@ -201,7 +204,14 @@ tikzContent += `\n}`;
             tasks.forEach(element => {
     let uniqueMachinesArray = Array.from(uniquemachines)
     let machineOrder = uniqueMachinesArray.indexOf(element.machine) * 3
-    tikzContent += `\n\\draw[fill=blue!30] (${element.startTime},${machineOrder}) rectangle (${element.finishTime},${machineOrder + 3}) node[pos=.5] {${element.id}};`
+
+    let slackTime = element.lst - element.startTime;
+    
+    if (slackTime > 0 && element.id !== tasks.length) {
+        tikzContent += `\n\\draw[fill=red!30] (${element.startTime},${machineOrder}) rectangle (${element.finishTime},${machineOrder + 3}) node[pos=.5] {${element.id}};`
+    } else {
+        tikzContent += `\n\\draw[fill=blue!30] (${element.startTime},${machineOrder}) rectangle (${element.finishTime},${machineOrder + 3}) node[pos=.5] {${element.id}};`
+    }
 });
             
             tikzContent += `\n\\end{tikzpicture}`;

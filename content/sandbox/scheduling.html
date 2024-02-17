@@ -257,8 +257,9 @@ border-radius: 8px;">
           </script>
 </div>
 
-<p>I will not attribute any processing times. Check out the list scheduling algorithm for precedence graphs if you want
-    to learn more about it but it should be like a walk in the park. </p>
+<p>I will not attribute any processing times, just picture an arbitrary set of numbers. Check out the list scheduling
+    algorithm for precedence graphs if you want
+    to learn more about it but it should be just a walk in the park. </p>
 
 
 
@@ -284,7 +285,7 @@ border-radius: 8px;">
     \draw[fill=blue!30] (3,0) rectangle (5,3) node[pos=.5] {Cut};
     
     \draw[fill=blue!30] (5,3) rectangle (10,7) node[pos=.5] {Cook};
-    \draw[fill=blue!30] (5,0) rectangle (8,3) node[pos=.5] {Bread};
+    \draw[fill=red!30] (5,0) rectangle (8,3) node[pos=.5] {Bread};
     \draw[fill=blue!30] (10,0) rectangle (12,3) node[pos=.5] {Stuff};
     \draw[fill=red!30, line width=1.5pt] (12,0) rectangle (12,7) node[pos=1, right=2mm] {$C_{max} = 12$};
 
@@ -293,6 +294,15 @@ border-radius: 8px;">
       </script>
 
 </div>
+
+Tasks marked with red can be shifted to the right as long as they do not introduce any extra time to the total makespan.
+You can cut the bread anytime you want between the 5th and 7th
+time mark. These are called Slack times, or in other literature as buffer times. They are computed using the following
+formula:
+\[ LST(i) = \max_{(j',p_{i_j}) \in S(j)} \left( s_{i,j} - p_{i,j} \right) \quad \forall i \in V \]
+
+
+
 
 <u>
     <h2>Small observation:</h2>
@@ -327,52 +337,65 @@ made me write less code.
             <button class="copy-button" onclick="copyCode()">Copy Code</button>
         </div>
         <pre>
-            <code>{{ $tasks := .Params.tasks }} 
+            <code>{{ $tasks := .Params.tasks }}
                 <span class="keyword">var</span> <span class="variable">processSteps</span> = [
-        {{- range $index, $task := $tasks -}}
-          {
-            id: {{ $task.id }},
-            name: "{{ $task.name }}",
-            machine: "{{ $task.machine }}",
-            processing_time: {{ $task.processing_time }},
-            dependencies: [{{ range $task.dependencies }}{{ . }},{{ end }}],
-          },
-        {{- end -}}
-      ];
-    
-    
-        <span class="function">function</span> <span class="variable">calculateSchedule</span>(<span class="variable">processSteps</span>) {
-            const <span class="variable">tasks</span> = <span class="variable">processSteps</span>.map((<span class="variable">step</span>, <span class="variable">index</span>) => ({
-                id: <span class="variable">index</span> + 1,
-                name: <span class="variable">step.name</span>,
-                machine: <span class="variable">step.machine</span>,
-                processingTime: <span class="variable">step.processing_time</span>,
-                dependencies: <span class="variable">step.dependencies</span>,
-                startTime: 0,
-                finishTime: 0,
-            }));
-    
-            for (const <span class="variable">task</span> of <span class="variable">tasks</span>) {
-                <span class="variable">task.startTime</span> = Math.max(...<span class="variable">task.dependencies</span>.map(<span class="variable">depId</span> => <span class="variable">tasks[depId - 1]</span>.finishTime), 0);
-                <span class="variable">task.finishTime</span> = <span class="variable">task.startTime</span> + <span class="variable">task.processingTime</span>;
-            }
-    
-            const <span class="variable">makespan</span> = Math.max(...<span class="variable">tasks</span>.map(<span class="variable">task</span> => <span class="variable">task.finishTime</span>));
-    
-            return { <span class="variable">makespan</span>, <span class="variable">tasks</span> };
-        }
-    
-    
-        const <span class="variable">scheduleResult</span> = <span class="variable">calculateSchedule</span>(<span class="variable">processSteps</span>);
-        console.log('Makespan:', <span class="variable">scheduleResult</span>.<span class="variable">makespan</span>);
-        console.log('Task Schedule:');
-        <span class="variable">scheduleResult</span>.<span class="variable">tasks</span>.forEach(<span class="variable">task</span> => {
-            console.log(`${<span class="variable">task.name</span>}: Start Time ${<span class="variable">task.startTime</span>}, Finish Time ${<span class="variable">task.finishTime</span>}, Machine ${<span class="variable">task.machine</span>}`);
-        });
-            </code>
-        </pre>
+  {{- range $index, $task := $tasks -}}
+    {
+      id: {{ $task.id }},
+      name: "{{ $task.name }}",
+      machine: "{{ $task.machine }}",
+      processing_time: {{ $task.processing_time }},
+      dependencies: [{{ range $task.dependencies }}{{ . }},{{ end }}],
+    },
+  {{- end -}}
+];
+
+<span class="function">function</span> <span class="variable">calculateSchedule</span>(<span class="variable">processSteps</span>) {
+    const <span class="variable">tasks</span> = <span class="variable">processSteps</span>.map((<span class="variable">step</span>, <span class="variable">index</span>) => ({
+        id: <span class="variable">index</span> + 1,
+        name: <span class="variable">step.name</span>,
+        machine: <span class="variable">step.machine</span>,
+        processingTime: <span class="variable">step.processing_time</span>,
+        dependencies: <span class="variable">step.dependencies</span>,
+        startTime: 0,
+        finishTime: 0,
+        lst: 0,
+    }));
+
+    for (const <span class="variable">task</span> of <span class="variable">tasks</span>) {
+        <span class="variable">task.startTime</span> = Math.max(...<span class="variable">task.dependencies</span>.map(<span class="variable">depId</span> => <span class="variable">tasks[depId - 1]</span>.finishTime), 0);
+        <span class="variable">task.finishTime</span> = <span class="variable">task.startTime</span> + <span class="variable">task.processingTime</span>;
+    }
+
+    for (const <span class="variable">task</span> of <span class="variable">tasks</span>) {
+        const <span class="variable">successors</span> = <span class="variable">tasks</span>.filter(<span class="variable">t</span> => <span class="variable">t.dependencies</span>.includes(<span class="variable">task.id</span>));
+        const <span class="variable">lstCandidates</span> = <span class="variable">successors</span>.map(<span class="variable">s</span> => <span class="variable">s.startTime</span> - <span class="variable">task.processingTime</span>);
+        <span class="variable">task.lst</span> = Math.max(...<span class="variable">lstCandidates</span>, 0);
+    }
+
+    const <span class="variable">makespan</span> = Math.max(...<span class="variable">tasks</span>.map(<span class="variable">task</span> => <span class="variable">task.finishTime</span>));
+
+    return { <span class="variable">makespan</span>, <span class="variable">tasks</span> };
+}
+
+const <span class="variable">scheduleResult</span> = <span class="variable">calculateSchedule</span>(<span class="variable">processSteps</span>);
+console.log(<span class="string">'Makespan:'</span>, <span class="variable">scheduleResult</span>.<span class="variable">makespan</span>);
+console.log(<span class="string">'Task Schedule:'</span>);
+<span class="variable">scheduleResult</span>.<span class="variable">tasks</span>.forEach(<span class="variable">task</span> => {
+    console.log(<span class="string">`${</span><span class="variable">task.name</span>}:</span> Start Time ${<span class="variable">task.startTime</span>}, Finish Time ${<span class="variable">task.finishTime</span>}, Machine ${<span class="variable">task.machine</span>}`);
+});
+</code>
+</pre>
     </div>
 </center>
+
+
+
+
+
+
+
+
 
 
 <h1>Can a better formulation beat my makespan ?</h1>
@@ -387,4 +410,8 @@ made me write less code.
     <h2>11/02/2024</h2>
     Conception added, every recipe now has a Gantt chart detailing the processing steps while aiming to minimize the
     makespan subject to a kitchen setup.
+    <h2>17/02/2024</h2>
+    Added Slack times indicators! Tasks marked with red can be shifted freely as long as they do not exceed their latest
+    finishing times!
+
 </details>
