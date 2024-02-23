@@ -11,6 +11,7 @@
         
 
     }
+
     .flex-container {
         display: flex;
         justify-content: flex-start;
@@ -20,6 +21,16 @@
         padding: 15px;
         gap: 5px;
     }
+    .tikzs svg {
+    overflow: visible !important;
+    position: static !important;
+}
+.scroll-container {
+    overflow-x: auto;
+    width: 100%;
+    max-width: 100%;
+}
+
 
     .flex-container>div {
         background-color: #3d3d3d;
@@ -154,7 +165,7 @@ console.log(scheduleResult);
 
 
 </div>
-
+<div class="scroll-container">
 <div class="tikzs">
     <script type="text/tikz">
         \begin{tikzpicture}[scale=0.7]
@@ -224,6 +235,6 @@ tikzContent += `\n}`;
         updateschedule();
     </script>
 </div>
-
+</div>
 
 {{ end }}
