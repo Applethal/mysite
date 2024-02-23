@@ -14,9 +14,18 @@ Date: 2024-02-11
         margin: auto;
         padding: 20px;
         border-radius: 8px;
+        overflow-x: auto;
 
     }
-
+    .tikzs svg {
+    overflow: visible !important;
+    position: static !important;
+}
+    .scroll-container {
+    overflow-x: auto;
+    width: 100%;
+    max-width: 100%;
+}
 
 
     .dark-mode {
@@ -149,6 +158,7 @@ Date: 2024-02-11
     amount of constraints that I have to account for. What I will be proposing is the work of an
     amateur, as of yet: \(P \,||\, \text{prec} \,,M_{j}||\, C_{\text{max}}\).</p>
 
+<h3> Small disclaimer: </h3> This work is purely an implementation of the scheduling theory. My intentions were focused only on seeing if I can pull this off with some Javascript / Hugo. Although it was a success, I need to add that you should cook at your own pace, never rush things up!
 
 <h1>The machines setup</h1>
 
@@ -178,6 +188,7 @@ Date: 2024-02-11
     <li>unnamed toast machine</li>
     <li>Me and my hand tools</li>
 </ul>
+
 
 </p>
 <h1>The formulation:</h1>
@@ -262,7 +273,7 @@ border-radius: 8px;">
     to learn more about it but it should be just a walk in the park. </p>
 
 
-
+<div class="scroll-container">
 <div class="tikzs">
     <script type="text/tikz">
         \begin{tikzpicture}[scale=0.7]
@@ -292,7 +303,7 @@ border-radius: 8px;">
     
     \end{tikzpicture}
       </script>
-
+</div>
 </div>
 
 Tasks marked with red can be shifted to the right as long as they do not introduce any extra time to the total makespan.
@@ -388,7 +399,6 @@ console.log(<span class="string">'Task Schedule:'</span>);
 </pre>
     </div>
 </center>
-
 
 
 
