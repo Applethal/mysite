@@ -6,6 +6,7 @@
         background-color: #151515;
     }
 
+
     ::-webkit-scrollbar-thumb {
         background-color: gray;
         border-radius: 5px;
@@ -54,28 +55,22 @@
     style="width: 100%; border: outset yellow; overflow: hidden; height: 30%; -webkit-border-radius: 20px; border-radius: 20px; margin-bottom: 20px;">
     <center>You may also use the tags tab to quickly browse for an appropriate food:</center>
     <ul>
-        {{ $tags := dict }}
-
-        {{ $filteredPages := where .Pages "Type" "!=" "recommendations/recipes" }}
-        {{ range $filteredPages }}
-        {{ $postTags := .Params.tags }}
-        {{ range $postTags }}
-        {{ with index $tags . }}
-        {{ $tags = merge $tags (dict . (slice ($.RelPermalink))) }}
-        {{ else }}
-        {{ $newTag := dict . (slice ($.RelPermalink)) }}
-        {{ $tags = merge $tags $newTag }}
-        {{ end }}
-        {{ end }}
-        {{ end }}
-
-        {{ $separator := "" }}
-        {{ range $tag, $pages := $tags }}
-        <li style="display: inline-block;">{{ $separator }}<a href="{{"/tags/" | relLangURL }}{{ $tag | urlize }}"
-                style="text-decoration: none; color: yellow;">{{ $tag }}</a></li>
-        {{ $separator = " || " }}
-        {{ end }}
-    </ul>
+		{{- $uniqueTags := slice -}}
+		{{- range .Pages }}
+		{{- with .Params.tags }}
+		{{- range . }}
+		{{- if not (in $uniqueTags .) }}
+		{{- $uniqueTags = $uniqueTags | append . -}}
+		{{- end }}
+		{{- end }}
+		{{- end }}
+		{{- end }}
+		{{- range $index, $tag := $uniqueTags }}
+		{{- if $index }} || {{ end }}
+		<a href="{{ $.Site.BaseURL }}tags/{{ $tag | urlize }}" style="color: yellow; text-decoration: none;">{{ $tag
+			}}</a>
+		{{- end }}
+	</ul>
 </div>
 
 {{ if not (.Params.disableListTemplate) }}
