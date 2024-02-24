@@ -1,0 +1,55 @@
+---
+type: "recommendations/recipes"
+title: "Pasta with cheese and sauce"
+date: 2024-02-24
+tags: ["Pasta" , "Quick"]
+ingredients: ["Pasta, any form", "Sauce", "Cheese", "Spices", "Onions", "Paprika"]
+
+
+tasks:
+  - id: 1
+    name: Boil water @ max temps
+    machine:  Stove
+    processing_time: 4
+    dependencies: []
+  - id: 2
+    name: Let the stove cook the pasta
+    machine:  Stove
+    processing_time: 13
+    dependencies: [1]
+  - id: 3
+    name: Wash the onions and paprika
+    machine:  Human
+    processing_time: 1
+    dependencies: []
+  - id: 4
+    name: Cut the onions and paprika
+    machine:  Human
+    processing_time: 5
+    dependencies: [3]
+  - id: 5
+    name: Mix the pasta with the sauce and everything
+    machine:  Human
+    processing_time: 3
+    dependencies: [4,2]
+---
+
+
+
+A classic, I am not sure if it has an official name but I often cook it each weak since it's cheap and takes little to no effort from the human end. Any sauce would work with this; the extras are optional, and funnily enough, excluding them does not cut the makespan of the schedule.
+
+
+<ol>
+  <li> Boil water at max temps
+  <li> Put the Pasta in the water and let it cook
+  <li> Meanwhile, you may wash the legumes and prepare them for the cutting
+  <li> Start cutting what should be cut, this is the step where you prepare the spices together with the onions, papkrikas and cheese
+  <li> After cooking the pasta, mix it around together with everything and voila!
+</ol>
+
+
+This is a basic recipe that every student should learn to make. Note that some pasta forms have their own custom processing time, though on average it's between 10 to 15 minutes to work with. You shouldn't overboil it nor shouldn't you mix it while it is not ready (Unless your teeth can hande it). It's a quick fix for a lunch yet does a good job at filling my stomach while also providing me with the energy that I need for my evening training.
+
+<br>
+<br>
+Feel free to adjust the spices and the legumes to your desires. Creativity fluids art, I am no artist in this domain, yet my people liked it, and so will I recommend it.
