@@ -6,33 +6,61 @@
         background-color: #151515;
     }
 
-    .Booktitle {
-        text-align: center;
-    }
-
     ::-webkit-scrollbar-thumb {
         background-color: gray;
         border-radius: 5px;
     }
 
-    .bookcover {
-
-        text-align: left;
-        aspect-ratio: auto 250 / 250;
-        height: 250px;
-        width: 250px;
-        padding: 20px;
-        margin: auto;
-        display: block;
-        float: right;
+    .booklink {
+        text-decoration: none;
+        color: rgb(252, 75, 5);
     }
 
-    p {
-        display: block;
-        margin-block-start: 1em;
-        margin-block-end: 1em;
-        margin-inline-start: 0px;
-        margin-inline-end: 0px;
+    .booktitle {
+        text-align: center;
+
+    }
+
+    .book-container {
+
+
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: flex-start;
+    }
+
+
+    .bookcover {
+        width: 200;
+
+        flex: 0 0 200px;
+
+        margin-right: 10px;
+
+    }
+
+    .content {
+        flex: 1;
+
+    }
+
+
+    @media only screen and (max-width: 768px) {
+        .book-container {
+            max-width: none;
+
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .bookcover,
+        .content {
+            flex: 1 1 100%;
+
+            margin-right: 0;
+
+        }
     }
 </style>
 <h2 style="text-align: center;">Here in this page you will find books that I highly recommend. Most of these serve an
@@ -60,22 +88,22 @@
 </div>
 
 {{ if not (.Params.disableListTemplate) }}
-<ul>
-    {{ range $index, $page := .Pages }}
-    <h2 class="Booktitle">{{ .Title }}</h2>
-    <li>
-        <div>
 
-            <p style="text-align: left;">{{ .Params.summary }}</p>
-        </div>
-        <div class="bookcover">
-            <a href="{{ .Permalink }}"><img src="/books/{{ .File.BaseFileName }}.jpg" alt="{{ .Title }} Image"
-                    style="width: 200px; margin-left: 5px;"></a>
-        </div>
+{{ range $index, $page := .Pages }}
+<a href="{{ .Permalink }}" class="booklink">
+    <h2 class="booktitle">{{ .Title }}</h2>
+</a>
+<div class="book-container">
 
-    </li>
-    {{ end }}
-</ul>
+    <div class="bookcover">
+        <a href="{{ .Permalink }}"><img src="/books/{{ .File.BaseFileName }}.jpg" alt="{{ .Title }} Image"></a>
+    </div>
+    <div class="content">
+        <p>{{ .Content }}</p>
+    </div>
+</div>
+{{ end }}
+
 {{.Content}}
 
 
