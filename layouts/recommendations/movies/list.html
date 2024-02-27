@@ -1,12 +1,133 @@
-{{ define "main" -}}
-{{ .Content }}
-<ul>
-    {{ with .Site.RegularPages }}
-    {{- range . }}
-    <li>
-        <a href="{{ .RelPermalink }}">{{ .Title }}</a>
-    </li>
-    {{- end }}
+{{ define "main" }}
+
+<style>
+    ::-webkit-scrollbar {
+        width: 0.66vw;
+        background-color: #151515;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background-color: gray;
+        border-radius: 5px;
+    }
+
+    .movietitle {
+        text-decoration: none;
+        color: rgb(252, 75, 5);
+    }
+
+    .movietitle {
+        text-align: center;
+
+    }
+
+    .movie-container {
+
+
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: flex-start;
+    }
+
+
+    .moviecover {
+        width: 200;
+
+        flex: 0 0 200px;
+
+        margin-right: 10px;
+
+    }
+
+    .content {
+        flex: 1;
+
+    }
+
+
+    @media only screen and (max-width: 768px) {
+        .movie-container {
+            max-width: none;
+
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .moviecover,
+        .content {
+            flex: 1 1 100%;
+
+            margin-right: 0;
+
+        }
+    }
+</style>
+<h2 style="text-align: center;">I barely watch series and movies. </h2>
+<div
+    style="width: 100%; border: outset yellow; overflow: hidden; height: 30%; -webkit-border-radius: 20px; border-radius: 20px; margin-bottom: 20px;">
+    <center>You may also use the tags tab to quickly browse for an appropriate movie genre:</center>
+    <ul>
+        {{- $uniqueTags := slice -}}
+        {{- range .Pages }}
+        {{- with .Params.tags }}
+        {{- range . }}
+        {{- if not (in $uniqueTags .) }}
+        {{- $uniqueTags = $uniqueTags | append . -}}
+        {{- end }}
+        {{- end }}
+        {{- end }}
+        {{- end }}
+        {{- range $index, $tag := $uniqueTags }}
+        {{- if $index }} || {{ end }}
+        <a href="{{ $.Site.BaseURL }}tags/{{ $tag | urlize }}" style="color: yellow; text-decoration: none;">{{ $tag
+            }}</a>
+        {{- end }}
+    </ul>
+</div>
+
+{{ if not (.Params.disableListTemplate) }}
+
+{{ $paginator := .Paginate .Pages 5 }}
+
+{{ range $index, $page := $paginator.Pages }}
+<a href="{{ .Permalink }}" class="movietitle">
+    <h2 class="movietitle">{{ .Title }}</h2>
+</a>
+<div class="movie-container">
+    <div class="content">
+        {{ $words := split .Content " " }}
+        {{ if gt (len $words) 40 }}
+        <p>
+            {{ range $index, $word := slice $words }}
+            {{ $word }}
+            {{ end }}
+            ... <a href="{{ .Permalink }}">Read more</a>
+        </p>
+        {{ else }}
+        <p>{{ .Content }}</p>
+        {{ end }}
+    </div>
+    <div class="moviecover">
+        <a href="{{ .Permalink }}"><img src="/movies/{{ .File.BaseFileName }}.jpg" alt="{{ .Title }} Image"></a>
+    </div>
+</div>
+{{ end }}
+
+<!-- Pagination Navigation -->
+<div class="pagination" style="text-align: center;">
+    {{ with .Paginator }}
+    <nav class="pagination-nav">
+        {{ if .HasPrev }}
+        <a href="{{.Prev.URL}}" style="color: yellow;">&laquo; Newer</a>
+        {{ end }}
+        <span class="page-number">Page {{.PageNumber}} of {{.TotalPages}}</span>
+        {{ if .HasNext }}
+        <a href="{{.Next.URL}}" style="color: yellow;">Older &raquo;</a>
+        {{ end }}
+    </nav>
     {{ end }}
-</ul>
-{{- end }}
+</div>
+
+{{ end }}
+{{ end }}

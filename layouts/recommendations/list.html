@@ -3,11 +3,35 @@
 {{- end }}
 {{ define "main" -}}
 {{ .Content }}
-<ul>
+<style>
+    .button-container {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .big-button {
+        box-sizing: border-box;
+        display: block;
+        width: 100%;
+        padding: 20px;
+        margin: 5px 0;
+        text-align: center;
+        text-decoration: none;
+        background-color: #a75648;
+        color: #000000;
+        border: 1px solid #000000;
+        border-radius: 5px;
+        transition: background-color 0.3s ease;
+    }
+
+    .big-button:hover {
+        background-color: #c7ba42;
+    }
+</style>
+<div class="button-container">
     {{- range .Sections }}
-    <li>
-        <a href="{{ .RelPermalink }}">{{ .Title }}</a>
-    </li>
+    <a href="{{ .RelPermalink }}" class="big-button">{{ .Title }}</a>
     {{- end }}
-</ul>
+</div>
 {{- end }}
