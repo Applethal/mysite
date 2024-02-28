@@ -13,7 +13,7 @@
 
     .movietitle {
         text-decoration: none;
-        color: rgb(252, 75, 5);
+        color: orange;
     }
 
     .movietitle {
@@ -32,7 +32,7 @@
 
 
     .moviecover {
-        width: 200;
+        width: 200px;
 
         flex: 0 0 200px;
 
@@ -109,12 +109,12 @@
         {{ end }}
     </div>
     <div class="moviecover">
-        <a href="{{ .Permalink }}"><img src="/movies/{{ .File.BaseFileName }}.jpg" alt="{{ .Title }} Image"></a>
+        <a href="{{ .Permalink }}"><img src="/movies/{{ .File.BaseFileName }}.png" alt="{{ .Title }} Image"></a>
     </div>
 </div>
 {{ end }}
 
-<!-- Pagination Navigation -->
+
 <div class="pagination" style="text-align: center;">
     {{ with .Paginator }}
     <nav class="pagination-nav">
