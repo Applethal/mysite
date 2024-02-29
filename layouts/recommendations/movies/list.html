@@ -63,7 +63,9 @@
         }
     }
 </style>
-<h2 style="text-align: center;">I barely watch series and movies. </h2>
+<h2 style="text-align: center;">I barely watch series and movies. This list contains what I would highly recommend, the
+    content however would have my thoughts on the media and characters, as I have little to not experience judging these
+    and writing reviews on them.</h2>
 <div
     style="width: 100%; border: outset yellow; overflow: hidden; height: 30%; -webkit-border-radius: 20px; border-radius: 20px; margin-bottom: 20px;">
     <center>You may also use the tags tab to quickly browse for an appropriate movie genre:</center>
@@ -95,7 +97,11 @@
     <h2 class="movietitle">{{ .Title }}</h2>
 </a>
 <div class="movie-container">
+    <div class="moviecover">
+        <a href="{{ .Permalink }}"><img src="/movies/{{ .File.BaseFileName }}.png" alt="{{ .Title }} Image"></a>
+    </div>
     <div class="content">
+
         {{ $words := split .Content " " }}
         {{ if gt (len $words) 40 }}
         <p>
@@ -108,9 +114,7 @@
         <p>{{ .Content }}</p>
         {{ end }}
     </div>
-    <div class="moviecover">
-        <a href="{{ .Permalink }}"><img src="/movies/{{ .File.BaseFileName }}.png" alt="{{ .Title }} Image"></a>
-    </div>
+
 </div>
 {{ end }}
 
