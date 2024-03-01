@@ -20,8 +20,15 @@
             var randomIndex = getRandomInt(0, imagesData.length - 1);
             var randomImage = imagesData[randomIndex];
 
+            var captions = {
+                "neko-neco.gif": "You have laid your eyes on a rare image, consider yourself lucky!",
+                "image1.png": "Caption for Image 1",
+                "image2.png": "Caption for Image 2",
+                "image3.png": "Caption for Image 3",
 
-            var caption = (randomImage === "neko-neco.gif") ? "You have layed your eyes on a rare image, consider yourself lucky!" : "";
+            };
+
+            var caption = captions[randomImage] || "";
 
             document.write('<img src="/random/' + randomImage + '" alt="Random Image">');
             document.write('<p>' + caption + '</p>');
