@@ -8,30 +8,36 @@ ingredients: ["Pasta, any form", "Sauce", "Cheese", "Spices", "Onions", "Paprika
 
 tasks:
   - id: 1
-    name: Boil water @ max temps
-    machine:  Stove
-    processing_time: 4
-    dependencies: []
-  - id: 2
-    name: Let the stove cook the pasta
-    machine:  Stove
-    processing_time: 13
-    dependencies: [1]
-  - id: 3
-    name: Wash the onions and paprika
+    name: Contain the water in a proper heating medium
     machine:  Human
     processing_time: 1
     dependencies: []
+
+  - id: 2
+    name: Boil water @ max temps
+    machine:  Stove
+    processing_time: 4
+    dependencies: [1]
+  - id: 3
+    name: Let the stove cook the pasta
+    machine:  Stove
+    processing_time: 13
+    dependencies: [2]
   - id: 4
+    name: Wash the onions and paprika
+    machine:  Human
+    processing_time: 1
+    dependencies: [1]
+  - id: 5
     name: Cut the onions and paprika
     machine:  Human
     processing_time: 5
-    dependencies: [3]
-  - id: 5
+    dependencies: [4]
+  - id: 6
     name: Mix the pasta with the sauce and everything
     machine:  Human
     processing_time: 3
-    dependencies: [4,2]
+    dependencies: [5,3]
 ---
 
 
@@ -40,6 +46,7 @@ A classic, I am not sure if it has an official name but I often cook it each wea
 
 
 <ol>
+  <li> Contain the water in a proper medium and let it heat
   <li> Boil water at max temps
   <li> Put the Pasta in the water and let it cook
   <li> Meanwhile, you may wash the legumes and prepare them for the cutting
