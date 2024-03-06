@@ -1,0 +1,136 @@
+---
+title: "Mathematics 💻"
+
+
+---
+<style>
+  table {
+    border-spacing: 0;
+    width: 100%;
+    border: 1px solid #ddd;
+    color: #000000;
+
+  }
+
+  th {
+    cursor: pointer;
+    border: 1px solid #ddd;
+  }
+
+  th,
+  td {
+    text-align: left;
+    padding: 16px;
+    border: 1px solid #ddd;
+  }
+
+  .row-green {
+    background-color: #333333;
+    color: #ffffff;
+  }
+
+  .row-beige {
+    background-color: #f5f5dc;
+  }
+
+  a {
+    text-decoration: none;
+    color: red;
+  }
+
+
+  .table-container {
+    max-height: 300px;
+
+    overflow-y: auto;
+  }
+  @media only screen and (max-width: 600px) {
+    .table-container {
+      overflow-x: auto;
+      max-height: 300px;
+    }
+
+    table {
+      width: 100%;
+    }
+
+    td {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  }
+
+</style>
+
+<h3>Finding resources to enrich my mathematical skills required me to pick through a wide array of choices. Grasping Mathematics requires visualization, which creates a feedback exchange between the abstraction and the human understanding. Sadly some sources lack this important element, making the learning process even harder. Here I will be posting learning material that I find nicely readable and accessible.</h3>
+
+<div class="table-container">
+  <table id="myTable">
+    <tr class="row-green">
+
+      <th onclick="sortTable(0)">Name</th>
+      <th onclick="sortTable(1)">Type</th>
+      <th>Description</th>
+    </tr>
+    <tr class="row-beige">
+      <td><a href="https://www.probabilitycourse.com/">Probability course</a></td>
+      <td>Combinatorics <br> Probability</td>
+      <td>This is my go to for anything combinatorics related, it is very accessible and very specific to this area. It comes with exercises and solutions and does a good job at giving all the basics and things that you need. However, I still believe that their exercises could use some changes, I would still recommend it overall.</td>
+    </tr>
+
+  </table>
+</div>
+
+
+<script>
+  function sortTable(n) {
+    var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+    table = document.getElementById("myTable");
+    switching = true;
+
+    dir = "asc";
+
+    while (switching) {
+
+      switching = false;
+      rows = table.rows;
+
+      for (i = 1; i < (rows.length - 1); i++) {
+
+        shouldSwitch = false;
+
+        x = rows[i].getElementsByTagName("TD")[n];
+        y = rows[i + 1].getElementsByTagName("TD")[n];
+
+        if (dir == "asc") {
+          if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+
+            shouldSwitch = true;
+            break;
+          }
+        } else if (dir == "desc") {
+          if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+
+            shouldSwitch = true;
+            break;
+          }
+        }
+      }
+      if (shouldSwitch) {
+
+
+        rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+        switching = true;
+
+        switchcount++;
+      } else {
+
+        if (switchcount == 0 && dir == "asc") {
+          dir = "desc";
+          switching = true;
+        }
+      }
+    }
+  }
+</script>
