@@ -9,6 +9,7 @@ title: "Programing 💻"
     width: 100%;
     border: 1px solid #ddd;
     color: #000000;
+
   }
 
   th {
@@ -24,7 +25,8 @@ title: "Programing 💻"
   }
 
   .row-green {
-    background-color: #00ff00;
+    background-color: #333333;
+    color: #ffffff;
   }
 
   .row-beige {
@@ -33,7 +35,7 @@ title: "Programing 💻"
 
   a {
     text-decoration: none;
-    color: yellow;
+    color: red;
   }
 
 
@@ -42,6 +44,23 @@ title: "Programing 💻"
 
     overflow-y: auto;
   }
+  @media only screen and (max-width: 600px) {
+    .table-container {
+      overflow-x: auto;
+      max-height: 300px; 
+    }
+
+    table {
+      width: 100%;
+    }
+
+    td {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  }
+
 </style>
 
 <h3>When it comes down to self learning, videos often challenge my lack of patience, readable resources are a preference in this case. Everyone highly recommends learning
@@ -56,14 +75,14 @@ title: "Programing 💻"
       <th onclick="sortTable(1)">Type</th>
       <th>Description</th>
     </tr>
-    <tr>
+    <tr class="row-beige">
       <td><a href="https://leetcode.com/">Leetcode</a></td>
       <td>Exercises</td>
       <td>Intended to help with preparing for interviews, I use this to exercise as it helped me shape my algorithmic
         skills. I do want to emphasize that there is no official way to know from where to start but I intuitively
         started with the easy ones.</td>
     </tr>
-    <tr>
+    <tr class="row-beige">
       <td><a href="https://runestone.academy/ns/books/published/cpp4python/index.html">Python to Cpp</a></td>
       <td>Syntax</td>
       <td>I like how Python acts as a nice introduction to programming, when I wanted to start learning C++ for fun, I
