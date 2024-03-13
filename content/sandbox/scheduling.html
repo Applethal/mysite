@@ -247,28 +247,28 @@ These will be the tasks assigned to each machine:
 </p>
 <p>And these can be modeled like so, because you can't stuff anything in the bread as long as your eggs aren't ready:
 </p>
-<div style="text-align: center; background-color: white; width: fit-content; margin: auto; 
+<div style="text-align: center; background-color: white; width: fit-content; margin: auto;
 
 
 padding: 20px;
 border-radius: 8px;">
     <script type="text/tikz">
             \begin{tikzpicture}
-        
+
         \node (1) at (0,0) {1};
         \node (2) at (2,0){2};
         \node (3) at (4,2){3};
         \node (4) at (4,-2){4};
         \node (5) at (6,0){5};
-        
-        
+
+
         \draw[->, >=stealth] (1) -- (2);
         \draw[->, >=stealth] (2) -- (3);
         \draw[->, >=stealth] (2) -- (4);
         \draw[->, >=stealth] (4) -- (5);
         \draw[->, >=stealth] (3) -- (5);
-    
-        
+
+
         \foreach \i in {1,...,5} {
             \node[draw, circle] at (\i) {\i};
         }
@@ -287,28 +287,28 @@ border-radius: 8px;">
         \begin{tikzpicture}[scale=0.7]
         \draw[->] (0,0) -- (14,0) node[right] {};
     \draw[->] (0,0) -- (0,7) node[above] {};
-    
-    
+
+
     \draw[gray!50, dashed, step=1] (0,0) grid (14,7);
-    
-    
+
+
     \foreach \x in {1,2,...,14} {
         \draw (\x,0) -- (\x,-0.2) node[below] {\x};
     }
-    
-    
+
+
     \foreach \y/\label in {3/Human, 7/Stove} {
         \draw (0,\y) -- (-0.2,\y) node[left] {\label};
     }
     \draw[fill=blue!30] (0,0) rectangle (3,3) node[pos=0.5] {Egg};
     \draw[fill=blue!30] (3,0) rectangle (5,3) node[pos=.5] {Cut};
-    
+
     \draw[fill=blue!30] (5,3) rectangle (10,7) node[pos=.5] {Cook};
     \draw[fill=red!30] (5,0) rectangle (8,3) node[pos=.5] {Bread};
     \draw[fill=blue!30] (10,0) rectangle (12,3) node[pos=.5] {Stuff};
     \draw[fill=red!30, line width=1.5pt] (12,0) rectangle (12,7) node[pos=1, right=2mm] {$C_{max} = 12$};
 
-    
+
     \end{tikzpicture}
       </script>
     </div>
@@ -328,10 +328,10 @@ formula:
 </u>
 A couple of people pointed out that I was cooking eggs the wrong way, more specifically, I put the eggs on a pan and let
 the pan do the rest @ 6/10
-heat. Apparently the popular belief recommends against this and instead agitate the egg as it heats up using a pressure
+heat. Apparently the popular belief recommends against this, instead one should agitate the egg as it heats up using a pressure
 tool. If that is the case then this isn't a Parallel machine schedule anymore but a single machine since I would then be
 actively
-doing all the cooking, increasing the total time up to 15.
+doing all the cooking, increasing the total time up to 15. Despite all of this, I will keep this mistake up there for demonstrative purposes.
 
 <h1>About the computation</h1>
 
