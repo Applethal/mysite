@@ -11,7 +11,32 @@ Summary: Trying to simplify the algorithm's explanation even further.
     text-decoration: none;
     color: yellow;
   }
+
+  .tikzs {
+        text-align: center;
+        background-color: white;
+        width: fit-content;
+        margin: auto;
+        padding: 20px;
+        border-radius: 8px;
+        overflow-x: auto;
+
+    }
+
+    .tikzs svg {
+        overflow: visible !important;
+        position: static !important;
+    }
+
+    .scroll-container {
+        overflow-x: auto;
+        width: 100%;
+        max-width: 100%;
+    }
 </style>
+
+<link rel="stylesheet" type="text/css" href="https://tikzjax.com/v1/fonts.css">
+<script src="https://tikzjax.com/v1/tikzjax.js"></script>
 
 <p>As of today and to the best of my knowledge, there are no articles that explain simulated annealing (Kirkpatrick et al., 1983) for those outside the loop. The terminology used in explaining the algorithm may be rough and intimidating at first. One cheap attempt nowadays to simplify the explanation of any concept is to go online and ask people to explain it to you as if you are 5 years old. As of yet. I personally have never tried this approach, so I can't review how effective it is. </p>
 
@@ -20,6 +45,54 @@ Summary: Trying to simplify the algorithm's explanation even further.
 <p>Picture this: Imagine that just opened up a business and that you are looking for workers to maintain your cash flow. Consider that you are fresh into the world, by this time, your trust and naivety are still green. With that said, you will receive people with different backgrounds and different skill levels. Your trust levels are on top, and you will pretty much accept who steps at your doors. As your business keeps growing, you will at some point want to replace your current workers with some that satisfy your greedy needs, your current workers will set a bar, and as you keep encountering new people, your standards will rise and your trust goes lower, making you less naive and less accepting of those who might help you reach higher skies, despite their low profiles. At some point your trust in humanity will vanish, and your job offers will contain elements that are humanly impossible to achieve, unless the job applicants meet your conditions, you will receive no new servants, and this will keep on until you become the N°1 in the globe. Greed is good!</p>
 
 <p>Naturally this algorithm is an analogy to metallurgy. It can be used to solve various problems where exploring a mathematical function is time consuming, most of these problems are of combinatorial nature (Traveling salesman problem, Job-shop scheduling..etc..). For a number of itterations, the algorithm attempts to explore solutions until it stops improving the objective function. Provided you have an objective function with high number of finite points, you can execute the algorithm and hopefully find the global minima, or maxima. </p>
+
+
+<p> I know pseudo-codes look scary so I made this small diagram, sadly the standalone tikz does not support special shapes; the blue rectangles depict decisions, while the green and orange blocks are reserved for the termination and processes respectively.</p>
+
+
+<div class="scroll-container">
+    <div class="tikzs">
+        <script type="text/tikz">
+        \begin{tikzpicture}[node distance = 1.5cm, auto, font=\small]
+    % Place nodes
+    \tikzstyle{decision} = [rectangle, draw, fill=blue!20,
+    text width=4em, text centered, rounded corners, minimum height=3em]
+    \tikzstyle{block} = [rectangle, draw, fill=orange!20,
+    text width=4em, text centered, rounded corners, minimum height=3em]
+    \tikzstyle{line} = [draw, ->]
+    \tikzstyle{cloud} = [draw, ellipse,fill=red!20, node distance=2cm,
+    minimum height=1.5em]
+    \node [block, fill =  green!20] (start) {Start};
+    \node [block, below of=start] (init) {Initialize trust T};
+    \node [block, below of=init, node distance = 3cm] (getscore1) {Hire an initial worker};
+    \node [block, below of=getscore1, node distance = 2cm] (getscore2) {Hire a new person};
+    \node [block, below of=getscore2, node distance = 3cm] (difference) {evaluate the new worker};
+    \node [decision, below of=difference, node distance = 4cm] (better) {Is the new worker better?};
+    \node [decision, below left of=better, node distance=3.5cm] (trust) {Should I trust them regardless?};
+    \node [block, below of=better, node distance=5cm] (accept) {Welcome the new worker, fire the old one};
+    \node [block, below of=accept, node distance = 2cm] (decrease) {Decrease trust T};
+
+    \node [decision, right of=trust,node distance=6cm] (dominate) {Do I have more patience ? Can I reach newer peaks ?};
+    \node [block, below of=dominate, node distance=3cm, fill =  green!20] (end) {END};
+    % Draw edges
+    \path [line] (start) -- (init);
+    \path [line] (init) -- (getscore1);
+    \path [line] (getscore1) -- (getscore2);
+    \path [line] (getscore2) -- (difference);
+    \path [line] (difference) -- (better);
+    \path [line] (better) -- node {yes} (accept);
+    \path [line] (better.west) -| node [near start] {no} (trust);
+    \path [line] (trust) -- node {yes} (accept);
+    \path [line] (trust.south) |- node [near start] {no} (decrease);
+    \path [line] (accept) -- (decrease);
+    \path [line] (decrease.east) -| ++(1cm,0cm) |- (dominate.west);
+
+    \path [line] (dominate.south) -- node {yes} (end);
+    \path [line] (dominate.north) |- node [near start] {no} (getscore2);
+\end{tikzpicture}
+      </script>
+    </div>
+</div>
 
 
 <h3>References</h3>
