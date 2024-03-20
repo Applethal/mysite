@@ -1,4 +1,12 @@
 {{ define "main" }}
+
+<style>
+a {
+    color: yellow;
+    text-decoration: none;
+}
+</style>
+
 <main id="main">
     <p>It appears that you chose to enter the realm of the unknown, even I don't know what lies beyond the link that you
         are attempting to visit. Fret not, however, you shall not leave this page with empty hands. Here's some eye
@@ -21,12 +29,11 @@
             var randomImage = imagesData[randomIndex];
 
             var captions = {
-                "neko-neco.gif": "You have laid your eyes on a rare image, consider yourself lucky!",
-                "image1.png": "Caption for Image 1",
-                "image2.png": "Caption for Image 2",
-                "image3.png": "Caption for Image 3",
+    "neko-neco.gif": "You have laid your eyes on a rare image, consider yourself lucky!",
+    "chicken.png": "Picture provided by <a href=\"https://www.instagram.com/zsashalovescats/\">zsashalovescats on Instagram</a>",
+    "hello_kitty.png": "Gasoline container, provided by <a href=\"https://www.instagram.com/rhubarcode/\">rhubarcode on Instagram</a>",
+};
 
-            };
 
             var caption = captions[randomImage] || "";
 
