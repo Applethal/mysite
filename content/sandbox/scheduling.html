@@ -1,7 +1,7 @@
 ---
 Title: Scheduling is fun!
 math: true
-summary: "An attempt to dynamically formulate and visualize a recipe's processing Gantt chart using nothing but mathematics,
+summary: "Dynamically formulate and visualize a recipe's processing Gantt chart using nothing but mathematics,
 schedulign theory and bits of programing. Basic scheduling theory is required to enjoy this article."
 tags: ["Operational research", "Scheduling", "Mathematics", "Programing"]
 Date: 2024-02-11
@@ -105,7 +105,10 @@ Date: 2024-02-11
 
         font-style: italic;
     }
-
+    a {
+    text-decoration: none;
+    color: yellow;
+    }
 
     @media (max-width: 600px) {
         .code-container {
@@ -130,6 +133,32 @@ Date: 2024-02-11
     }
 </script>
 
+<h1>Sets and indices </h1>
+
+<span class="math">\(
+i \in M
+\)</span> : Set of machines
+
+
+
+<br>
+<span class="math">\(
+j \in J
+\)</span> : Set of jobs
+
+<br>
+<span class="math">\(
+p_{i,j}
+\)</span> : procssing time of job j in machine i
+<br>
+<span class="math">\(
+C_{i,j}
+\)</span> : Completion time of job j in machine i
+
+<br>
+<span class="math">\(
+LST_{j}
+\)</span> : Latest starting time of job j
 
 
 
@@ -139,8 +168,8 @@ Date: 2024-02-11
     layout, I thought about adding some spiciness
     to my articles, even if it defies my minimalistic philosophies.</p>
 
-<p>Living here in Germany slowly and subconsiously turned me into someone who embraces time, and marketers did a really
-    good job at putting emphasis on it, encouraging
+<p>Living here in Germany slowly and subconsiously turned me into a time-slave, evil marketers did a really
+    good job at putting emphasis on time, encouraging
     goods and services that make me priorities being on time. </p>
 
 <p>Scheduling was something that I was a fan of, the goal of their science is to find the perfect sequence of tasks that
@@ -149,14 +178,14 @@ Date: 2024-02-11
     the development of heuristical approaches to tackle the the hardships of investigating permutations by offering a
     solution that is good enough. </p>
 
-<p>Cooking just began to slowly become an integral part of my life, my routine life style makes it hard for me to
+<p>Cooking just began to slowly become an integral part of my life, my life style makes it hard for me to
     innovate, I just keep cycling through a limited set of recipes. Old habits die hard, at least they do. When I feel
     energetic, my dexterity goes top notch, enabling fast reactions
     and quick manouvers across the kitchen, but sometimes I just brute force my structures without thinking, which can
     result in a chunk of wasted time, and sometimes effort.</p>
 
-<p>In the theory of scheduling, if a given situation is formulated properly, you may gain access to tools that aid
-    you reach your goal. This can be achieved by understanding the setup
+<p>In the theory of scheduling, if a given situation is properly formulated, you may gain access to tools that aid
+    you reach your goals, without having to rely on any form of soft experience. This can be achieved by understanding the setup
     and trying to perceive it with intelligence, after all, the methods of logistics aim to exploit all kinds of
     information in order to fullfill an objective. I thought a lot about how to design a nice scheduling setup for a
     cooking context, not chaining tasks as quick as possible may cause your food to catch a cold. </p>
@@ -170,10 +199,10 @@ should cook at your own pace, never rush things up!
 
 <h1>The machines setup</h1>
 
-<p>Most of the parallel machine and single machine problems, are positioned in the NP- and P complete spectrum unlike.
-    Precedence constraints are essential because you can't mix veggies before cutting them. We are aiming for the global
+<p>Most of the parallel machine and single machine problems, are positioned in the NP- and P complete spectrum.
+    Precedence constraints are essential because you can't mix veggies before cutting them. the aim is to minimize the global
     completion time
-    or we will be missing the train. There would be no heuristics here to speak of, just a direct method, specifically a
+    or else I would miss the train. There would be no heuristics here to speak of, just a direct method, specifically a
     list
     scheduling algorithm since it has been proven by <a
         href="https://www.sciencedirect.com/science/article/pii/0167637795000577">Shutten</a>(2003) that parallel machine
@@ -182,9 +211,9 @@ should cook at your own pace, never rush things up!
     As for the constraints here is how I dealt with some of these:
 <ul>
     <li>Preemption: Instead of stopping the machine and resuming afterwards, I made it so that it is treated as \(n\)
-        number of phases.</li>
+        number of phases, which will verbally describe what their states.</li>
     <li>Setup times: These will either be modeled as a seperate task similarly to the previous constraint, or in some
-        occasions I might just combine everything in the processing times </li>
+        occasions I might just combine everything together as a single task. </li>
 
 </ul>
 
@@ -236,7 +265,7 @@ should cook at your own pace, never rush things up!
 </ol>
 </p>
 <p>
-<h2>Machines set:
+<h2>Machines/Tasks set:
 
 </h2>
 These will be the tasks assigned to each machine:
@@ -342,7 +371,7 @@ snippet will be plugged together with a module that generates Gantt charts, for 
 rendering speed and its lack of CSS flexibility motivates me to seek another package. The code computes the Makespan and
 outputs
 the starting- and finishing times of each machine, all of which are calculated using the classic formula:
-$$C_{i,j} = \max\left(C_{i-1,j}, C_{i,j-1}\right) + p_{i,j}$$
+$$C_{i,j} = \max\left(C_{i-1,j}, C_{i,j-1}\right) + p_{i,j} \quad \forall j \in J, i \in M$$
 
 
 The data is extracted from the recipes's front matter and formulated as a list that contains all the information that I
