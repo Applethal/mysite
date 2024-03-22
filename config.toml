@@ -28,5 +28,5 @@ languageCode = 'en-us'
   taglist = true
   #footer items
   nextprev = true
-  
+
   showrss = true
