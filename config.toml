@@ -1,5 +1,5 @@
 title = "Saads perfektewelt"
-baseURL = 'https://example.org'
+baseURL = '/'
 languageCode = 'en-us'
 
 [markup]
