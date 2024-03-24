@@ -14,11 +14,12 @@
 	<script src="{{ $jsScript.RelPermalink }}" defer></script>
 	{{- end }}
 	{{ end -}}
-	<meta name="description" content="{{ with .Params.description }}{{ . }}{{ else }}{{ .Summary }}{{ end }}">
+	<meta property="og:description" content="Welcome!">
 	{{ if isset .Params "tags" }}
 	<meta name="keywords" content="{{ with .Params.tags }}{{ delimit . " , " }}{{ end }}">
 	{{ end -}}
 	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<meta property="og:image" content="Splash.png">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap"
 		rel="stylesheet">
