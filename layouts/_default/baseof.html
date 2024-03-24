@@ -69,8 +69,7 @@
 		</center>
 		{{ .Content }}
 		{{ end }}
-		<div style="margin-top: 50px;">{{ if .Param "nextprev" }}{{ partial "nextprev.html" . -}}{{ end -}}
-			{{ if .Param "taglist" }}{{ partial "taglist.html" . }}{{ end -}}</div>
+
 	</div>
 
 	{{ block "footer" . }}
