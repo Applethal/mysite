@@ -7,6 +7,10 @@ tags: ["Operational research", "Scheduling", "Mathematics", "Programing"]
 Date: 2024-02-11
 ---
 <style>
+    .scrollable-div {
+    overflow-x: auto; /* Enable horizontal scrollbar if needed */
+    white-space: nowrap; /* Prevent line breaks */
+}
     .tikzs {
         text-align: center;
         background-color: white;
@@ -347,7 +351,10 @@ Tasks marked with red can be shifted to the right as long as they do not introdu
 You can cut the bread anytime you want between the 5th and 7th
 time mark. These are called tasks with slack times, or in other literature as buffer times. Their times are computed using the following
 formula:
-\[ LST(j) = \max_{j' \in S(j)} \left( C_{i,j'} - p_{i,j'} \right) \quad \forall j \in J \]
+<div class="scrollable-div">
+    \[ LST(j) = \max_{j' \in S(j)} \left( C_{i,j'} - p_{i,j'} \right) \quad \forall j \in J \]
+</div>
+
 
 
 
