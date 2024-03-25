@@ -168,8 +168,8 @@ LST_{j}
     layout, I thought about adding some spiciness
     to my articles, even if it defies my minimalistic philosophies.</p>
 
-<p>Living here in Germany slowly and subconsiously turned me into a time-slave, evil marketers did a really
-    good job at putting emphasis on time, encouraging
+<p>Living here in Germany slowly and subconsiously turned me into a time-slave. Evil marketers did a really
+    good job at putting emphasis on time, creating a need for
     goods and services that make me priorities being on time. </p>
 
 <p>Scheduling was something that I was a fan of, the goal of their science is to find the perfect sequence of tasks that
@@ -195,7 +195,7 @@ LST_{j}
 
 <h3> Small disclaimer: </h3> This work is purely an implementation of the scheduling theory. My intentions were focused
 only on seeing if I can pull this off with some Javascript / Hugo. Although it was a success, I need to add that you
-should cook at your own pace, never rush things up!
+should cook at your own pace. Just take your time and never rush things up!
 
 <h1>The machines setup</h1>
 
@@ -211,7 +211,7 @@ should cook at your own pace, never rush things up!
     As for the constraints here is how I dealt with some of these:
 <ul>
     <li>Preemption: Instead of stopping the machine and resuming afterwards, I made it so that it is treated as \(n\)
-        number of phases, which will verbally describe what their states.</li>
+        number of phases, each of which will describe their states.</li>
     <li>Setup times: These will either be modeled as a seperate task similarly to the previous constraint, or in some
         occasions I might just combine everything together as a single task. </li>
 
@@ -222,23 +222,23 @@ should cook at your own pace, never rush things up!
     <li>Bauknecht oven with 2 slots</li>
     <li>Panasonic NN E221MM</li>
     <li>Schott Seran stove set</li>
-    <li>unnamed toast machine</li>
-    <li>Me and my hand tools</li>
+    <li>Unnamed toast machine</li>
+    <li>Me and my tools</li>
 </ul>
 
 
 </p>
 <h1>The formulation:</h1>
 <p>Before talking about the design let me define what a machine is. <b>Pretty much anything that processes a task on its
-        own without any active moderation from my end.</b> My kitchen is equipped with a stove, an oven, a microwave-
+        own without any active moderation from my end.</b> My kitchen is equipped with a stove, an oven, and microwave-
     all of which can act on their own
     provided
     I initiate them - As for me, I have my own hands which will act as a medium to craft the best of the best.
     Specs-wise,
     I think the machines and I are modern enough. <br>
-    As for the precedence graph, I will not go into deep detail on the chain of tasks unless it is necessary. The
+    As for the precedence graph, I will not go into deep details on the chain of tasks unless it is necessary. The
     quantity of my
-    descriptions should not in theory influence the makespan, so micro tasks like "breaking an egg and then mixing it
+    descriptions should, in theory, not influence the makespan; micro tasks like "breaking an egg and then mixing it
     up"
     will be
     summed up as "preparing the egg" for the sake of simplicity.
@@ -305,7 +305,7 @@ border-radius: 8px;">
           </script>
 </div>
 
-<p>I will not attribute any processing times, just picture an arbitrary set of numbers. Check out the list scheduling
+<p>I will not attribute any processing times in this example, just picture an arbitrary number for each task. Check out the list scheduling
     algorithm for precedence graphs if you want
     to learn more about it but it should be just a walk in the park. </p>
 
@@ -345,7 +345,7 @@ border-radius: 8px;">
 
 Tasks marked with red can be shifted to the right as long as they do not introduce any extra time to the total makespan.
 You can cut the bread anytime you want between the 5th and 7th
-time mark. These are called Slack times, or in other literature as buffer times. They are computed using the following
+time mark. These are called tasks with slack times, or in other literature as buffer times. Their times are computed using the following
 formula:
 \[ LST(j) = \max_{j' \in S(j)} \left( C_{i,j'} - p_{i,j'} \right) \quad \forall j \in J \]
 
@@ -365,7 +365,7 @@ doing all the cooking, increasing the total time up to 15. Despite all of this, 
 <h1>About the computation</h1>
 
 
-Using a solver is totally unecessary since our list algorithm method has a complexity of \(O(N)\). The following
+Using a solver is totally unecessary since our list algorithm has a complexity of \(O(N)\). The following
 Javascript
 snippet will be plugged together with a module that generates Gantt charts, for now I am using Tikzjax but its slow
 rendering speed and its lack of CSS flexibility motivates me to seek another package. The code computes the Makespan and
@@ -449,7 +449,7 @@ console.log(<span class="string">'Task Schedule:'</span>);
 
 <p>I would like to see that, Everything that you have read so far was the effort of two days and is subject for
     potential improvements. For now I am happy with the results, though if I get any new ideas, I will surely imeplement
-    provide updates.</p>
+    provide updates. Feel free to submit an issue on the website's repo or send me an email and I will be content to have a discussion on the matter.</p>
 <h1> References </h1>
 <p><i>J.M.J. Schutten</i>, List scheduling revisited, Operations Research Letters, Volume 18, Issue 4, 1996, Pages 167-170, ISSN 0167-6377, <a href="https://doi.org/10.1016/0167-6377(95)00057-7" target="_blank">https://doi.org/10.1016/0167-6377(95)00057-7</a></p>
 
