@@ -378,8 +378,9 @@ snippet will be plugged together with a module that generates Gantt charts, for 
 rendering speed and its lack of CSS flexibility motivates me to seek another package. The code computes the Makespan and
 outputs
 the starting- and finishing times of each machine, all of which are calculated using the classic formula:
+<div class="scrollable-div">
 $$C_{i,j} = \max\left(C_{i-1,j}, C_{i,j-1}\right) + p_{i,j} \quad \forall j \in J, i \in M$$
-
+</div>
 
 The data is extracted from the recipes's front matter and formulated as a list that contains all the information that I
 would need. Thanks to <a href="https://gohugo.io/"> Hugo's</a> flexibility, plugging in the input in Javascript
