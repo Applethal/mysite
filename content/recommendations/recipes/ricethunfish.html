@@ -8,9 +8,9 @@ ingredients: ["rice", "Thon fish", "Potatoes", "Spices", "Onions"]
 
 tasks:
   - id: 1
-    name: Cut the potatoes and onions
+    name: Cut the potatoes
     machine:  Human
-    processing_time: 4
+    processing_time: 2
     dependencies: []
 
   - id: 2
@@ -30,12 +30,18 @@ tasks:
     machine:  Stove slot 2
     processing_time: 10
     dependencies: [2]
-
   - id: 5
+    name: Cut the onions
+    machine:  Human
+    processing_time: 2
+    dependencies: [2]
+
+
+  - id: 6
     name: Mix the rice with everything
     machine:  Human
     processing_time: 4
-    dependencies: [3]
+    dependencies: [3,5]
 
 ---
 
@@ -49,6 +55,7 @@ This fix stems from the east, my mom used to say that fish and rice are part of 
   <li> Contain the water and boil it in 2 slots @ max heat
   <li> Cook the rice in one of the slots
   <li> Put the potatoes on the other container
+  <li> Cut the onions
   <li> Mix everything together
 
 </ol>
