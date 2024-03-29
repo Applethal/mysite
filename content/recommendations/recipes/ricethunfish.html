@@ -7,41 +7,42 @@ ingredients: ["rice", "Thon fish", "Potatoes", "Spices", "Onions"]
 
 
 tasks:
-- id: 1
-name: Cut the potatoes
-machine: Human
-processing_time: 2
-dependencies: []
+  - id: 1
+    name: Cut the potatoes
+    machine: Human
+    processing_time: 2
+    dependencies: []
 
-- id: 2
-name: Contain the water in 2 containers
-machine: Human
-processing_time: 1
-dependencies: [1]
+  - id: 2
+    name: Contain the water in 2 containers
+    machine: Human
+    processing_time: 1
+    dependencies: [1]
 
-- id: 3
-name: Cook the rice at max heat
-machine: Stove slot 1
-processing_time: 15
-dependencies: [2]
+  - id: 3
+    name: Cook the rice at max heat
+    machine: Stove slot 1
+    processing_time: 15
+    dependencies: [2]
 
-- id: 4
-name: Cook the potatoes
-machine: Stove slot 2
-processing_time: 10
-dependencies: [2]
-- id: 5
-name: Cut the onions
-machine: Human
-processing_time: 2
-dependencies: [2]
+  - id: 4
+    name: Cook the potatoes
+    machine: Stove slot 2
+    processing_time: 10
+    dependencies: [2]
 
+  - id: 5
+    name: Cut the onions
+    machine: Human
+    processing_time: 2
+    dependencies: [2]
 
-- id: 6
-name: Mix the rice with everything
-machine: Human
-processing_time: 2
-dependencies: [3,5]
+  - id: 6
+    name: Mix the rice with everything
+    machine: Human
+    processing_time: 2
+    dependencies: [3,5]
+
 
 ---
 
