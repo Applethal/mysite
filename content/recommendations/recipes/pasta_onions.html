@@ -1,0 +1,79 @@
+---
+type: "recommendations/recipes"
+title: "Pasta with cheese and sauce"
+date: 2024-02-24
+tags: ["Pasta", "Quick", "Sauce"]
+ingredients: ["Pasta, any form","Liquid creme", "Parmesan powder Cheese", "Spices", "Onions"]
+
+
+tasks:
+  - id: 1
+    name: Contain the water in a proper heating medium
+    machine:  Human
+    processing_time: 1
+    dependencies: []
+
+  - id: 2
+    name: Boil water @ max temps
+    machine:  Stove slot 1
+    processing_time: 4
+    dependencies: [1]
+  - id: 3
+    name: Let the stove cook the pasta
+    machine:  Stove slot 1
+    processing_time: 13
+    dependencies: [2]
+  - id: 4
+    name: Cut 2 onions 
+    machine:  Human
+    processing_time: 1
+    dependencies: [1]
+  - id: 5
+    name: With moderation, fry the onions with butter on a pan
+    machine:  Human
+    processing_time: 6
+    dependencies: [4]
+  - id: 6
+    name: Cool the frying down using some water
+    machine:  Human
+    processing_time: 1
+    dependencies: [5]
+  - id: 7
+    name: add 20 cl liquid creme to the onions
+    machine:  Human
+    processing_time: 3
+    dependencies: [6]
+  - id: 8
+    name: as you keep frying the onions, add salt, pepper and parmesan cheese to the mix and reduce the heat
+    machine:  Human
+    processing_time: 3
+    dependencies: [7]
+  - id: 9
+    name: mix the Pasta with the onions
+    machine:  Human
+    processing_time: 3
+    dependencies: [8]
+---
+
+
+
+I was just roaming online until I hit a video that claims that the recipe is quick so I gave it a go!
+
+<ol>
+  <li> Contain the water in a proper heating medium
+  <li> Boil water @ max temps
+  <li> Put the pasta in the container and let it heat
+  <li> Cut 2 onions 
+  <li> Using a pan, fry them together with some butter
+  <li> Cool the fried onions using some water 
+  <li> Add 20 cl liquid creme to it
+  <li> Add some salt, pepper and parmesan cheese to it and keep mixing 
+  <li> mix the pasta together with the sauce
+  
+</ol>
+
+I can't believe I pulled this off properly on the first try, it was delicious and took little to no effort. I guess the algorithm blessed me today with a nice recipe, else I would be
+consuming my usual stuff. I am glad that this was a success as it boosted my confidence for more! I lost the video's link but I have seen people hinting towards the possibility of adding meat or thun fish to it.
+I still think however that 2 onions were overkill here, as only a big one would be enough, maybe this is a craft for families. I don't see myself preparing this unless I have more time than what the Gantt chart says, it appears
+that cleaning the pan after eating took more effort than what I anticipated due to how sticky the onions and the sauce was. I think the main product of this entire thing is the sauce itself, which I can maybe use for other 
+recipes in the future, not just pasta.
