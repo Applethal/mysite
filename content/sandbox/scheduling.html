@@ -210,7 +210,7 @@ should cook at your own pace. Just take your time and never rush things up!
     list
     scheduling algorithm since it has been proven by <a
         href="https://www.sciencedirect.com/science/article/pii/0167637795000577">Shutten</a>(2003) that parallel machine
-    problems with setup times or precedence constraints can be solved to optimality with the aformentioned algorithm.
+    problems with setup times or precedence constraints can be solved to optimality with the aformentioned algorithm, Except it's not a list here that we are talking about but a graph of sorts: I will be traversing the graph and checking for dependencies as I keep moving forward until I hit the last node.
     <br>
     As for the constraints here is how I dealt with some of these:
 <ul>
@@ -309,9 +309,7 @@ border-radius: 8px;">
           </script>
 </div>
 
-<p>I will not attribute any processing times in this example, just picture an arbitrary number for each task. Check out the list scheduling
-    algorithm for precedence graphs if you want
-    to learn more about it but it should be just a walk in the park. </p>
+<p>I will not attribute any processing times in this example, just picture an arbitrary number for each task for now.  </p>
 
 
 <div class="scroll-container">
@@ -372,7 +370,7 @@ doing all the cooking, increasing the total time up to 15. Despite all of this, 
 <h1>About the computation</h1>
 
 
-Using a solver is totally unecessary since our list algorithm has a complexity of \(O(N)\). The following
+Using a solver is totally unecessary since our list algorithm has a complexity of \(O(V + E)\). The following
 Javascript
 snippet will be plugged together with a module that generates Gantt charts, for now I am using Tikzjax but its slow
 rendering speed and its lack of CSS flexibility motivates me to seek another package. The code computes the Makespan and
