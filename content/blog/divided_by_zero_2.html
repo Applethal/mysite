@@ -1,0 +1,124 @@
+---
+title: "Divided by zero - Living in a stochastic environment"
+date: 2024-04-29
+
+tags: ["Untagged for now"]
+Summary: Is the human's randomness beautiful ?
+Picture: "divided_by_zero.png"
+Draft: True
+---
+<style>
+  a {
+    text-decoration: none;
+    color: yellow;
+  }
+
+  .scrollable-div {
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+
+  .tikzs {
+    text-align: center;
+    background-color: white;
+    width: fit-content;
+    margin: auto;
+    padding: 20px;
+    border-radius: 8px;
+    overflow-x: auto;
+
+  }
+
+  .tikzs svg {
+    overflow: visible !important;
+    position: static !important;
+  }
+
+  .scroll-container {
+    overflow-x: auto;
+    width: 100%;
+    max-width: 100%;
+  }
+</style>
+<script src="https://tikzjax.com/v1/tikzjax.js"></script>
+<p><a href="https://en.wikipedia.org/wiki/Operant_conditioning_chamber">The skinner box</a> is an psychology experiment
+  that further
+  explores operant conditioning. Simply put: Behave well and you will get rewarded, choose the wrong option and you will
+  get punished.
+  Be it humans or animals, any entity would always seek to maximize our utility function. Honestly I wish this analogy
+  was used
+  in the artificial intelligence resources that I used. </p>
+
+<p>As we grow up, we shape our knowledge base and keep learning to enhance our future interactions through the
+  experiences we gain.
+  Part of the learning process is to make mistakes (Or watch people do mistakes), since they lead to nothing but
+  punishement, since rewards feel
+  temporary in comparison to the pain attached to choosing the wrong dialogue option.
+</p>
+
+<p>As far as interactions go, I like to picture them as branch and bound models, where each root node has up to N
+  options. If you overthink much, chances are, you tree will be transformed in a non-tree graph where some decisions
+  might lead to a loop. Having trees with a high number of options might lead to decision fatigue, extending all the way
+  to decision avoidance A.K.A. I ain't doing that. </p>
+
+
+<div style="text-align: center; background-color: white; width: fit-content; margin: auto;
+
+
+padding: 20px;
+border-radius: 8px;">
+  <script type="text/tikz">
+    \begin{tikzpicture}[
+  font=\normalsize,
+  tree node/.style={align=center, draw, circle, minimum size=18pt},
+  branch label/.style={font=\scriptsize},
+]
+
+% Define the nodes
+\node[tree node] (P0) {1};
+\node[tree node] (P1) at ([shift={(-2,-1)}]P0) {2};
+\node[tree node] (P2) at ([shift={(2,-1)}]P0) {3};
+\node[tree node] (P3) at ([shift={(-2,-1)}]P2) {4};
+\node[tree node] (P4) at ([shift={(2,-1)}]P2) {5};
+\node[tree node] (P5) at ([shift={(-1,-1)}]P3) {6};
+\node[tree node] (P6) at ([shift={(1,-1)}]P3) {7};
+
+% Draw the edges
+\draw[thick] (P0) -- node[left, above] {run} (P1);
+\draw[thick] (P0) -- node[left,above] {talk} (P2);
+\draw[thick] (P2) -- node[left, above] {lie} (P3);
+\draw[thick] (P2) -- node[right, midway] {truth} (P4);
+\draw[thick] (P3) -- node[left, midway] {lie again} (P5);
+\draw[thick] (P3) -- node[right, midway] {pay} (P6);
+\end{tikzpicture}
+
+          </script>
+</div>
+
+
+<p>Everyone loves smooth and swift communications, navigating decision trees is a daunting task. I often envy those who
+  can quickly sort themselves out through it. One way to heuristically deal with this is to reduce the amount of options
+  that you
+  have to deal with, each experience that you gain acts as a cache in your memory, allowing you to reduce the length of
+  the tree by
+  seeing patterns in your daily life. Paradoxically enough, with experience, you end up learning new branching paths and
+  new
+  options to choose from. Skilled manipulators tend to have intelligently designed trees; psychopaths however tend to
+  have multiple trees instead, one
+  for each profile .
+</p>
+
+<p>After all, I find it crucial for every human to learn and gain as experience as they can. I observed that the
+  punishement
+  factor of taking the bad options tend to be lighter the younger a human is; as you grow, people would often presume
+  that
+  you are capable of measuring and designing good decision trees. It's an important skill that some people make money
+  off of nowadays, most departements have an advisory bureau, ready to enrich your trees with all the solutions you can
+  afford. This is important as life is filled with many surprises that you can't really quantify.
+</p>
+<h2>Is stochasticity beautiful ?</h2>
+<p>Real life is filled with randomness. In such environments, it becomes harder and harder to calculate your moves, let
+  alone set
+  an objective function as the number of dimensions grows exponencially, which is why people study psychology. </p>
+
+<p>Growing up in Morocco offered me an environment with tons of variables to deal with.</p>
