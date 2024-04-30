@@ -41,19 +41,19 @@ Draft: True
   }
 </style>
 <script src="https://tikzjax.com/v1/tikzjax.js"></script>
-<p><a href="https://en.wikipedia.org/wiki/Operant_conditioning_chamber">The skinner box</a> is an psychology experiment
+<p><a href="https://en.wikipedia.org/wiki/Operant_conditioning_chamber">The skinner box</a> is a psychology experiment
   that further
   explores operant conditioning. Simply put: Behave well and you will get rewarded, choose the wrong option and you will
   get punished.
-  Be it humans or animals, any entity would always seek to maximize our utility function. Honestly I wish this analogy
+  Be it humans or animals, any entity would always seek to maximize its utility function. Honestly I wish this analogy
   was used
   in the artificial intelligence resources that I used. </p>
 
 <p>As we grow up, we shape our knowledge base and keep learning to enhance our future interactions through the
   experiences we gain.
   Part of the learning process is to make mistakes (Or watch people do mistakes), since they lead to nothing but
-  punishement, since rewards feel
-  temporary in comparison to the pain attached to choosing the wrong dialogue option.
+  punishement, as rewards feel
+  cheap in comparison to the pain attached to choosing the wrong dialogue option.
 </p>
 
 <p>As far as interactions go, I like to picture them as branch and bound models, where each root node has up to N
@@ -80,23 +80,24 @@ border-radius: 8px;">
 \node[tree node] (P2) at ([shift={(2,-1)}]P0) {3};
 \node[tree node] (P3) at ([shift={(-2,-1)}]P2) {4};
 \node[tree node] (P4) at ([shift={(2,-1)}]P2) {5};
-\node[tree node] (P5) at ([shift={(-1,-1)}]P3) {6};
-\node[tree node] (P6) at ([shift={(1,-1)}]P3) {7};
+\node[tree node] (P5) at ([shift={(-1,-2)}]P3) {6};
+\node[tree node] (P6) at ([shift={(1,-2)}]P3) {7};
 
 % Draw the edges
-\draw[thick] (P0) -- node[left, above] {run} (P1);
+\draw[thick] (P0) -- node[left, above] {avoid} (P1);
 \draw[thick] (P0) -- node[left,above] {talk} (P2);
-\draw[thick] (P2) -- node[left, above] {lie} (P3);
-\draw[thick] (P2) -- node[right, midway] {truth} (P4);
-\draw[thick] (P3) -- node[left, midway] {lie again} (P5);
+\draw[thick] (P2) -- node[left, above] {refuse } (P3);
+\draw[thick] (P2) -- node[right, midway] {accept} (P4);
+\draw[thick] (P3) -- node[left, midway] {low ball} (P5);
 \draw[thick] (P3) -- node[right, midway] {pay} (P6);
 \end{tikzpicture}
 
           </script>
+
 </div>
+<p style="text-align:center; color:grey; font-size:small;">Negociating a monetary exchange</p>
 
-
-<p>Everyone loves smooth and swift communications, navigating decision trees is a daunting task. I often envy those who
+<p>Everyone loves smooth and swift communications, navigating decision trees is a daunting task, it prompts me often to rely on muscle memory and instinct, something which I usually train by creating simulations in my head, hoping that their interactions will be 1:1 with what I picture. I often envy those who
   can quickly sort themselves out through it. One way to heuristically deal with this is to reduce the amount of options
   that you
   have to deal with, each experience that you gain acts as a cache in your memory, allowing you to reduce the length of
@@ -105,7 +106,7 @@ border-radius: 8px;">
   new
   options to choose from. Skilled manipulators tend to have intelligently designed trees; psychopaths however tend to
   have multiple trees instead, one
-  for each profile .
+  for each profile.
 </p>
 
 <p>After all, I find it crucial for every human to learn and gain as experience as they can. I observed that the
@@ -114,11 +115,19 @@ border-radius: 8px;">
   that
   you are capable of measuring and designing good decision trees. It's an important skill that some people make money
   off of nowadays, most departements have an advisory bureau, ready to enrich your trees with all the solutions you can
-  afford. This is important as life is filled with many surprises that you can't really quantify.
+  afford. This is important as life is filled with many surprises that you can't really quantify. It is expected of an adult to be ready for the
+  many possibilities that they may encounter.
 </p>
 <h2>Is stochasticity beautiful ?</h2>
 <p>Real life is filled with randomness. In such environments, it becomes harder and harder to calculate your moves, let
   alone set
-  an objective function as the number of dimensions grows exponencially, which is why people study psychology. </p>
+  a proper objective function as the number of dimensions grows exponencially, which is why some people study psychology. </p>
 
-<p>Growing up in Morocco offered me an environment with tons of variables to deal with.</p>
+<p>Growing up in Morocco offered me an environment with tons of variables to deal with. On top of reacting to what I would see. To ensure my survival, I would still require something beyond the so called sixth sense. This is one of the reasons that motivate my coming to Germany, yet still, Germany also has some RNG to fight against but the probability range is a bit slim in comparison to my country. This is alluded by the fact that the law controls everything, however, humans are not perfect as entities, and might make some exceptions if they feel the need to.
+</p>
+
+<p>To fight against the RNG, people commit to build small communities where they share their experiences and expand each others' knowledge base, which is often to be archived for existing and new members. But what if those communities pretty much have no knowledge to back you up ? Job searching is one environment where you will often hear people say "Just try your luck! and see if you can land a job". </p>
+
+<p>Job search is an environment where you can't concretly state a chain of moves that you can follow in order to reach your goal. It is subject to competition, the state of the economy, your expertise and even sometimes the mood of the HR. </p>
+
+
