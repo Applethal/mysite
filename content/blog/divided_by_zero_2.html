@@ -77,42 +77,45 @@ Picture: "divided_by_zero.png"
     your imagination.</p>
 
 
+<div class="scroll-container">
+    <div class="tikzs">
+        <script type="text/tikz">
+            \begin{tikzpicture}[
+scale = 1.5, transform shape, thick,
+tree node/.style = {align=center, inner sep=0pt, text centered, font = 
+\scriptsize},
+S/.style = {draw, circle, minimum size = 8mm},
+grow = down,  
+level 1/.style = {sibling distance=3cm},
+level 2/.style = {sibling distance=4cm}, 
+level 3/.style = {sibling distance=5cm}, 
+level distance = 1.25cm]
 
-<div style="text-align: center; background-color: white; width: fit-content; margin: auto;
+\node [S, label=above:{$Z = 0$}] {$1$}
+    child{node [S,label=left:{$Z = 0$}] {$2$}
+        edge from parent node[above left, font = \scriptsize] {avoid}}
+    child{node [S, label=above right:{$Z = 5$}] {$3$}
+        child {node [S, label=left:{$Z = 15$}] {$4$}
+            child {node [S, label=left:{$Z = 0$}] {$6$}
+                edge from parent node[above left, font = \scriptsize] {low ball}}
+            child {node [S, label=left:{$Z = 20$}] {$7$}
+                edge from parent node[above right, font = \scriptsize] {pay}}
+                edge from parent node[above left, font = \scriptsize] {refuse}
+        }
+        child {node [S, label=right:{$Z = 10$}] {$5$}
+                edge from parent node[above right, font = \scriptsize] {accept}
+        }
+        edge from parent node[above right, font = \scriptsize] {talk}};
+        
 
 
-padding: 20px;
-border-radius: 8px;">
-    <script type="text/tikz">
-    \begin{tikzpicture}[
-  font=\normalsize,
-  tree node/.style={align=center, draw, circle, minimum size=18pt},
-  branch label/.style={font=\scriptsize},
-]
-
-% Define the nodes
-\node[tree node] (P0) {1};
-\node[tree node] (P1) at ([shift={(-2,-1)}]P0) {2};
-\node[tree node] (P2) at ([shift={(2,-1)}]P0) {3};
-\node[tree node] (P3) at ([shift={(-2,-1)}]P2) {4};
-\node[tree node] (P4) at ([shift={(2,-1)}]P2) {5};
-\node[tree node] (P5) at ([shift={(-1,-2)}]P3) {6};
-\node[tree node] (P6) at ([shift={(1,-2)}]P3) {7};
-
-% Draw the edges
-\draw[thick] (P0) -- node[left, above] {avoid} (P1);
-\draw[thick] (P0) -- node[left,above] {talk} (P2);
-\draw[thick] (P2) -- node[left, above] {refuse } (P3);
-\draw[thick] (P2) -- node[right, midway] {accept} (P4);
-\draw[thick] (P3) -- node[left, midway] {low ball} (P5);
-\draw[thick] (P3) -- node[right, midway] {pay} (P6);
 \end{tikzpicture}
-
           </script>
-
+    </div>
 </div>
+
 <p style="text-align:center; color:grey; font-size:small;">Negotiating a trade, yes I usually give up easily, hence why
-    my tree's depth is short.'</p>
+    my tree's depth is short.</p>
 
 <p>Everyone loves smooth and swift communications, navigating decision trees is a daunting task, it prompts me often to
     rely on muscle memory and instinct, something which I usually train by creating simulations in my head, hoping that
@@ -123,7 +126,8 @@ border-radius: 8px;">
     have to deal with, each experience that you gain acts as a cache in your memory, allowing you to reduce the length
     of
     the tree by
-    seeing patterns in your daily life. Paradoxically enough, with experience, you end up learning new branching paths
+    seeing patterns in your daily life, though at some points it might introduce new complexities depending on the
+    topic. Paradoxically enough, with experience, you end up learning new branching paths
     and
     new
     options to choose from. Skilled manipulators tend to have intelligently designed trees; psychopaths however tend to
@@ -285,6 +289,14 @@ border-radius: 8px;">
     Germany.
 </p>
 
+
+<p>Mathematically speaking, with the way I see it, \(\Omega\)'s space here only has 2 coins at the minimum, the first of
+    which revolves around finding an offer and getting into contact with the owner, and the second is getting the deal.
+    I honestly wish if some offers had a highly-detailed check list that could help me filter my search, or get filtered
+    of course.
+    But I suppose some might cheat this, given how dire the housing situation was back then.
+</p>
+
 <p>I am writing this article from my new home, in a room bigger than the kitchen I had. Had I not asked an acquittance
     of
     mine for help,
@@ -295,25 +307,40 @@ border-radius: 8px;">
     never expect. I would never forget this and I would always be thankful for it. </p>
 
 
-<h3>Getting the visa</h3>
+<h3>Getting the European visa: My least favourite casino</h3>
 
 <p>I don't have much to say here, this is somehow comparable to job seeking. Since you are dealing with unseen variables
     which somehow led to many into creating phantasies on the topic.
 </p>
 
-<p>Normally, to apply for a visa, I would have to submit my documents and see the magic happen. More often than not,
+<p>Normally, to apply for a European visa, I would have to submit my documents and see the magic happen. More often than
+    not,
     getting a refusal
     comes dry with no feedback or remarks that hint towards the decision, which is why people keep speculating on the
     matter, to the point that I heard things like: Make sure to smile properly in order to have a chance.
 </p>
 
 <p>Without the feedback, it becomes a bit difficult to plan your next moves, especially if you are desperate and
-    want to alter the outcome RNG.
+    want to alter the outcome RNG. The wisest thing one can do is to have a plan B on the side. I recall hearing someone
+    sold their house to generate enough money for the whole gamble, only for them to get a refusal.
 </p>
 
+<p>In all fairness, this is a special case in my opinion, as all you have to do is to fill their requirements I suppose.
+    I believe any amount of extra effort is great. I made it in by simply meeting the (official)bar, which is the case
+    for many other.
+    But some who had much brighter profiles couldn't make it, for reasons that are left unknown to us of course.
+    Our society's psyche makes the whole thing discouraging when commenting on the latter case, where they would mention
+    things like
+    "See ? his grades are quite high and still could not make it."
+</p>
 
+<p>There is of course, the idea that the feedback element is left unseen to allow for more money-farming
+    shenanigans by the shadow people. The only way to find out I guess is to join their ranks and climb their hierarchy.
+    This whole model has only one coin to be flipped, you either make it in or not, unless if you are into conspiracies
+    which makes your sample space grow further.
+</p>
 
-<h3>Side note: The dangers of living in a routine</h3>
+<h3>Side note: The danger of living in a routine</h3>
 
 <p>I highly appreciate structure routines. Under normal conditions, spending my days feels like meditating, as
     I have nothing to worry about, as long as I take the proper measures and as long as I stay responsible with things
@@ -326,6 +353,6 @@ border-radius: 8px;">
     that can occur in my daily life. Though I do my best to stay away from these, I am not a perfect being.
 </p>
 
-<p>As much as I appreciate all the good moments that I had in my life, I sometimes wish if I could systematically
+<p>As much as I appreciate all the lucky shots that I had in my life, I sometimes wish if I could systematically
     tackle many challenges instead of relying on any sort of luck factor in order to succeed.
 </p>
