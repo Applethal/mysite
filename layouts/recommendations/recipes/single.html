@@ -8,7 +8,7 @@
         margin: auto;
         padding: 20px;
         border-radius: 8px;
-        
+
 
     }
 
@@ -23,7 +23,7 @@
     }
     .tikzs svg {
     overflow: visible !important;
-    position: static !important;
+
 }
 .scroll-container {
     overflow-x: auto;
@@ -42,7 +42,7 @@
     .item1 {
         align-self: auto;
         display: inline-block;
-        
+
         max-height: 100%;
 
     }
@@ -51,7 +51,7 @@
         flex-grow: 0;
         align-self: center;
         min-width: 220px;
-        
+
     }
 
     .info {
@@ -72,7 +72,7 @@
 
     @media (max-width: 767px) {
 
-        
+
         .flex-container {
             flex-direction: column;
         }
@@ -80,12 +80,12 @@
         .item2 {
             align-self: center;
             min-width: unset;
-            
+
         }
-        
+
     }
-    
-    
+
+
 </style>
 <script src="https://tikzjax.com/v1/tikzjax.js"></script>
 {{ $tasks := .Params.tasks }}
@@ -112,7 +112,7 @@ function calculateSchedule(processSteps) {
         dependencies: step.dependencies,
         startTime: 0,
         finishTime: 0,
-        lst: 0, 
+        lst: 0,
     }));
 
     for (const task of tasks) {
@@ -169,13 +169,13 @@ console.log(scheduleResult);
 <div class="tikzs">
     <script type="text/tikz">
         \begin{tikzpicture}[scale=0.7]
-        
-        
-        
-       
-        
-       
-        
+
+
+
+
+
+
+
     </script>
     <script type="text/javascript">
         function updateschedule() {
@@ -186,19 +186,19 @@ console.log(scheduleResult);
                 console.log(`${task.name}: Start Time ${task.startTime}, Finish Time ${task.finishTime}, Machine ${task.machine}`);
             });
             tasks = scheduleResult.tasks;
-            
+
 
             var tikzCook = document.querySelector('.tikzs script');
             var tikzContent = tikzCook.innerHTML;
-            
-            
+
+
             let uniquemachines = new Set();
             processSteps.forEach(obj => {
                 uniquemachines.add(obj.machine);
             });
-            let machinescount = uniquemachines.size; 
+            let machinescount = uniquemachines.size;
             console.log(machinescount)
-            
+
             let space = 3;
             tikzContent += `\n\\draw[->] (0,0) -- (${scheduleResult.makespan},0) node[right] {};`;
             tikzContent += `\n\\draw[->] (0,0) -- (0,${machinescount * 3}) node[above] {};`;
@@ -211,27 +211,27 @@ tikzContent += `\n}`;
             tikzContent += `\n\\draw (0,${space}) -- (-0.2,${space}) node[left] {${element}};`
             space +=3
             });
-            
+
             tasks.forEach(element => {
     let uniqueMachinesArray = Array.from(uniquemachines)
     let machineOrder = uniqueMachinesArray.indexOf(element.machine) * 3
 
     let slackTime = element.lst - element.startTime;
-    
+
     if (slackTime > 0 && element.id !== tasks.length) {
         tikzContent += `\n\\draw[fill=red!30] (${element.startTime},${machineOrder}) rectangle (${element.finishTime},${machineOrder + 3}) node[pos=.5] {${element.id}};`
     } else {
         tikzContent += `\n\\draw[fill=blue!30] (${element.startTime},${machineOrder}) rectangle (${element.finishTime},${machineOrder + 3}) node[pos=.5] {${element.id}};`
     }
 });
-            
+
             tikzContent += `\n\\end{tikzpicture}`;
 
-            
+
             tikzCook.innerHTML = tikzContent;
         }
 
-        
+
         updateschedule();
     </script>
 </div>
