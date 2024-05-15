@@ -209,17 +209,17 @@ level distance = 1.25cm]
 <p>Oddswise, the RNG set can be reduced to \( \Omega = \{Refused, Accepted\}\), this is true because of how
     imperfect the recruitment processes are, as you can't objectively make a guide that
     leads you to victory. Getting accepted would have you flip a coin against every obstacle, fail once and you're out,
-    and thus the following describes odds of both
-    outcomes, where \(n\) is the number of job application obstacles that the applicant has to deal with and \(P\) is
-    the probability chance:
+    and thus the following describes the odds of both
+    outcomes, where \(n\) is the number of the \(n\)th job application obstacle (First meeting, Interviews...etc..) that the applicant has to deal with and \(P\) is
+    the probability chance, namely \(P_{r,n}\) is the probability of getting refused at the \(n\)th round:
 
     \[
-    Refusal = P_r
+    Refusal = P_{r,n} \quad \forall \quad n  \in N
 
     \]
 
     \[
-    Acceptance = (1- P_r)^n
+    Acceptance = \prod\limits_{n \in N}{1- P_{r,n}}
     \]
     \[
     \quad n > 0
@@ -239,15 +239,13 @@ level distance = 1.25cm]
 
 
 \[
-Acceptance = \sum\limits_{k = 1}^{K}{(1- P_r)^{n_{k}}}
+Acceptance = \sum\limits_{k = 1}^{K}\prod\limits_{n \in N}{1- P_{r,n,k}}
 \]
 \[
 \quad n > 0 \quad k > 0
 \]
 
-<p>Verbally, this means to flip the coins at various companies up to a number \(K\) of companies, where \(n\) is the
-    amount of interviews and hoops
-    that you have to jump through at company \(k\). As long as one has the resources to keep flipping, these statements
+<p>Verbally, this means to flip the coins at various companies up to a number \(K\) of companies, where \(P_{n,r,k}\) is the failure probability of obstacle \(n\) at company \(k\). As long as one has the resources to keep flipping, these statements
     still hold. </p>
 
 
