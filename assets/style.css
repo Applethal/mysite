@@ -61,6 +61,11 @@ footer {
 	text-decoration: none;
 }
 
+a {
+	text-decoration: none;
+	color: yellow;
+}
+
 .Top {
 	background-color: #332929;
 	color: rgb(255, 255, 255);
