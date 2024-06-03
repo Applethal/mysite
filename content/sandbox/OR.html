@@ -3,31 +3,45 @@ title: "Systematically visualize the impact of linear constraints in a MIP"
 date: 2024-06-02
 
 tags: ["Optimization","Operational research","Mathematics"]
-Summary: "I wish this visual trick was given in the many literature that I inspected"
-draft: True
+Summary: "I wish this visual trick was given in the many literature that I inspected. The post's picture is from Pop
+Team Epic"
+
 
 ---
+<link rel="stylesheet" type="text/css" href="https://tikzjax.com/v1/fonts.css">
+<script src="https://tikzjax.com/v1/tikzjax.js"></script>
 
-<p>Mixed integer linear programing is easy to comprehend on the surface, you just plug in
-a linear constraint and voila! you now have transformed a LP into a MIP. Learning how to
-systematically write a model with its constraints and component is, sadly, a matter
-of training. Watching all these professors and these seniors formulate constraints at ease makes
-it look easy, which may or may note evoke an air of imposter syndrom.</p>
+<h3>Introduction</h3>
+<p>Mixed integer linear programming is easy to comprehend on the surface, you just plug in
+    a linear constraint and voila! you now have transformed a LP into a MIP. Learning how to
+    systematically write a model with its constraints and component is, sadly, a matter
+    of training. Watching all these professors and these seniors formulate constraints at ease makes
+    it look easy, which may or may note evoke an air of imposter syndrome.</p>
 
 <p>Just like coding, the goal is to shape the perspective around optimization, that's the passive
-effect of doing exercises. Some of the constraints seem intuitive but once you get into the deeper
-side of linear programming (I.E. Big M, logical constraints...etc..), it becomes a bit hard to visualize the effect
-of a constraint with respect to the optimization problem that you are facing.</p>
+    effect of doing exercises. Some of the constraints seem intuitive but once you get into the deeper
+    side of linear programming (I.E. Big M, logical constraints...etc..), it becomes a bit hard to visualize the effect
+    of a constraint with respect to the optimization problem that you are facing. If you are a beginner in operational
+    research and having skipped mathematics, chances are, that every time these
+    constraints are brought up, you might feel as if you are missing something elementary. It becomes much more
+    frustrating if you try to research any specific since you can't tell where to start, as the anything revolving the
+    constraint
+
+    is not so centralized and accessible.</p>
+
+<h3>Shape your perception</h3>
 
 
-<p>This article is aimed at introducing the method that I use to understand a linear constraint.
-This method is sadly not directly communicated, as it is to be concluded through intuition and can not be
-easily googled, as the average Operational research guide or blog expects the person to have some mathematical
-reflexes. This method is meant to be fool-proof, I believe that no one may face difficulties with it.</p>
+
+<p>This article is aimed at introducing the method that I use to understand any linear constraint.
+    This method is sadly not directly communicated, as it is to be concluded through intuition and can not be
+    easily googled. The average Operational research guide or blog expects the person to have some mathematical
+    reflexes. This method is meant to be fool-proof, I believe that no one may face difficulties with it.</p>
 
 
 <p>Unless relaxed, binary variables express the execution of a decision; if the variable equals 1,
-the decision to execute what the variable expresses is enabled. Do you produce X, do you use X, do you allocate X...etc...
+    the decision to execute what the variable expresses is enabled. Do you produce X, do you use X, do you allocate
+    X...etc...
 </p>
 
 
@@ -39,9 +53,11 @@ X=\begin{cases}
 \]
 
 
-<p>When writing mathematical models, it is imperative to express linear functions (hence the term Linear in the model's property). Many modelling
-tricks were invented to cope with constraints that can not be directly translated from a verbal statement. Allow me to present the following modelling
-trick:	</p>
+<p>When writing mathematical models, it is imperative to express linear functions (hence the term Linear in the model's
+    property). Many modelling
+    tricks were invented to cope with constraints that can not be directly translated from a verbal statement. Allow me
+    to present the following modelling
+    trick: </p>
 
 
 \[
@@ -51,25 +67,132 @@ x \leq y
 
 
 \[
-If Product X is produced, I want Product Y to be produced alongside it. However, I still want the option to decide on producing Product Y independently of whether Product X gets produced.
+
 x, y \in [0,1]
 \]
 
 
-<p>This trick helps to formulate situations where the execution of a variable (in this case \(x\)) forces another variable (\(y\)) to be true, though we don't
-care about the latter, we want to force them both to be enabled if the former gets the value of 1. In other words: </p>
+
+
+<p>This trick helps to formulate situations where the execution of a variable (in this case \(x\)) forces another
+    variable (\(y\)) to be true, though we don't
+    care about the latter, we want to force them both to be enabled if the former gets the value of 1. In other words:
+</p>
 
 
 <ul>
-<li> If x = 1 then y = 1
-<li> If x = 0 then we don't care if y = 1 or 0
+    <li> If x = 1 then y = 1
+    <li> If x = 0 then we don't care if y = 1 or 0
 </ul>
 
-<p><u>Concret example: </u>If Product X is produced, I want Product Y to be produced alongside it. However, I still want the option to decide on producing Product Y independently of whether Product X gets produced.</p>
+<p><u>Concrete example: </u>If Product X is produced, I want Product Y to be produced alongside it. However, I still
+    want
+    the option to decide on producing Product Y independently of whether Product X gets produced.</p>
 
-<p>How could I understand the desired outcome of this expression ? Before presenting the method, let me explain how this whole thing works: <br>
+<p>How could I understand the desired outcome of this expression ? Before presenting the method, let me explain how this
+    whole thing works: <br>
 
-From a logical point of view, the
+    Graphically, this is how the constraint looks like. Any point that exists outside the area is invalid/infeasible.
+    The role of the constraint is to make sure that only the integer points within this area are chosen. With that said,
+    the point (1,0) as seen in the picture below is infeasible, <u><b>as the value 1 can never be lower or equal to
+            0</b></u>.
 
 
+</p>
+
+
+<div class="scroll-container">
+    <div class="tikzs">
+        <script type="text/tikz">
+            \begin{tikzpicture}[scale=4]
+    
+    \draw[->] (-0.5,0) -- (2.5,0) node[right] {$x$};
+    \draw[->] (0,-0.5) -- (0,2.5) node[above] {$y$};
+    
+    
+    \draw[step=1, gray, very thin] (0,0) grid (2.5, 2.5);
+    
+    
+    \fill[black] (0,0) circle (1pt) node[below left] {$(0,0)$};
+    \fill[black] (1,1) circle (1pt) node[above right] {$(1,1)$};
+    \fill[black] (0,1) circle (1pt) node[above left] {$(0,1)$};
+    \fill[black] (1,0) circle (1pt) node[above left] {$(1,0)$};
+    
+    
+    \begin{scope}[fill=gray, fill opacity=0.3]
+        \clip (0,0) -- (1,1) -- (0,1) -- cycle;
+        \fill[gray, opacity=0.3] (0,0) rectangle (1,1);
+    \end{scope}
+    
+    
+    \foreach \x in {0,1,2} {
+        \draw (\x,1pt) -- (\x,-1pt) node[below] {$\x$};
+    }
+    \foreach \y in {0,1,2} {
+        \draw (1pt,\y) -- (-1pt,\y) node[left] {$\y$};
+    }
+    
+\end{tikzpicture}
+      </script>
+
+    </div>
+    <p style="color: #888; font-size: 14px; text-align: center;">Graphical depiction of the aforementioned constrain</p>
+</div>
+
+
+<p>That's right, by all logic, 1 can't be lower or equal than 0 for sure, so how do I perceive this ? Truth is, I don't
+    draw a 2 dimensional axis and a constraint ? There is an even faster way:
+
+
+</p>
+
+
+<div style="display: flex; justify-content: center; align-items: center;">
+    <table border="1" style="border-collapse: collapse; text-align: center; width: 60%;">
+        <tr>
+            <th style="width: 20%;">X</th>
+            <th style="width: 20%;">Y</th>
+            <th>Feasible ?</th>
+        </tr>
+        <tr>
+            <td>0</td>
+            <td>0</td>
+            <td>Feasible</td>
+        </tr>
+        <tr>
+            <td>1</td>
+            <td>0</td>
+            <td>Infeasible</td>
+        </tr>
+        <tr>
+            <td>0</td>
+            <td>1</td>
+            <td>Feasible</td>
+        </tr>
+        <tr>
+            <td>1</td>
+            <td>1</td>
+            <td>Feasible</td>
+        </tr>
+    </table>
+</div>
+
+
+<p>Here is how I do it: I draw a table up to \(M\) number of variables and constants on the columns and then I list
+    all of their possible values, and then I check the feasibility with respect to the mechanics of the constraint.
+    This is a method that I absorbed by watching a student do it few years ago, and as I mentioned, I have not seen this
+    in any OR literature yet.
+</p>
+
+
+
+<p>Although this method is meant to quickly help understand how a mathematical constraint works, I have seen that
+    same student use it to write and design constraints. I believe this could help in this regard, especially if the
+    variables are strictly binary. I would be happy to see if there is a better and quicker way, I will certainly update
+    this guide
+    if I ever find anything fruitful.
+</p>
+
+<p>I have to admit that I still relay on my muscle memory to write optimization models, it takes some intelligence
+    to write some cool constraints. It's an art!
 </p>
