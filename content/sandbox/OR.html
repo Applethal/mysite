@@ -23,7 +23,53 @@ of a constraint with respect to the optimization problem that you are facing.</p
 <p>This article is aimed at introducing the method that I use to understand a linear constraint.
 This method is sadly not directly communicated, as it is to be concluded through intuition and can not be
 easily googled, as the average Operational research guide or blog expects the person to have some mathematical
-reflexes.</p>
+reflexes. This method is meant to be fool-proof, I believe that no one may face difficulties with it.</p>
 
 
+<p>Unless relaxed, binary variables express the execution of a decision; if the variable equals 1,
+the decision to execute what the variable expresses is enabled. Do you produce X, do you use X, do you allocate X...etc...
+</p>
 
+
+\[
+X=\begin{cases}
+1 & \text{Decision is to be executed}\\
+0 & \text{Otherwise}
+\end{cases}
+\]
+
+
+<p>When writing mathematical models, it is imperative to express linear functions (hence the term Linear in the model's property). Many modelling
+tricks were invented to cope with constraints that can not be directly translated from a verbal statement. Allow me to present the following modelling
+trick:	</p>
+
+
+\[
+x \leq y
+
+\]
+
+
+\[
+If Product X is produced, I want Product Y to be produced alongside it. However, I still want the option to decide on producing Product Y independently of whether Product X gets produced.
+x, y \in [0,1]
+\]
+
+
+<p>This trick helps to formulate situations where the execution of a variable (in this case \(x\)) forces another variable (\(y\)) to be true, though we don't
+care about the latter, we want to force them both to be enabled if the former gets the value of 1. In other words: </p>
+
+
+<ul>
+<li> If x = 1 then y = 1
+<li> If x = 0 then we don't care if y = 1 or 0
+</ul>
+
+<p><u>Concret example: </u>If Product X is produced, I want Product Y to be produced alongside it. However, I still want the option to decide on producing Product Y independently of whether Product X gets produced.</p>
+
+<p>How could I understand the desired outcome of this expression ? Before presenting the method, let me explain how this whole thing works: <br>
+
+From a logical point of view, the
+
+
+</p>
