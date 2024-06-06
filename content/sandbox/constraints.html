@@ -4,7 +4,7 @@ date: 2024-06-02
 
 tags: ["Optimization","Operational research","Mathematics"]
 Summary: "I wish this visual trick was given in the many literature that I inspected. The post's picture is from Pop
-Team Epic"
+Team Epic. This article is as of now still WIP"
 
 
 ---
@@ -36,7 +36,9 @@ Team Epic"
 <p>This article is aimed at introducing the method that I use to understand any linear constraint.
     This method is sadly not directly communicated, as it is to be concluded through intuition and can not be
     easily googled. The average Operational research guide or blog expects the person to have some mathematical
-    reflexes. This method is meant to be fool-proof, I believe that no one may face difficulties with it.</p>
+    reflexes. This method is meant to be fool-proof, I believe that no one may face difficulties with it.
+    This article serves also as a way to centralize most of the modelling tricks that I have learned, you may
+    use it as a reference to come back to later on.</p>
 
 
 <p>Unless relaxed, binary variables express the execution of a decision; if the variable equals 1,
@@ -105,33 +107,33 @@ x, y \in [0,1]
     <div class="tikzs">
         <script type="text/tikz">
             \begin{tikzpicture}[scale=4]
-    
+
     \draw[->] (-0.5,0) -- (2.5,0) node[right] {$x$};
     \draw[->] (0,-0.5) -- (0,2.5) node[above] {$y$};
-    
-    
+
+
     \draw[step=1, gray, very thin] (0,0) grid (2.5, 2.5);
-    
-    
+
+
     \fill[black] (0,0) circle (1pt) node[below left] {$(0,0)$};
     \fill[black] (1,1) circle (1pt) node[above right] {$(1,1)$};
     \fill[black] (0,1) circle (1pt) node[above left] {$(0,1)$};
     \fill[black] (1,0) circle (1pt) node[above left] {$(1,0)$};
-    
-    
+
+
     \begin{scope}[fill=gray, fill opacity=0.3]
         \clip (0,0) -- (1,1) -- (0,1) -- cycle;
         \fill[gray, opacity=0.3] (0,0) rectangle (1,1);
     \end{scope}
-    
-    
+
+
     \foreach \x in {0,1,2} {
         \draw (\x,1pt) -- (\x,-1pt) node[below] {$\x$};
     }
     \foreach \y in {0,1,2} {
         \draw (1pt,\y) -- (-1pt,\y) node[left] {$\y$};
     }
-    
+
 \end{tikzpicture}
       </script>
 
@@ -178,8 +180,9 @@ x, y \in [0,1]
 </div>
 
 
-<p>Here is how I do it: I draw a table up to \(M\) number of variables and constants on the columns and then I list
-    all of their possible values, and then I check the feasibility with respect to the mechanics of the constraint.
+<p>Here is how I do it: I draw a table up to \(N\) number of variables  on the columns and then I list
+    all of their possible values, luckily, what makes this method faster than graphically checks is the fact that the variables are binary and can't have anything other
+    than 0s and 1s. Finally, I check the feasibility with respect to the mechanics of the constraint.
     This is a method that I absorbed by watching a student do it few years ago, and as I mentioned, I have not seen this
     in any OR literature yet.
 </p>
