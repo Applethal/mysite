@@ -180,9 +180,11 @@ x, y \in [0,1]
 </div>
 
 
-<p>Here is how I do it: I draw a table up to \(n\) number of variables  on the columns and then I list
-    all of their possible values, luckily, what makes this method faster than graphically checks is the fact that the variables are binary and can't have anything other
-    than 0s and 1s, which by extension means that you will have \(2^n\) rows. Finally, I check the feasibility with respect to the mechanics of the constraint.
+<p>Here is how I do it: I draw a table up to \(n\) number of variables on the columns and then I list
+    all of their possible values, luckily, what makes this method faster than graphically checks is the fact that the
+    variables are binary and can't have anything other
+    than 0s and 1s, which by extension means that you will have \(2^n\) rows. Finally, I check the feasibility with
+    respect to the mechanics of the constraint.
     This is a method that I absorbed by watching a student do it few years ago, and as I mentioned, I have not seen this
     in any OR literature yet.
 </p>
@@ -200,7 +202,7 @@ x, y \in [0,1]
     to write some cool constraints. It's an art!
 </p>
 
-<h2>modeling the logical NOT</h2>
+<h2>modeling the logical NAND</h2>
 
 <p>We've seen the logical IF expression, the following becomes easier to understand after utilizing the method:</p>
 
@@ -243,14 +245,13 @@ x, y \in [0,1]
     </table>
 </div>
 
-<p>Notice that \(x\) and \(y\) can never both contain a value of 1 at the same time, the constraint is feasible only when either \(x\) or \(y\) gets the value of 1, or 0 optionally. Verbally, this express says the following: If \(x\) gets 1 then \(y\) should NOT get 1 and vice versa.
-I believe this equation can be visually simplified by swapping its terms like this; this is how I remember it:</p>
+<p>Notice that \(x\) and \(y\) can never both contain a value of 1 at the same time, the constraint is feasible only
+    when either \(x\) or \(y\) gets the value of 1, or 0 optionally. Verbally, this expression says the following: If
+    \(x\) gets 1 then \(y\) should NOT get 1 and vice versa.
+    I believe this equation can be visually simplified by swapping its terms like this; this is how I remember it:</p>
 
 \[
 x + y \leq 1
 \]
 
 <p>Like this, you may easily remember that 2 can never be greater than 1.</p>
-
-
-
