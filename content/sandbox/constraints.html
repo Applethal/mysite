@@ -243,8 +243,14 @@ x, y \in [0,1]
     </table>
 </div>
 
-<p>Notice that \(x\) and \(y\) can never both contain a value of 1, the constraint is feasible only when either \(x\) or \(y\) gets the value of 1 though they can
-still have 0 as an option. Verbally, this express says the following: If \(x\) gets 1 then \(y\) should NOT get 1.</p>
+<p>Notice that \(x\) and \(y\) can never both contain a value of 1 at the same time, the constraint is feasible only when either \(x\) or \(y\) gets the value of 1, or 0 optionally. Verbally, this express says the following: If \(x\) gets 1 then \(y\) should NOT get 1 and vice versa.
+I believe this equation can be visually simplified by swapping its terms like this; this is how I remember it:</p>
+
+\[
+x + y \leq 1
+\]
+
+<p>Like this, you may easily remember that 2 can never be greater than 1.</p>
 
 
 
