@@ -180,9 +180,9 @@ x, y \in [0,1]
 </div>
 
 
-<p>Here is how I do it: I draw a table up to \(N\) number of variables  on the columns and then I list
+<p>Here is how I do it: I draw a table up to \(n\) number of variables  on the columns and then I list
     all of their possible values, luckily, what makes this method faster than graphically checks is the fact that the variables are binary and can't have anything other
-    than 0s and 1s. Finally, I check the feasibility with respect to the mechanics of the constraint.
+    than 0s and 1s, which by extension means that you will have \(2^n\) rows. Finally, I check the feasibility with respect to the mechanics of the constraint.
     This is a method that I absorbed by watching a student do it few years ago, and as I mentioned, I have not seen this
     in any OR literature yet.
 </p>
@@ -199,3 +199,53 @@ x, y \in [0,1]
 <p>I have to admit that I still relay on my muscle memory to write optimization models, it takes some intelligence
     to write some cool constraints. It's an art!
 </p>
+
+<h2>modeling the logical NOT</h2>
+
+<p>We've seen the logical IF expression, the following becomes easier to understand after utilizing the method:</p>
+
+
+\[
+x \leq 1 - y
+\]
+
+\[
+
+x, y \in [0,1]
+\]
+
+<div style="display: flex; justify-content: center; align-items: center;">
+    <table border="1" style="border-collapse: collapse; text-align: center; width: 60%;">
+        <tr>
+            <th style="width: 20%;">X</th>
+            <th style="width: 20%;">Y</th>
+            <th>Feasible ?</th>
+        </tr>
+        <tr>
+            <td>0</td>
+            <td>0</td>
+            <td>Feasible</td>
+        </tr>
+        <tr>
+            <td>1</td>
+            <td>0</td>
+            <td>Feasible</td>
+        </tr>
+        <tr>
+            <td>0</td>
+            <td>1</td>
+            <td>Feasible</td>
+        </tr>
+        <tr>
+            <td>1</td>
+            <td>1</td>
+            <td>Infeasible</td>
+        </tr>
+    </table>
+</div>
+
+<p>Notice that \(x\) and \(y\) can never both contain a value of 1, the constraint is feasible only when either \(x\) or \(y\) gets the value of 1 though they can
+still have 0 as an option. Verbally, this express says the following: If \(x\) gets 1 then \(y\) should NOT get 1.</p>
+
+
+
