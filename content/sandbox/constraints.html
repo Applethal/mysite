@@ -202,9 +202,9 @@ x, y \in [0,1]
     to write some cool constraints. It's an art!
 </p>
 
-<h2>modeling the logical NAND</h2>
+<h3>Modeling If -> NOT</h3>
 
-<p>We've seen the logical IF expression, the following becomes easier to understand after utilizing the method:</p>
+<p>We've seen the logical IF -> Then true, the following becomes easier to understand after utilizing the method:</p>
 
 
 \[
@@ -246,7 +246,7 @@ x, y \in [0,1]
 </div>
 
 <p>Notice that \(x\) and \(y\) can never both contain a value of 1 at the same time, the constraint is feasible only
-    when either \(x\) or \(y\) gets the value of 1, or 0 optionally. Verbally, this expression says the following: If
+    when either \(x\) or \(y\) gets the value of 1 (or 0 optionally). Verbally, this expression says the following: If
     \(x\) gets 1 then \(y\) should NOT get 1 and vice versa.
     I believe this equation can be visually simplified by swapping its terms like this; this is how I remember it:</p>
 
@@ -254,4 +254,4 @@ x, y \in [0,1]
 x + y \leq 1
 \]
 
-<p>Like this, you may easily remember that 2 can never be greater than 1.</p>
+<p>Like this, you may easily remember it by considering that 2 can never be greater than 1.</p>
