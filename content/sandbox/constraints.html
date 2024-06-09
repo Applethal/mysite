@@ -254,4 +254,103 @@ x, y \in [0,1]
 x + y \leq 1
 \]
 
-<p>Like this, you may easily remember it by considering that 2 can never be greater than 1.</p>
+<p>Like this, you may easily remember it by considering that 2 can never be greater than 1. Next, I will display
+    how to model the AND statement.
+</p>
+
+
+<h3>Modeling AND</h3>
+
+<p>Picture this: What if I want to either produce both \(x\) and \(y\) at the same time or produce neither. I can't
+    simply plug+in the last inequality from the previous section because there would always be the off chance that
+    either
+    \(x\) or \(y\) get a value of 1. Let's review the nature of the desirable output, either:
+
+</p>
+
+<ul>
+    <li>Neither \(x\) or \(y\) may be produced</li>
+    <li>We produce \(x\) and \(y\) at the same time</li>
+</ul>
+
+<p>One idea that I would use as a headstart is to use the following equation: \(x + y = 2\), but the issue with this one
+    is that
+    it does not allow the first part of the condition to function, as it will always result into producing both
+    products. One workaround to deal with this is to introduce a new binary variable \(z\) that goes enabled <b><u>only
+            if</u></b>
+    \(x\) and \(y\)
+    have a value of 1.
+
+</p>
+
+\[z \leq x\]
+\[z \leq y\]
+\[x + y - 1 \leq z \]
+\[x,y,z \in [0,1]\]
+
+
+<p>With this combination, only the two desired outcomes may happen. All of these constraints are essential. The third
+    inequality
+    is the very key component of the whole logic. As far as logic is concerned, with the boolean checks table in mind,
+    for each variable, we check the feasibility not for just one constraint, but for them all:
+</p>
+
+<div style="display: flex; justify-content: center; align-items: center;">
+    <table border="1" style="border-collapse: collapse; text-align: center; width: 60%;">
+        <tr>
+            <th style="width: 20%;">X</th>
+            <th style="width: 20%;">Y</th>
+            <th style="width: 20%;">Z</th>
+            <th>Feasible ?</th>
+        </tr>
+        <tr>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>Feasible</td>
+        </tr>
+        <tr>
+            <td>1</td>
+            <td>0</td>
+            <td>0</td>
+            <td>Infeasible</td>
+        </tr>
+        <tr>
+            <td>0</td>
+            <td>1</td>
+            <td>0</td>
+            <td>Infeasible</td>
+        </tr>
+        <tr>
+            <td>0</td>
+            <td>0</td>
+            <td>1</td>
+            <td>Infeasible</td>
+        </tr>
+        <tr>
+            <td>1</td>
+            <td>1</td>
+            <td>0</td>
+            <td>Infeasible</td>
+        </tr>
+        <tr>
+            <td>1</td>
+            <td>0</td>
+            <td>1</td>
+            <td>Infeasible</td>
+        </tr>
+        <tr>
+            <td>0</td>
+            <td>1</td>
+            <td>1</td>
+            <td>Infeasible</td>
+        </tr>
+        <tr>
+            <td>1</td>
+            <td>1</td>
+            <td>1</td>
+            <td>Feasible</td>
+        </tr>
+
+    </table>
+</div>
