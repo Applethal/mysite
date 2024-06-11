@@ -12,7 +12,7 @@ Team Epic. This article is as of now still WIP"
 <script src="https://tikzjax.com/v1/tikzjax.js"></script>
 
 <h3>Introduction</h3>
-<p>Mixed integer linear programming is easy to comprehend on the surface, you just plug in
+<p>Mixed integer linear programming (MIP) is easy to comprehend on the surface, you just plug in
     a linear constraint and voila! you now have transformed a LP into a MIP. Learning how to
     systematically write a model with its constraints and component is, sadly, a matter
     of training. Watching all these professors and these seniors formulate constraints at ease makes
@@ -70,7 +70,7 @@ x \leq y
 
 \[
 
-x, y \in [0,1]
+x, y \in \{0,1\}
 \]
 
 
@@ -212,7 +212,7 @@ x \leq 1 - y
 \]
 
 \[
-x, y \in [0,1]
+x, y \in \{0,1\}
 \]
 
 <div style="display: flex; justify-content: center; align-items: center;">
@@ -286,7 +286,7 @@ x + y \leq 1
 \[z \leq x\]
 \[z \leq y\]
 \[x + y - 1 \leq z \]
-\[x,y,z \in [0,1]\]
+\[x,y,z \in \{0,1\}\]
 
 
 <p>With this combination, only the two desired outcomes may happen. All of these constraints are essential. The third
@@ -370,21 +370,21 @@ right sequence of customers such as to respect your limited capacity. In Flow/Jo
 and between each machine. Let's use the former as a use case!
 </p>
 
-<p>The standard VRP can be modeled in an indirected graph \(G = (A,V)\). In such setups, we would want to know which route to take in order to compute
-the total costs, the problem is often modeled using the following variable:</p>
+<p>In MIP, sequencing is often modeled with a decision variable that denotes if we execute action \(i\) before \(j\), do we visit customer \(i\) before \(j\),
+do we execute job \(i\) before \(j\)...A single index is not enough to tell a permutation (As of today, who knows if someone invents something crazy).</p>
+
+
 
 \[
 x_{i,j}=\begin{cases}
-1 & \text{The path that goes from \(i\) to \(j\) is to be taken}\\
+1 & \text{Execute action \(i\) before action \(j\)}\\
 0 & \text{Otherwise}
 \end{cases}
 \]
 
-<p>Let's revisit the verbal purpose of the sequencing constraint, we want: </p>
+<p>Getting deeper in operational research would eventually expose you to a famous constraint that helps against permutation-based problems. The Miller-Truck-Zemling (Miller et al., 1960)
+can be seen in various MIPs. This expression also magically eliminates subtours in TSP.</p>
 
-<ul>
-<li>To ensure that the visited sequence of customers does not violate the capacity constraint
-</ul>
 
-<p>Collecting the data that concerns the capacity can not be achieved with the above variable, we would need a snowballing/continuous variable.</p>
+
 
