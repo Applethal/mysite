@@ -48,7 +48,7 @@ Team Epic. This article is as of now still WIP"
 
 
 \[
-X=\begin{cases}
+x=\begin{cases}
 1 & \text{Decision is to be executed}\\
 0 & \text{Otherwise}
 \end{cases}
@@ -362,7 +362,29 @@ x + y \leq 1
 
 
 <p>Precedence constraints usual concern problems where sequencing is a hard constraint that must occur, else the modeled problem may be infeasible.
-This is usually the case for complex problems like Vehicle routing problems (VRP) and scheduling, the former of which is feasible only if the sequence
-of jumping from a customer to another does not visit an already visited customer, unless we are solving a VRP with a split delivery gimmick.
-Let's take a small look at a scheduling example. Naturally in scheduling problems, the expected output of an optimization model targets the makespan. </p>
+This is usually the case for complex problems like Vehicle routing problems (VRP), Traveling salesman problem (TSP) and scheduling where choosing the right
+permutations is crucial to controlling the objective function.
+
+<br> Naturally, when designing constraints for such problems, in VRPs for instance, you might be challenged by a capacity constraint, forcing you to choose the
+right sequence of customers such as to respect your limited capacity. In Flow/Job shop scheduling, you would want a sequence of jobs such as they don't overlap on each other
+and between each machine. Let's use the former as a use case!
+</p>
+
+<p>The standard VRP can be modeled in an indirected graph \(G = (A,V)\). In such setups, we would want to know which route to take in order to compute
+the total costs, the problem is often modeled using the following variable:</p>
+
+\[
+x_{i,j}=\begin{cases}
+1 & \text{The path that goes from \(i\) to \(j\) is to be taken}\\
+0 & \text{Otherwise}
+\end{cases}
+\]
+
+<p>Let's revisit the verbal purpose of the sequencing constraint, we want: </p>
+
+<ul>
+<li>To ensure that the visited sequence of customers does not violate the capacity constraint
+</ul>
+
+<p>Collecting the data that concerns the capacity can not be achieved with the above variable, we would need a snowballing/continuous variable.</p>
 
