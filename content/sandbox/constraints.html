@@ -5,7 +5,7 @@ date: 2024-06-02
 tags: ["Optimization","Operational research","Mathematics"]
 Summary: "I wish this visual trick was given in the many literature that I inspected. The post's picture is from Pop
 Team Epic. This article is as of now still WIP"
-
+draft: false
 
 ---
 <link rel="stylesheet" type="text/css" href="https://tikzjax.com/v1/fonts.css">
@@ -361,17 +361,23 @@ x + y \leq 1
 <h3>Modelling precedence constraints</h3>
 
 
-<p>Precedence constraints usual concern problems where sequencing is a hard constraint that must occur, else the modeled problem may be infeasible.
-This is usually the case for complex problems like Vehicle routing problems (VRP), Traveling salesman problem (TSP) and scheduling where choosing the right
-permutations is crucial to controlling the objective function.
+<p>Precedence constraints usual concern problems where sequencing is a hard constraint that must occur, else the modeled
+    problem may be infeasible.
+    This is usually the case for complex problems like Vehicle routing problems (VRP), Traveling salesman problem (TSP)
+    and scheduling where choosing the right
+    permutations is crucial to controlling the objective function.
 
-<br> Naturally, when designing constraints for such problems, in VRPs for instance, you might be challenged by a capacity constraint, forcing you to choose the
-right sequence of customers such as to respect your limited capacity. In Flow/Job shop scheduling, you would want a sequence of jobs such as they don't overlap on each other
-and between each machine. Let's use the former as a use case!
+    <br> Naturally, when designing constraints for such problems, in VRPs for instance, you might be challenged by a
+    capacity constraint, forcing you to choose the
+    right sequence of customers such as to respect your limited capacity. In Flow/Job shop scheduling, you would want a
+    sequence of jobs such as they don't overlap on each other
+    and between each machine. Let's use the former as a use case!
 </p>
 
-<p>In MIP, sequencing is often modeled with a decision variable that denotes if we execute action \(i\) before \(j\), do we visit customer \(i\) before \(j\),
-do we execute job \(i\) before \(j\)...A single index is not enough to tell a permutation (As of today, who knows if someone invents something crazy).</p>
+<p>In MIP, sequencing is often modeled with a decision variable that denotes if we execute action \(i\) before \(j\), do
+    we visit customer \(i\) before \(j\),
+    do we execute job \(i\) before \(j\)...A single index is not enough to tell a permutation (As of today, who knows if
+    someone invents something crazy).</p>
 
 
 
@@ -382,9 +388,6 @@ x_{i,j}=\begin{cases}
 \end{cases}
 \]
 
-<p>Getting deeper in operational research would eventually expose you to a famous constraint that helps against permutation-based problems. The Miller-Truck-Zemling (Miller et al., 1960)
-can be seen in various MIPs. This expression also magically eliminates subtours in TSP.</p>
-
-
-
-
+<p>Getting deeper in operational research would eventually expose you to a famous constraint that helps against
+    permutation-based problems. The Miller-Truck-Zemling (Miller et al., 1960)
+    can be seen in various MIPs. This expression also magically eliminates subtours in TSP.</p>
