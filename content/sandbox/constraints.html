@@ -406,4 +406,67 @@ will be enter a node and leaving it; in other words: Make sure we use the paths 
 \]
 
 
-<p>Let \(V\) be the set of nodes, the above constraints verbally say: Between each node, we will choose only 1 path. This constraint holds true for every \(i\) and \(j\) couple. </p>
+<p>Let \(V\) be the set of nodes, the above constraints verbally say: Between each node, we will choose only 1 path. This constraint holds true for every \(i\) and \(j\) couple. The objective function takes
+care of the optimization part in which it chooses the set of connections following the logic of the 2 constraints. For this exact constraint my brain is trained to visualize it without using any tables, 
+I will not list every single outcome because ooh boy we will have so \(2^v!\), so if we play around 3 nodes, the table should be way too long.</p>
+
+<div style="display: flex; justify-content: center; align-items: center;">
+    <table border="1" style="border-collapse: collapse; text-align: center; width: 60%;">
+        <tr>
+            <th style="width: 16%;">\( x_{12} \)</th>
+            <th style="width: 16%;">\( x_{13} \)</th>
+            <th style="width: 16%;">\( x_{21} \)</th>
+            <th style="width: 16%;">\( x_{23} \)</th>
+            <th style="width: 16%;">\( x_{31} \)</th>
+            <th style="width: 16%;">\( x_{32} \)</th>
+            <th>Feasible?</th>
+        </tr>
+        <tr>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>Infeasible</td>
+        </tr>
+        <tr>
+            <td>1</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>Infeasible</td>
+        </tr>
+        <tr>
+            <td>1</td>
+            <td>1</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>Infeasible</td>
+        </tr>
+        <tr>
+            <td>1</td>
+            <td>1</td>
+            <td>1</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>Feasible</td>
+        </tr>
+        <tr>
+            <td>0</td>
+            <td>1</td>
+            <td>1</td>
+            <td>1</td>
+            <td>0</td>
+            <td>0</td>
+            <td>Feasible</td>
+        </tr>
+    </table>
+</div>
+
+<p>Since we have a set of 3 nodes, you would expect your TSP solution to have exactly \(V\) number of arcs, so without even thinking about it, feasible are the inequalities that no more and no less than 3 edges.</p>
