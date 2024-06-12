@@ -393,9 +393,11 @@ x_{i,j}=\begin{cases}
     can be seen in various MIPs, it uses continuous variables to magically eliminate subtours and ensure permuting.</p>
 
 
-<p>In a TSP environement, you would want to have a Hamiltonian cycle across all the nodes. With that variable in mind, one way to achieve this is to introduce
-a constraint that expresses the following: we will leave each node once. If applied as intended, you should have a graph where <b><u>each node has 2 arcs </u></b> since we
-will be enter a node and leaving it; in other words: Make sure we use the paths between each nodes only once:</p>
+<p>In a TSP environement, you would want to have a Hamiltonian cycle across all the nodes. With that variable in mind,
+    one way to achieve this is to introduce
+    a constraint that expresses the following: we will leave each node once. If applied as intended, you should have a
+    graph where <b><u>each node has 2 arcs </u></b> since we
+    will be enter a node and leaving it; in other words: Make sure we use the paths between each nodes only once:</p>
 
 \[
 \sum\limits_{i \in V \setminus \{j\}}{x_{ij} = 1} \quad \forall i \in V
@@ -406,108 +408,112 @@ will be enter a node and leaving it; in other words: Make sure we use the paths 
 \]
 
 
-<p>Let \(V\) be the set of nodes, the above constraints verbally say: Between each node, we will choose only 1 path. This constraint holds true for every \(i\) and \(j\) couple. The objective function takes
-care of the optimization part in which it chooses the set of connections following the logic of the 2 constraints. For each node \(i\) and for each node \(j\) you will have \(V - 1\) constraints to check. In the following table
-I will present how the feasibility check looks like for every \(j\)th node in the graph.</p>
+<p>Let \(V\) be the set of nodes, the above constraints verbally say: For each pair of nodes, only one path would be
+    chosen. This constraint is forced for every \(i\) and \(j\) couple. The objective function takes
+    care of the optimization part in which it chooses the set of connections following the logic of the 2 constraints.
+    For each node \(i\) and for each node \(j\) you will have \(V - 1\) constraints to check. In the following table
+    I will present how the feasibility check looks like for every \(j\)th node in the graph. Note that the TSP assumes
+    graph symmetry, going from 1 to 2 is the same as going from 2 to 1 \(x_{12} = x_{21} \)</p>
 <div class="scroll-container">
-<div style="display: flex; justify-content: center; align-items: center;">
-    <table border="1" style="border-collapse: collapse; text-align: center; width: 60%;">
-        <tr>
-            <th style="width: 33%;">Constraint 1: \( x_{21} + x_{31} = 1 \)</th>
-            <th style="width: 33%;">Constraint 2: \( x_{12} + x_{32} = 1 \)</th>
-            <th style="width: 33%;">Constraint 3: \( x_{13} + x_{23} = 1 \)</th>
-        </tr>
-        <tr>
-            <td>
-                <table border="1" style="border-collapse: collapse; text-align: center; width: 100%;">
-                    <tr>
-                        <th>\( x_{21} \)</th>
-                        <th>\( x_{31} \)</th>
-                        <th>Feasible?</th>
-                    </tr>
-                    <tr>
-                        <td>0</td>
-                        <td>0</td>
-                        <td>No</td>
-                    </tr>
-                    <tr>
-                        <td>0</td>
-                        <td>1</td>
-                        <td>Yes</td>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>0</td>
-                        <td>Yes</td>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>1</td>
-                        <td>No</td>
-                    </tr>
-                </table>
-            </td>
-            <td>
-                <table border="1" style="border-collapse: collapse; text-align: center; width: 100%;">
-                    <tr>
-                        <th>\( x_{12} \)</th>
-                        <th>\( x_{32} \)</th>
-                        <th>Feasible?</th>
-                    </tr>
-                    <tr>
-                        <td>0</td>
-                        <td>0</td>
-                        <td>No</td>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>0</td>
-                        <td>Yes</td>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>0</td>
-                        <td>Yes</td>
-                    </tr>
-                    <tr>
-                        <td>0</td>
-                        <td>1</td>
-                        <td>Yes</td>
-                    </tr>
-                </table>
-            </td>
-            <td>
-                <table border="1" style="border-collapse: collapse; text-align: center; width: 100%;">
-                    <tr>
-                        <th>\( x_{13} \)</th>
-                        <th>\( x_{23} \)</th>
-                        <th>Feasible?</th>
-                    </tr>
-                    <tr>
-                        <td>0</td>
-                        <td>0</td>
-                        <td>No</td>
-                    </tr>
-                    <tr>
-                        <td>0</td>
-                        <td>1</td>
-                        <td>Yes</td>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>0</td>
-                        <td>Yes</td>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>1</td>
-                        <td>No</td>
-                    </tr>
-                </table>
-            </td>
-        </tr>
-    </table>
-</div>
+    <div style="display: flex; justify-content: center; align-items: center;">
+        <table border="1" style="border-collapse: collapse; text-align: center; width: 60%;">
+            <tr>
+                <th style="width: 33%;">Constraint 1: \( x_{21} + x_{31} = 1 \)</th>
+                <th style="width: 33%;">Constraint 2: \( x_{12} + x_{32} = 1 \)</th>
+                <th style="width: 33%;">Constraint 3: \( x_{13} + x_{23} = 1 \)</th>
+            </tr>
+            <tr>
+                <td>
+                    <table border="1" style="border-collapse: collapse; text-align: center; width: 100%;">
+                        <tr>
+                            <th>\( x_{21} \)</th>
+                            <th>\( x_{31} \)</th>
+                            <th>Feasible?</th>
+                        </tr>
+                        <tr>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>No</td>
+                        </tr>
+                        <tr>
+                            <td>0</td>
+                            <td>1</td>
+                            <td>Yes</td>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>0</td>
+                            <td>Yes</td>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>1</td>
+                            <td>No</td>
+                        </tr>
+                    </table>
+                </td>
+                <td>
+                    <table border="1" style="border-collapse: collapse; text-align: center; width: 100%;">
+                        <tr>
+                            <th>\( x_{12} \)</th>
+                            <th>\( x_{32} \)</th>
+                            <th>Feasible?</th>
+                        </tr>
+                        <tr>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>No</td>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>0</td>
+                            <td>Yes</td>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>0</td>
+                            <td>Yes</td>
+                        </tr>
+                        <tr>
+                            <td>0</td>
+                            <td>1</td>
+                            <td>Yes</td>
+                        </tr>
+                    </table>
+                </td>
+                <td>
+                    <table border="1" style="border-collapse: collapse; text-align: center; width: 100%;">
+                        <tr>
+                            <th>\( x_{13} \)</th>
+                            <th>\( x_{23} \)</th>
+                            <th>Feasible?</th>
+                        </tr>
+                        <tr>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>No</td>
+                        </tr>
+                        <tr>
+                            <td>0</td>
+                            <td>1</td>
+                            <td>Yes</td>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>0</td>
+                            <td>Yes</td>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>1</td>
+                            <td>No</td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+    </div>
 </div>
 
-<p>Since we have a set of 3 nodes, you would expect your TSP solution to have exactly \(V\) number of arcs, so without even thinking about it, feasible are the inequalities that no more and no less than 3 edges.</p>
+<p>Since we have a set of 3 nodes, you would expect your TSP solution to have exactly \(V\) number of arcs, so without
+    even thinking about it, feasible are the inequalities that no more and no less than 3 edges.</p>
