@@ -407,6 +407,12 @@ x_{i,j}=\begin{cases}
 \sum\limits_{j \in V \setminus \{i\}}{x_{ij} = 1} \quad \forall j \in V
 \]
 
+<p>This would be the best time to talk a bit in-depth about the syntax of these constraints. You see, because of
+how generic this problems are, in academics, these equations are written with the above algebraic syntax. Using the table would have
+you decompose the constraint first. I usually start with the space domain first, we have a for statement here that defines
+the amount of constraints that we have to account for, in this case it would be for every \(i\) node in the graph, next
+we have a sum statement here that simply chains every variable. As you can see, the key here is to always comprehend
+the syntax to decompose.</p>
 
 <p>Let \(V\) be the set of nodes, the above constraints verbally say: For each pair of nodes, only one path would be
     chosen. This constraint is forced for every \(i\) and \(j\) couple. The objective function takes
@@ -433,22 +439,22 @@ x_{i,j}=\begin{cases}
                         <tr>
                             <td>0</td>
                             <td>0</td>
-                            <td>No</td>
+                            <td>Infeasible</td>
                         </tr>
                         <tr>
                             <td>0</td>
                             <td>1</td>
-                            <td>Yes</td>
+                            <td>Feasible</td>
                         </tr>
                         <tr>
                             <td>1</td>
                             <td>0</td>
-                            <td>Yes</td>
+                            <td>Feasible</td>
                         </tr>
                         <tr>
                             <td>1</td>
                             <td>1</td>
-                            <td>No</td>
+                            <td>Infeasible</td>
                         </tr>
                     </table>
                 </td>
@@ -462,22 +468,22 @@ x_{i,j}=\begin{cases}
                         <tr>
                             <td>0</td>
                             <td>0</td>
-                            <td>No</td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>0</td>
-                            <td>Yes</td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>0</td>
-                            <td>Yes</td>
+                            <td>Infeasible</td>
                         </tr>
                         <tr>
                             <td>0</td>
                             <td>1</td>
-                            <td>Yes</td>
+                            <td>Feasible</td>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>0</td>
+                            <td>Feasible</td>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>1</td>
+                            <td>Infeasible</td>
                         </tr>
                     </table>
                 </td>
@@ -491,22 +497,22 @@ x_{i,j}=\begin{cases}
                         <tr>
                             <td>0</td>
                             <td>0</td>
-                            <td>No</td>
+                            <td>Infeasible</td>
                         </tr>
                         <tr>
                             <td>0</td>
                             <td>1</td>
-                            <td>Yes</td>
+                            <td>Feasible</td>
                         </tr>
                         <tr>
                             <td>1</td>
                             <td>0</td>
-                            <td>Yes</td>
+                            <td>Feasible</td>
                         </tr>
                         <tr>
                             <td>1</td>
                             <td>1</td>
-                            <td>No</td>
+                            <td>Infeasible</td>
                         </tr>
                     </table>
                 </td>
