@@ -408,10 +408,13 @@ x_{i,j}=\begin{cases}
 \]
 
 <p>This would be the best time to talk a bit in-depth about the syntax of these constraints. You see, because of
-how generic this problems are, in academics, these equations are written with the above algebraic syntax. Using the table would have
+how generic these problems are, in academics, these equations are written with the above algebraic syntax to optimize readibility. Using the table would have
 you decompose the constraint first. I usually start with the space domain first, we have a for statement here that defines
 the amount of constraints that we have to account for, in this case it would be for every \(i\) node in the graph, next
-we have a sum statement here that simply chains every variable. As you can see, the key here is to always comprehend
+we have a sum statement here that simply chains every variable. We will sum over all the paths that are connected to the node \(i\),
+the node \(i\) is excluded because that would bring up a variable that decides on a path that goes from the node \(i\) and leads back to it.
+
+As you can see, the key here is to always comprehend
 the syntax to decompose.</p>
 
 <p>Let \(V\) be the set of nodes, the above constraints verbally say: For each pair of nodes, only one path would be
@@ -419,7 +422,111 @@ the syntax to decompose.</p>
     care of the optimization part in which it chooses the set of connections following the logic of the 2 constraints.
     For each node \(i\) and for each node \(j\) you will have \(V - 1\) constraints to check. In the following table
     I will present how the feasibility check looks like for every \(j\)th node in the graph. Note that the TSP assumes
-    graph symmetry, going from 1 to 2 is the same as going from 2 to 1 \(x_{12} = x_{21} \)</p>
+    graph symmetry, going from 1 to 2 is the same as going from 2 to 1 \(x_{12} = x_{21} \), so if the program ever
+    enables one of these paths, it implicitly enables it from the other sides.</p>
+
+<div class="scroll-container">
+<div style="display: flex; justify-content: center; align-items: center;">
+    <table border="1" style="border-collapse: collapse; text-align: center; width: 80%;">
+        <tr>
+            <th style="width: 33%;">Constraint 1: \( x_{12} + x_{13} = 1 \)</th>
+            <th style="width: 33%;">Constraint 2: \( x_{21} + x_{23} = 1 \)</th>
+            <th style="width: 33%;">Constraint 3: \( x_{31} + x_{32} = 1 \)</th>
+        </tr>
+        <tr>
+            <td>
+                <table border="1" style="border-collapse: collapse; text-align: center; width: 100%;">
+                    <tr>
+                        <th>\( x_{12} \)</th>
+                        <th>\( x_{13} \)</th>
+                        <th>Feasible?</th>
+                    </tr>
+                    <tr>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>Infeasible</td>
+                    </tr>
+                    <tr>
+                        <td>0</td>
+                        <td>1</td>
+                        <td>Feasible</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>0</td>
+                        <td>Feasible</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>Infeasible</td>
+                    </tr>
+                </table>
+            </td>
+            <td>
+                <table border="1" style="border-collapse: collapse; text-align: center; width: 100%;">
+                    <tr>
+                        <th>\( x_{21} \)</th>
+                        <th>\( x_{23} \)</th>
+                        <th>Feasible?</th>
+                    </tr>
+                    <tr>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>Infeasible</td>
+                    </tr>
+                    <tr>
+                        <td>0</td>
+                        <td>1</td>
+                        <td>Feasible</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>0</td>
+                        <td>Feasible</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>Infeasible</td>
+                    </tr>
+                </table>
+            </td>
+            <td>
+                <table border="1" style="border-collapse: collapse; text-align: center; width: 100%;">
+                    <tr>
+                        <th>\( x_{31} \)</th>
+                        <th>\( x_{32} \)</th>
+                        <th>Feasible?</th>
+                    </tr>
+                    <tr>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>Infeasible</td>
+                    </tr>
+                    <tr>
+                        <td>0</td>
+                        <td>1</td>
+                        <td>Feasible</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>0</td>
+                        <td>Feasible</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>Infeasible</td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+</div>
+
+
+</div>
 <div class="scroll-container">
     <div style="display: flex; justify-content: center; align-items: center;">
         <table border="1" style="border-collapse: collapse; text-align: center; width: 60%;">
@@ -522,4 +629,8 @@ the syntax to decompose.</p>
 </div>
 
 <p>Since we have a set of 3 nodes, you would expect your TSP solution to have exactly \(V\) number of arcs, so without
-    even thinking about it, feasible are the inequalities that no more and no less than 3 edges.</p>
+    even thinking about it, feasible are the inequalities that enable no more and no less than 3 edges over all the arcs.</p>
+
+<p>As said earlier, with respect to the above constraints, the objective function will choose the edges that ensure the
+minimal. Funnily enough, these constraints are sufficient for a case where the graph contains 3 to 4 nodes, as no combination of edges
+can make an infeasible TSP solution, until you introduce a 5 nodes graph:</p>
