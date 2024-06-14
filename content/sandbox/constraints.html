@@ -712,8 +712,8 @@ u_i - u_j + 1 \leq n(x_{i,j}-1)
 \]
 
 
-<p>If \(x_{i,j}\) is 1, it cancels itself together with the constant and the inequality turns into \(u_{i}  \geq
-    u_{j} + 1
+<p>If \(x_{i,j}\) is 1, it cancels itself together with the constant and the inequality turns into \(u_{j}  \geq
+    u_{i} + 1
     \), because \(u_{i}\) ranges between 2 and \(n\), and together with the other constraints, the final solution would
     be
     a graph containing no subtours. Let's take a look at how this would look like by the time we reach the 3rd itteration:</p>
@@ -743,10 +743,47 @@ u_i - u_j + 1 \leq n(x_{i,j}-1)
 </div>
 
 
-<p>Let's pretend that \(x_{c,d} = 1\) </p>
+<p>Let's pretend that \(x_{2,4} = 1\), this turns the inequality into \(u_{4} \geq u_{2} + 1\), as of reaching node \(2\), the algorithm decided that \(u_{2} = 3\):</p>
+
+<div style="display: flex; justify-content: center; align-items: center;">
+    <table border="1" style="border-collapse: collapse; text-align: center; width: 60%;">
+        <tr>
+            <th style="width: 20%;">\(u_{i} + 1\)</th>
+            <th style="width: 20%;">\(u_{j}\)</th>
+            <th>Feasible ?</th>
+        </tr>
+        <tr>
+            <td>4</td>
+            <td>2</td>
+            <td>Infeasible</td>
+        </tr>
+        <tr>
+            <td>4</td>
+            <td>3</td>
+            <td>Infeasible</td>
+        </tr>
+        <tr>
+            <td>4</td>
+            <td>4</td>
+            <td>Feasible</td>
+        </tr>
+        <tr>
+            <td>4</td>
+            <td>5</td>
+            <td>Feasible</td>
+        </tr>
+    </table>
+</div>
+
+
+<p>The solver has no choice but to either assign either 4 or 5, and because of the subsequent node after taking that path, it ends up ultimatly choosing the value \(u_j = 4\). If for whatever reason the said path gets a 0, then the big constant \(n\) will outweight every possible choice, neglating the connection between the nodes, as no
+value for the two variables \(u_i\) and \(u_j\) can ensure feasibility.</p>
+
+<p>For VRP and Scheduling problems, enumeration is not necessary as these problems already come with continuous variables that can be intelligently used as an
+engine for the inequalities.</p>
 
 <h2>Reference </h2>
 
-<p>Miller, C.E., Tucker, A.W. and Zemlin, R.A. (1960) Integer Programming Formulations and Traveling Salesman
-            Problems. Journal of the Association for Computing Machinery, 7, 326-329.
+<p>Miller, C.E., Tucker, A.W. and Zemlin, R.A. (1960) <i>Integer Programming Formulations and Traveling Salesman
+            Problems. Journal of the Association for Computing Machinery, 7, 326-329 </i>.
             https://doi.org/10.1145/321043.321046 </p>
