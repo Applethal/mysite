@@ -3,7 +3,8 @@ title: "Systematically visualize the impact of linear constraints in a MIP"
 date: 2024-06-02
 
 tags: ["Optimization","Operational research","Mathematics"]
-Summary: "I wish this visual trick was given in the many literature that I inspected. The post's picture is from Pop
+Summary: "I wish this visual trick was given in a good deal of literature that I inspected. The post's picture is from
+Pop
 Team Epic. This article is as of now still WIP"
 draft: false
 
@@ -13,14 +14,14 @@ draft: false
 
 <h3>Introduction</h3>
 <p>Mixed integer linear programming (MIP) is easy to comprehend on the surface, you just plug in
-    a linear constraint and voila! you now have transformed a LP into a MIP. Learning how to
+    a linear constraint and voilà! You now have transformed an LP into a MIP. Learning how to
     systematically write a model with its constraints and component is, sadly, a matter
     of training. Watching all these professors and these seniors formulate constraints at ease makes
-    it look easy, which may or may note evoke an air of imposter syndrome.</p>
+    it look easy, which may or may not evoke an air of imposter syndrome.</p>
 
 <p>Just like coding, the goal is to shape the perspective around optimization, that's the passive
-    effect of doing exercises. Some of the constraints seem intuitive but once you get into the deeper
-    side of linear programming (I.E. Big M, logical constraints...etc..), it becomes a bit hard to visualize the effect
+    effect of doing exercises. Some of these constraints seem intuitive but once you get into the deeper
+    side of linear programming (I.E. Big M, logical constraints...etc), it becomes a bit hard to visualize the effect
     of a constraint with respect to the optimization problem that you are facing. If you are a beginner in operational
     research and having skipped mathematics, chances are, that every time these
     constraints are brought up, you might feel as if you are missing something elementary. It becomes much more
@@ -138,7 +139,8 @@ x, y \in \{0,1\}
       </script>
 
     </div>
-    <p style="color: #888; font-size: 14px; text-align: center;">Graphical depiction of the aforementioned constrain</p>
+    <p style="color: #888; font-size: 14px; text-align: center;">Graphical depiction of the aforementioned constraint
+    </p>
 </div>
 
 
@@ -180,7 +182,7 @@ x, y \in \{0,1\}
 </div>
 
 
-<p>Here is how I do it: I draw a table up to \(n\) number of variables on the columns and then I list
+<p>Here is how I do it: I draw a table up to \(n\) number of variables on the columns, and then I list
     all of their possible values, luckily, what makes this method faster than graphically checks is the fact that the
     variables are binary and can't have anything other
     than 0s and 1s, which by extension means that you will have \(2^n\) rows. Finally, I check the feasibility with
@@ -202,9 +204,9 @@ x, y \in \{0,1\}
     to write some cool constraints. It's an art!
 </p>
 
-<h3>Modeling If -> NOT</h3>
+<h3>Modeling If → NOT</h3>
 
-<p>We've seen the logical IF -> Then true, the following becomes easier to understand after utilizing the method:</p>
+<p>We've seen the logical IF → Then true, the following becomes easier to understand after utilizing the method:</p>
 
 
 \[
@@ -377,7 +379,8 @@ x + y \leq 1
 
 <p>In MIP, sequencing is often modeled with a decision variable that denotes if we execute action \(i\) before \(j\), do
     we visit customer \(i\) before \(j\),
-    do we execute job \(i\) before \(j\)...A single index is not enough to tell a permutation (As of today, who knows if
+    do we execute job \(i\) before \(j\)... A single index is not enough to tell a permutation (As of today, who knows
+    if
     someone invents something crazy).</p>
 
 
@@ -391,11 +394,11 @@ x_{i,j}=\begin{cases}
 
 
 
-<p>In a TSP environement, you would want to have a Hamiltonian cycle across all the nodes. With that variable in mind,
+<p>In a TSP environment, you would want to have a Hamiltonian cycle across all the nodes. With that variable in mind,
     one way to achieve this is to introduce
     a constraint that expresses the following: we will leave each node once. If applied as intended, you should have a
-    graph where <b><u>each node has 1 successor and 1 precedessor.</u></b> since we
-    will be enter a node and leaving it; in other words: Make sure we use the paths between each nodes only once:</p>
+    graph where <b><u>each node has 1 successor and 1 predecessor.</u></b> since we
+    will enter a node and leaving it; in other words: Make sure we use the paths between each node only once:</p>
 
 \[
 \sum\limits_{i \in V \setminus \{j\}}{x_{ij} = 1} \quad \forall i \in V
@@ -407,7 +410,7 @@ x_{i,j}=\begin{cases}
 
 <p>This would be the best time to talk a bit in-depth about the syntax of these constraints. You see, because of
     how generic these problems are, in academics, these equations are written with the above algebraic syntax to
-    optimize readibility. Using the table would have
+    optimize readability. Using the table would have
     you decompose the constraint first. I usually start with the space domain first, we have a for statement here that
     defines
     the amount of constraints that we have to account for, in this case it would be for every \(i\) node in the graph,
@@ -662,7 +665,7 @@ x_{i,j}=\begin{cases}
       </script>
 
     </div>
-    <p style="color: #888; font-size: 14px; text-align: center;">Nu uh! this is not a Hamiltonian tour!</p>
+    <p style="color: #888; font-size: 14px; text-align: center;">Nu uh! This is not a Hamiltonian tour!</p>
 </div>
 
 
@@ -677,7 +680,8 @@ x_{i,j}=\begin{cases}
 
 <p>One idea to deal with this is to weight each node with an index to indicate its position in the permutation. In a
     TSP, the starting node
-    matters not since we are going to visit it anyways. Using a continuous variable \(u_{i}\), each node will be asigned
+    matters not since we are going to visit it anyways. Using a continuous variable \(u_{i}\), each node will be
+    assigned
     an index, we would
     then want to implement a logic that says the following: If we use the path \(x_{i,j}\), the index of the \(j\)
     should be higher than \(i\)'s index.</p>
@@ -718,7 +722,7 @@ u_i - u_j + 1 \leq n(x_{i,j}-1)
     \), because \(u_{i}\) ranges between 2 and \(n\), and together with the other constraints, the final solution would
     be
     a graph containing no subtours. Let's take a look at how this would look like by the time we reach the 3rd
-    itteration:</p>
+    iteration:</p>
 
 
 <div class="scroll-container">
