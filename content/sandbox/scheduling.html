@@ -8,9 +8,10 @@ Date: 2024-02-11
 ---
 <style>
     .scrollable-div {
-    overflow-x: auto; /* Enable horizontal scrollbar if needed */
-    white-space: nowrap; /* Prevent line breaks */
-}
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+
     .tikzs {
         text-align: center;
         background-color: white;
@@ -109,9 +110,10 @@ Date: 2024-02-11
 
         font-style: italic;
     }
+
     a {
-    text-decoration: none;
-    color: yellow;
+        text-decoration: none;
+        color: yellow;
     }
 
     @media (max-width: 600px) {
@@ -140,29 +142,29 @@ Date: 2024-02-11
 <h1>Notation </h1>
 
 <span class="math">\(
-i \in M
-\)</span> : Set of machines
+    i \in M
+    \)</span> : Set of machines
 
 
 
 <br>
 <span class="math">\(
-j \in J
-\)</span> : Set of jobs
+    j \in J
+    \)</span> : Set of jobs
 
 <br>
 <span class="math">\(
-p_{i,j}
-\)</span> : procssing time of job j in machine i
+    p_{i,j}
+    \)</span> : procssing time of job j in machine i
 <br>
 <span class="math">\(
-C_{i,j}
-\)</span> : Completion time of job j in machine i
+    C_{i,j}
+    \)</span> : Completion time of job j in machine i
 
 <br>
 <span class="math">\(
-LST_{j}
-\)</span> : Latest starting time of job j
+    LST_{j}
+    \)</span> : Latest starting time of job j
 
 
 
@@ -189,7 +191,8 @@ LST_{j}
     result in a chunk of wasted time, and sometimes effort.</p>
 
 <p>In the theory of scheduling, if a given situation is properly formulated, you may gain access to tools that aid
-    you reach your goals, without having to rely on any form of soft experience. This can be achieved by understanding the setup
+    you reach your goals, without having to rely on any form of soft experience. This can be achieved by understanding
+    the setup
     and trying to perceive it with intelligence, after all, the methods of logistics aim to exploit all kinds of
     information in order to fullfill an objective. I thought a lot about how to design a nice scheduling setup for a
     cooking context, not chaining tasks as quick as possible may cause your food to catch a cold. </p>
@@ -204,13 +207,17 @@ should cook at your own pace. Just take your time and never rush things up!
 <h1>The machines setup</h1>
 
 <p>Most of the parallel machine and single machine problems, are positioned in the NP- and P complete spectrum.
-    Precedence constraints are essential because you can't mix veggies before cutting them. the aim is to minimize the global
+    Precedence constraints are essential because you can't mix veggies before cutting them. the aim is to minimize the
+    global
     completion time
     or else I would miss the train. There would be no heuristics here to speak of, just a direct method, specifically a
     list
     scheduling algorithm since it has been proven by <a
-        href="https://www.sciencedirect.com/science/article/pii/0167637795000577">Shutten</a>(2003) that parallel machine
-    problems with setup times or precedence constraints can be solved to optimality with the aformentioned algorithm, Except it's not a list here that we are talking about but a graph of sorts: I will be traversing the graph and checking for dependencies as I keep moving forward until I hit the last node.
+        href="https://www.sciencedirect.com/science/article/pii/0167637795000577">Shutten</a>(2003) that parallel
+    machine
+    problems with setup times or precedence constraints can be solved to optimality with the aformentioned algorithm,
+    Except it's not a list here that we are talking about but a graph of sorts: I will be traversing the graph and
+    checking for dependencies as I keep moving forward until I hit the last node.
     <br>
     As for the constraints here is how I dealt with some of these:
 <ul>
@@ -309,13 +316,14 @@ border-radius: 8px;">
           </script>
 </div>
 
-<p>I will not attribute any processing times in this example, just picture an arbitrary number for each task for now.  </p>
+<p>I will not attribute any processing times in this example, just picture an arbitrary number for each task for now.
+</p>
 
 
 <div class="scroll-container">
     <div class="tikzs">
         <g transform>
-        <script type="text/tikz">
+            <script type="text/tikz">
         \begin{tikzpicture}[scale=0.7]
         \draw[->] (0,0) -- (14,0) node[right] {};
     \draw[->] (0,0) -- (0,7) node[above] {};
@@ -348,7 +356,8 @@ border-radius: 8px;">
 
 Tasks marked with red can be shifted to the right as long as they do not introduce any extra time to the total makespan.
 You can cut the bread anytime you want between the 5th and 7th
-time mark. These are called tasks with slack times, or in other literature as buffer times. Their times are computed using the following
+time mark. These are called tasks with slack times, or in other literature as buffer times. Their times are computed
+using the following
 formula:
 <div class="scrollable-div">
     \[ LST(j) = \max_{j' \in S(j)} \left( C_{i,j'} - p_{i,j'} \right) \quad \forall j \in J \]
@@ -363,10 +372,12 @@ formula:
 </u>
 A couple of people pointed out that I was cooking eggs the wrong way, more specifically, I put the eggs on a pan and let
 the pan do the rest @ 6/10
-heat. Apparently the popular belief recommends against this, instead one should agitate the egg as it heats up using a pressure
+heat. Apparently the popular belief recommends against this, instead one should agitate the egg as it heats up using a
+pressure
 tool. If that is the case then this isn't a Parallel machine schedule anymore but a single machine since I would then be
 actively
-doing all the cooking, increasing the total time up to 15. Despite all of this, I will keep this mistake up there for demonstrative purposes.
+doing all the cooking, increasing the total time up to 15. Despite all of this, I will keep this mistake up there for
+demonstrative purposes.
 
 <h1>About the computation</h1>
 
@@ -378,7 +389,7 @@ rendering speed and its lack of CSS flexibility motivates me to seek another pac
 outputs
 the starting- and finishing times of each machine, all of which are calculated using the classic formula:
 <div class="scrollable-div">
-$$C_{i,j} = \max\left(C_{i-1,j}, C_{i,j-1}\right) + p_{i,j} \quad \forall j \in J, i \in M$$
+    $$C_{i,j} = \max\left(C_{i-1,j}, C_{i,j-1}\right) + p_{i,j} \quad \forall j \in J, i \in M$$
 </div>
 
 The data is extracted from the recipes's front matter and formulated as a list that contains all the information that I
@@ -456,9 +467,12 @@ console.log(<span class="string">'Task Schedule:'</span>);
 
 <p>I would like to see that, Everything that you have read so far was the effort of two days and is subject for
     potential improvements. For now I am happy with the results, though if I get any new ideas, I will surely imeplement
-    provide updates. Feel free to submit an issue on the website's repo or send me an email and I will be content to have a discussion on the matter.</p>
+    provide updates. Feel free to submit an issue on the website's repo or send me an email and I will be content to
+    have a discussion on the matter.</p>
 <h1> References </h1>
-<p><i>J.M.J. Schutten</i>, List scheduling revisited, Operations Research Letters, Volume 18, Issue 4, 1996, Pages 167-170, ISSN 0167-6377, <a href="https://doi.org/10.1016/0167-6377(95)00057-7" target="_blank">https://doi.org/10.1016/0167-6377(95)00057-7</a></p>
+<p><i>J.M.J. Schutten</i>, List scheduling revisited, Operations Research Letters, Volume 18, Issue 4, 1996, Pages
+    167-170, ISSN 0167-6377, <a href="https://doi.org/10.1016/0167-6377(95)00057-7"
+        target="_blank">https://doi.org/10.1016/0167-6377(95)00057-7</a></p>
 
 <details>
     <summary>Change log</summary>
