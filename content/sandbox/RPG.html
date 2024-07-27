@@ -63,18 +63,19 @@ draft: false
 
 
 <ul>
-    <li>Set of characters \(c \in C\)
-    <li>Set of enemies \(e \in E\)
-    <li>Set of attacks \(a \in A\) with \([a_1, a_2...a_n]\) \(\cap \) \([o_1,o_2....o_3]\). \(a\) are the single target
+    <li>\(c \in C\): Set of characters
+    <li>\(e \in E\): Set of enemies
+    <li>\(a,o \in A\): Set of attacks with \([a_1, a_2...a_n]\) \(\cap \) \([o_1,o_2....o_3]\). \(a\) are the single
+        target
         attacks, and \(o\) represent the attacks that can hit multiple enemies.
 </ul>
 
 <p>As for the parameters, the model requires:</p>
 
 <ul>
-    <li>The Mana/Stamina parameter of each attack \(a\) \(m_a\)
-    <li>The HP of each enemy \(e\) \(HP_e\)
-    <li>The power coefficient of each attack \(a\) that the character \(c\) can apply to enemy \(e\) \(p^c_{ae}\)
+    <li>\(m_a\): The Mana/Stamina parameter of each attack \(a\)
+    <li>\(HP_e\): The HP of each enemy \(e\)
+    <li>\(p^c_{ae}\): The power coefficient of each attack \(a\) that the character \(c\) can apply to enemy \(e\)
 </ul>
 
 <p>The power of an attack is computed after considering the attack parameter of the character and adding up the enemy's
