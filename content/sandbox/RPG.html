@@ -1,0 +1,68 @@
+---
+title: "Mathematically reduce the number of turns in a turn based RPG fight"
+date: 2024-07-27
+
+tags: ["Optimization","Operational research","Mathematics"]
+Summary: "Is this how speedrunners compete for records ?"
+draft: false
+
+---
+
+<p> I love turn based RPG games, especially those where I have no control over the mobility of my characters, as these reduce the problem size of my decisions, making me
+only decide on actions and ignore positioning, plus, I get to enjoy the privilege of taking all the time I need in order to make a decision. </p>
+
+<p>Weeks ago I was playing the original Final Fantasy 7 for the first time in my life, and I somehow lost my patience against a group of monsters, wanting to breeze
+through the game, I started to heuristically tinker ways in order to minimize the number of turns that it takes to end my fights as quick as I can. I had to account
+for my mana resource, especially since Final Fantasy 7's options in that regard were very costly back when I reached that chapter.</p>
+
+<p>I wondered how speedrunners come up with the all those strategies that allow them to reach the high skies of the leaderboards; There is indeed potential for some Operational research! And that is what sparked the following idea: We can use linear programming to determine:</p>
+
+<ul>
+<li>The upper bound of the number of turns that it takes to finish a fight
+<li>Which attacks to use
+</ul>
+
+<p>What I will be presenting here, sadly, does not work for every game out there, it specifically works only for the aformentioned type of games with no
+press turn gimmicks (Sorry Shin Megami Tensei fans). The model assumes that every member will move at the same turn, so games with Active Time Battle, which is true
+for the original Final Fantasy 7 if you disable it. It is sadly an upper bound because these games usually come with RNG mechanics that may either be a hinderance, like evasion stats, or a blessing, like with critical hits. Other than that, the output of an attack may appear to be an integer, but in most games, the output stems from a ceilling function that considers many shenanigans, hence why some people may mention that their attacks could not reach a range.</p>
+
+<h3>The model </h3>
+
+<p>Small disclaimer: This model will only work if you have sufficient mana for the fights. With that out of the way, Let's  discuss the input data. To model this, I need the following sets:</p>
+
+
+
+<ul>
+<li>Set of characters \(c \in C\)
+<li>Set of enemies \(e \in E\)
+<li>Set of attacks \(a \in A\) with \([a_1, a_2...a_n]\) \(\cap \) \([o_1,o_2....o_3]\). \(a\) are the single target attacks, and \(o\) represent the attacks that can hit multiple enemies.
+</ul>
+
+<p>As for the parameters, the model requires:</p>
+
+<ul>
+<li>The Mana/Stamina parameter of each attack \(m_a\)
+<li>The HP of each enemy \(HP_e\)
+<li>The power coefficient of each attack \(p_{ae}\)
+</ul>
+
+<p>The power of an attack is computed after considering the attack parameter of the character and adding up the enemy's weakness factor. This varies of course from game to game, consult the game's manual on how the power parameters are computed, some games have this information public while some don't offer it and could use some years of reverse engineering. </p>
+
+<p>With that out of the way, let's discuss how this is gonna work. I decided to use a 3 index formulation, let \(X_{ca}^{e}\) be the variable that determines the number of attacks \(a\) a character \(c\) is using on an enemy \(e\), attacks that target multiple enemies will have a variable that contains only 2 indices, the attack \(a\) and the character \(c\)</p>
+
+
+<p> Finally, the following objective function aims to minimize the number of attack actions, since all characters move at the same turn. The output of the objective function will then be divided by the number of ally units that you control and that's how you get the upper bound of the turns needed to finish the fight. This objective function implicitly minimizes the number of turns if you think about it. With that out of the way, behold: </p>
+
+\[min Z = \sum\limits_{a \in A}{} \sum\limits_{c\in C}{} \sum\limits_{e\in E}{} + X^c_{ae}  \sum\limits_{o \in A} \sum\limits_{c\in C}{} \sum\limits_{e\in E}{X^c_{o}}\]
+\[\sum\limits_{a \in A}{X^c_{ae} \cdot p_{ae} } + \sum\limits_{a \in A}{X^c_{o} \cdot p_{oe} \geq HP_e} \quad \forall e \in E \]
+\[\sum\limits_{a \in A}{X^c_{ae} \cdot m_{a} \geq M_c } \quad \forall c \in C\]
+\[X^c_{ea}, X^c_{o} \geq 0\]
+
+<p>The objective function aims to minimize the number of attacks. The first constraint ensures that the chosen attacks will be sufficient to eliminate the enemies, while the second constraint allows the model to choose the attacks that can't outcredit the mana of each character. </p>
+
+<h2>Closing words </h2>
+
+<p>As much as I enjoyed the making of this model, it's not perfect, and as mentioned before, it does not suit every game design. I Was thinking about adding more gimmicks considering damage over time (e.i. Pokemon's toxic), but these had me consider using the big M constant, which would render my formulation weak if the wrong big M parameter is chosen. I might update this in the future. Even though I mentioned that this would not work for the Megaten games with their press turn system, the output should give you an idea about how long the fight could go. </p>
+
+
+
