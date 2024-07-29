@@ -19,12 +19,12 @@ draft: false
 
 <p> I love turn based RPG games, especially those where I have no control over the mobility of my characters, as these
     reduce the problem size of my decisions, making me
-    only decide on actions and ignore positioning, plus, I get to enjoy the privilege of taking all the time I need in
+    only decide on actions and ignore positioning. Other than that I get to enjoy the privilege of taking all the time I need in
     order to make a decision. </p>
 
 <p>Weeks ago I was playing the original <a href="https://de.wikipedia.org/wiki/Final_Fantasy_VII">Final Fantasy VII</a>
     for the first time in my life, and I somehow lost my patience
-    against a group of monsters, wanting to breeze
+    against a group of monsters. Wanting to breeze
     through the game, I started to heuristically tinker ways in order to minimize the number of turns that it takes to
     end my fights as quick as I can. I had to account
     for my mana resource, especially since Final Fantasy VII's options in that regard were very costly back when I
@@ -40,9 +40,9 @@ draft: false
     <li>Which attacks to use
 </ul>
 
-<p>What I will be presenting here, sadly, does not work for every game out there, it specifically works only for the
+<p>What I will be presenting here, sadly, does not work for every game out there, <s> it specifically works only for the
     aforementioned type of games with no
-    press turn gimmicks (Sorry Shin Megami Tensei fans). The model assumes that every member will move at the same turn,
+    press turn gimmicks (Sorry Shin Megami Tensei fans)</s>. The model assumes that every member will move at the same turn,
     so games with Active Time Battle, which is true
     for the original Final Fantasy 7 if you disable it. It is sadly an upper bound because these games usually come with
     RNG mechanics that may either be a hindrance, like evasion stats, or a blessing, like with critical hits. Other
@@ -137,6 +137,15 @@ draft: false
 \[X^c_{i} \leq amount_i \quad \forall i \in I\]
 
 
+<p>As for the Shin Megami combat Tensei system, the number of turns can be estimated by exploiting the press system's rewarding
+gimmick, which gives an extra turn for every critical hit/elemental piercing attacks. Assuming of course that you have enough
+mana for all the spells, then the amount of turns necessary to end the fight is :</p>
+
+\[
+\text{Turns} = \left\lceil \frac{Z} - \text{spells that cause weakness hits}}{|C|} \right\rceil
+\]
+
+
 
 
 <h2>Closing words </h2>
@@ -145,7 +154,7 @@ draft: false
     design. I Was thinking about adding more gimmicks considering damage over time (e.i. <a
         href="https://bulbapedia.bulbagarden.net/wiki/Toxic_(move)"></a>Pokemon's toxic), but these had
     me consider using the big M constant, which would render my formulation weak if the wrong big M parameter is chosen.
-    I might update this in the future. Even though I mentioned that this would not work for the Megaten games with their
-    press turn system, the output should give you an idea about how long the fight could go. Accounting for stat boosts
+    I might update this in the future. <s>Even though I mentioned that this would not work for the Megaten games with their
+    press turn system, the output should give you an idea about how long the fight could go</s>. Accounting for stat boosts
     mid-fights will turn it into a non-linear model, still, it does serve the job; I will passively see if there are any
-    improvements that I can do to account for special cases. </p>
+    improvements that I can do to account for those special cases. </p>
