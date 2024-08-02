@@ -103,7 +103,7 @@ draft: false
     control and that's how you get the upper bound of the turns needed to finish the fight. This objective function
     implicitly minimizes the number of turns if you think about it. With that out of the way, behold: </p>
 <div class="scrollable-div">
-    \[min Z = \sum\limits_{a \in A}{} \sum\limits_{c\in C}{} \sum\limits_{e\in E}{} + X^c_{ae} \sum\limits_{o \in A}
+    \[min Z = \sum\limits_{a \in A}{} \sum\limits_{c\in C}{} \sum\limits_{e\in E}{}  X^c_{ae}  + \sum\limits_{o \in A}
     \sum\limits_{c\in C}{} {X^c_{o}}\]
     \[\sum\limits_{a \in A}{X^c_{ae} \cdot p^c_{ae} } + \sum\limits_{a \in A}{X^c_{o} \cdot p^c_{oe} \geq HP_e} \quad
     \forall e
