@@ -84,20 +84,20 @@ draft: false
 
 <ul>
     <li>\(m_a\): The Mana/Stamina parameter of an attack \(a\)
-    <li>\(HP_e\): The HP of each enemy \(e\)
+    <li>\(HP_e\): The HP of an enemy \(e\)
     <li>\(p^c_{ae}\): The power coefficient of an attack \(a\) that the character \(c\) can apply to enemy \(e\)
 
 </ul>
 
 <p>The power of an attack is computed after considering the attack parameter of the character and adding up the enemy's
-    weakness factor. This varies of course from game to game, consult the game's manual on how the power parameters are
-    computed, some games have this information public while some don't offer it and could use some years of reverse
+    weakness factor. This varies of course from game to game, consult the game's manual for the formulas, some games
+    have this information public while some don't offer it and could use some years of reverse
     engineering. </p>
 
 <p>With that out of the way, let's discuss how this is going to work. I decided to use a 3 index formulation, let
     \(X_{ca}^{e}\) be the variable that determines the number of attacks \(a\) a character \(c\) is using on an enemy
     \(e\), attacks that target multiple enemies will have a variable that contains only 2 indices, the attack \(a\) and
-    the character \(c\)</p>
+    the character \(c\).</p>
 
 
 <p> Finally, the following objective function aims to minimize the number of attack actions, since all characters move
@@ -151,15 +151,26 @@ draft: false
     function with something like the ratio of the mana to the power of the attack \(\frac{\text{mana}}{\text{power}}\).
 </p>
 
+<p>If the abilities that come with a cooldown coefficient cause your character(s) to be immobilized for \(w\) amount of
+    turns (e.i. Attacks like Pokemon's hyper beam) instead of introducing a cooldown on the said attack, then the
+    formula
+    to get the number of turns transforms into this: </p>
+
+\[
+\text{Turns} = \left\lceil \frac{\sum\limits_{a \in A}{} \sum\limits_{c\in C}{} \sum\limits_{e\in E}{} X^c_{ae} \cdot
+w_a + \sum\limits_{o \in A}
+\sum\limits_{c\in C}{} {X^c_{o} \cdot w_a}}{|C|} \right\rceil
+\]
 
 <p>As for the Shin Megami combat Tensei system, the number of turns can be estimated by exploiting the press system's
     rewarding
     gimmick, which gives an extra turn for every critical hit/elemental piercing attacks. Assuming of course that you
     have enough
-    mana for all the spells, then the amount of turns necessary to end the fight is :</p>
+    mana for all the spells, then the amount of turns necessary to end the fight is:</p>
 
 \[
-\text{Turns} = \left\lceil \frac{Z- \text{spells that cause weakness hits}}{|C|} \right\rceil
+\text{Turns} = \left\lceil \frac{\sum\limits_{a \in A}{} \sum\limits_{c\in C}{} \sum\limits_{e\in E}{} X^c_{ae} +
+\sum\limits_{o \in A} \sum\limits_{c\in C}{} {X^c_{o}}- \text{spells that cause weakness hits}}{|C|} \right\rceil
 \]
 
 
