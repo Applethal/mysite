@@ -170,8 +170,7 @@ draft: false
     mana for all the spells, then the amount of turns necessary to end the fight is:</p>
 <div class="scrollable-div">
     \[
-    \text{Turns} = \left\lceil \frac{\sum\limits_{a \in A}{} \sum\limits_{c\in C}{} \sum\limits_{e\in E}{} X^c_{ae} +
-    \sum\limits_{o \in A} \sum\limits_{c\in C}{} {X^c_{o}}- \text{spells that cause weakness hits}}{|C|} \right\rceil
+    \text{Turns} = \left\lceil \frac{\sum\limits_{ Z - \text{effective spells}}{|C|} \right\rceil
     \]
 </div>
 
