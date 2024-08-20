@@ -231,14 +231,15 @@ parameter of a chip \(i\). For this entire setup I require two decision variable
 
 \[\sum\limits_{j \in J}{x_{i,j,c}} \leq 3 \quad \forall i \in I\]
 
-\[sum\limits_{MEGA \in C}{x_{i,j,MEGA}} \leq 5 \]
+\[\sum\limits_{MEGA \in C}{x_{i,j,MEGA}} \leq 5 \]
 
-\[sum\limits_{GIGA \in C}{x_{i,j,GIGA}} \leq 1 \]
+\[\sum\limits_{GIGA \in C}{x_{i,j,GIGA}} \leq 1 \]
 
 <p> The objective function Z aims to maximize the stun lock potential of the deck. The first constraint prevents the program from picking more than 20 chips. You can set it to however you want, 
 I usually leave 10 cards for defensive options, which are not considered here in the formulation. The next 2 constraints limit the amount of chip codes that you may have, feel free to adjust it to 
 any number other than 2, I prefer having no more than 2 codes, asterisk codes are excluded from the constraint because they can be mixed with any code. Afterwards you've got game specific constraints, as
-of the latest 3 games in the series, I believe you can't have more than 3, 5 and 1 standard, mega and giga chips respectively (Unless you edit your character build with some NCP that enable more).</p>
+of the latest 3 games in the series, I believe you can't have more than 3, 5 and 1 standard, mega and giga chips respectively (Unless you edit your character build with some NCP that enable more). Damage isn't everything!
+</p>
 
 
 
