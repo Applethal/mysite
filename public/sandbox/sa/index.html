@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+	<title>Simulated Annealing for Kids | Saads perfektewelt</title>
+	<link rel="canonical" href="//localhost:1313/">
+	<link rel='alternate' type='application/rss+xml' title="Saads perfektewelt RSS" href='/index.xml'>
+	<link rel='stylesheet' type='text/css' href='/style.css'>
+	
+	<link rel="icon" href="favicon.ico">
+	<script src="/js/scripts.js" defer></script>
+	<meta property="og:description" content="I am immortal! I have life insurance!">
+	
+	<meta name="keywords" content="Optimization , Operational research , Metaheuristics">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<meta property="og:image" content="/Splash.png">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+		rel="stylesheet">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="robots" content="index, follow">
+	<meta charset="utf-8">
+	<link rel="shortcut icon" href="//localhost:1313/favicon.ico" type="image/x-icon">
+
+
+	
+	<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+<script>
+    MathJax = {
+        tex: {
+            displayMath: [['\\[', '\\]'], ['$$', '$$']],  
+            inlineMath: [['\\(', '\\)']]                  
+        }
+    };
+</script>
+	
+
+</head>
+
+
+<body>
+
+	<main>
+		
+		<header>
+
+			<div class="Top" style="text-align: center;">
+    <h1 style="display: inline-block; text-align: center;" title="Lady bugs are a symbol of luck">Saads Perfektewelt
+        <div onclick="darkmode('#2C2C2C')" class="hehe" id="DarkModetext"
+            style="display: inline-block; margin-left: 5px;">
+            <div class="emoji-container" style="cursor: pointer;">&#128030;</div>
+        </div>
+    </h1>
+</div>
+		</header>
+		<div class="navigation" style="overflow-x: auto;
+
+        white-space: nowrap;
+">
+			<ul>
+				<li><a href="/" style="text-decoration: none; color: yellow;">Home</a></li>
+				<li><a href="/blog/" style="text-decoration: none; color: yellow;">Blog</a></li>
+				<li><a href="/recommendations/" style="text-decoration: none; color: yellow;">Recommendations</a></li>
+				<li><a href="/sandbox/" style="text-decoration: none; color: yellow;">Sandbox</a></li>
+				<li><a href="/misc/" style="text-decoration: none; color: yellow;">Misc</a></li>
+				<li><a href="/about/" style="text-decoration: none; color: yellow;">About</a></li>
+			</ul>
+		</div>
+
+
+
+
+		
+		<article>
+
+		</article>
+	</main>
+	<div class="main">
+		
+		<center>
+			<h1 id="tag_Simulated annealing for kids">Simulated annealing for kids</h1>
+		</center>
+		<style>
+  a {
+    text-decoration: none;
+    color: yellow;
+  }
+
+  .tikzs {
+        text-align: center;
+        background-color: white;
+        width: fit-content;
+        margin: auto;
+        padding: 20px;
+        border-radius: 8px;
+        overflow-x: auto;
+
+    }
+
+    .tikzs svg {
+        overflow: visible !important;
+        position: static !important;
+    }
+
+    .scroll-container {
+        overflow-x: auto;
+        width: 100%;
+        max-width: 100%;
+    }
+</style>
+
+<link rel="stylesheet" type="text/css" href="https://tikzjax.com/v1/fonts.css">
+<script src="https://tikzjax.com/v1/tikzjax.js"></script>
+
+<p>As of today and to the best of my knowledge, there are no articles that explain simulated annealing (Kirkpatrick et al., 1983) for those outside the loop. The terminology used in explaining the algorithm may be rough and intimidating at first. One cheap attempt nowadays to simplify the explanation of any concept is to go online and ask people to explain it to you as if you are 5 years old. As of yet. I personally have never tried this approach, so I can't review how effective it is. </p>
+
+<p>We live in an age of accessibility, and I believe that simplify what is hard is the best proof that shows if you are capable of handling the topic or not.</p>
+
+<p>Picture this: Imagine that just opened up a business and that you are looking for workers to maintain your cash flow. Consider that you are fresh into the world, by this time, your trust and naivety are still green. With that said, you will receive people with different backgrounds and different skill levels. Your trust levels are on top, and you will pretty much accept who steps at your doors. As your business keeps growing, you will at some point want to replace your current workers with some that satisfy your greedy needs, your current workers will set a bar, and as you keep encountering new people, your standards will rise and your trust goes lower, making you less naive and less accepting of those who might help you reach higher skies, despite their low profiles. At some point your trust in humanity will vanish, and your job offers will contain elements that are humanly impossible to achieve, unless the job applicants meet your conditions, you will receive no new servants, and this will keep on until you become the N°1 in the globe. Greed is good!</p>
+
+<p>Naturally this algorithm is an analogy to metallurgy. It can be used to solve various problems where exploring a mathematical function is time consuming, most of these problems are of combinatorial nature (Traveling salesman problem, Job-shop scheduling..etc..). For a number of itterations, the algorithm attempts to explore solutions until it stops improving the objective function. Provided you have an objective function with high number of finite points, you can execute the algorithm and hopefully find the global minima, or maxima. </p>
+
+
+<p> I know pseudo-codes look scary so I made this small diagram, sadly the standalone tikz does not support special shapes; the blue rectangles depict decisions, while the green and orange blocks are reserved for the termination and processes respectively.</p>
+
+
+<div class="scroll-container">
+    <div class="tikzs">
+        <script type="text/tikz">
+        \begin{tikzpicture}[node distance = 1.5cm, auto, font=\small]
+    % Place nodes
+    \tikzstyle{decision} = [rectangle, draw, fill=blue!20,
+    text width=4em, text centered, rounded corners, minimum height=3em]
+    \tikzstyle{block} = [rectangle, draw, fill=orange!20,
+    text width=4em, text centered, rounded corners, minimum height=3em]
+    \tikzstyle{line} = [draw, ->]
+    \tikzstyle{cloud} = [draw, ellipse,fill=red!20, node distance=2cm,
+    minimum height=1.5em]
+    \node [block, fill =  green!20] (start) {Start};
+    \node [block, below of=start] (init) {Initialize trust T};
+    \node [block, below of=init, node distance = 3cm] (getscore1) {Hire an initial worker};
+    \node [block, below of=getscore1, node distance = 2cm] (getscore2) {Hire a new person};
+    \node [block, below of=getscore2, node distance = 3cm] (difference) {evaluate the new worker};
+    \node [decision, below of=difference, node distance = 4cm] (better) {Is the new worker better?};
+    \node [decision, below left of=better, node distance=3.5cm] (trust) {Should I trust them regardless?};
+    \node [block, below of=better, node distance=5cm] (accept) {Welcome the new worker, fire the old one};
+    \node [block, below of=accept, node distance = 2cm] (decrease) {Decrease trust T};
+
+    \node [decision, right of=trust,node distance=6cm] (dominate) {Do I have more patience ? Can I reach newer peaks ?};
+    \node [block, below of=dominate, node distance=3cm, fill =  green!20] (end) {END};
+    % Draw edges
+    \path [line] (start) -- (init);
+    \path [line] (init) -- (getscore1);
+    \path [line] (getscore1) -- (getscore2);
+    \path [line] (getscore2) -- (difference);
+    \path [line] (difference) -- (better);
+    \path [line] (better) -- node {yes} (accept);
+    \path [line] (better.west) -| node [near start] {no} (trust);
+    \path [line] (trust) -- node {yes} (accept);
+    \path [line] (trust.south) |- node [near start] {no} (decrease);
+    \path [line] (accept) -- (decrease);
+    \path [line] (decrease.east) -| ++(1cm,0cm) |- (dominate.west);
+
+    \path [line] (dominate.south) -- node {yes} (end);
+    \path [line] (dominate.north) |- node [near start] {no} (getscore2);
+\end{tikzpicture}
+      </script>
+    </div>
+
+</div>
+
+<p style="color: #888; font-size: 14px; text-align: center;">Figure: Simulated annealing for kids</p>
+
+<p>I know for certain that adults would comprehend this diagram, I do however think that actual kids might not enjoy it, I just hope that they do not turn out to be greedy in their future. </p>
+
+<h3>References</h3>
+
+<i>S. Kirkpatrick et al.</i>; 1983 ;<b>Optimization by Simulated Annealing</b>. Science220,671-680(1983).DOI:10.1126/science.220.4598.671
+
+		
+
+	</div>
+
+	
+
+	
+
+	<footer>
+		<div class="social-icons">
+			<a href="https://twitter.com/Applethal" target="_blank"><img src="/Twitter_Logo_WhiteOnBlue-2425288278.png"
+					alt="" class="contact"></a>
+			<a href="https://open.spotify.com/user/n568fkbbfbobfth4ad6sq9yei" target="_blank"><img
+					src="/Spotify_App_Logo.svg.png" alt="" class="contact"></a>
+			<a href="https://github.com/Applethal" target="_blank"><img src="/GitHub-Mark.png" class="contact"></a><a href="/index.xml"><img src="/Generic_Feed-icon.svg.png" class="contact"
+					alt="RSS Feed" title="Subscribe via RSS for updates."></a>
+		</div>
+
+
+	</footer>
+
+	
+	
+</body>
+
+</html>

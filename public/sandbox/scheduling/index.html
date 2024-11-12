@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+	<title>Scheduling Is Fun! | Saads perfektewelt</title>
+	<link rel="canonical" href="//localhost:1313/">
+	<link rel='alternate' type='application/rss+xml' title="Saads perfektewelt RSS" href='/index.xml'>
+	<link rel='stylesheet' type='text/css' href='/style.css'>
+	
+	<link rel="icon" href="favicon.ico">
+	<script src="/js/scripts.js" defer></script>
+	<meta property="og:description" content="I am immortal! I have life insurance!">
+	
+	<meta name="keywords" content="Operational research , Scheduling , Mathematics , Programing">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<meta property="og:image" content="/Splash.png">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+		rel="stylesheet">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="robots" content="index, follow">
+	<meta charset="utf-8">
+	<link rel="shortcut icon" href="//localhost:1313/favicon.ico" type="image/x-icon">
+
+
+	
+	<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+<script>
+    MathJax = {
+        tex: {
+            displayMath: [['\\[', '\\]'], ['$$', '$$']],  
+            inlineMath: [['\\(', '\\)']]                  
+        }
+    };
+</script>
+	
+
+</head>
+
+
+<body>
+
+	<main>
+		
+		<header>
+
+			<div class="Top" style="text-align: center;">
+    <h1 style="display: inline-block; text-align: center;" title="Lady bugs are a symbol of luck">Saads Perfektewelt
+        <div onclick="darkmode('#2C2C2C')" class="hehe" id="DarkModetext"
+            style="display: inline-block; margin-left: 5px;">
+            <div class="emoji-container" style="cursor: pointer;">&#128030;</div>
+        </div>
+    </h1>
+</div>
+		</header>
+		<div class="navigation" style="overflow-x: auto;
+
+        white-space: nowrap;
+">
+			<ul>
+				<li><a href="/" style="text-decoration: none; color: yellow;">Home</a></li>
+				<li><a href="/blog/" style="text-decoration: none; color: yellow;">Blog</a></li>
+				<li><a href="/recommendations/" style="text-decoration: none; color: yellow;">Recommendations</a></li>
+				<li><a href="/sandbox/" style="text-decoration: none; color: yellow;">Sandbox</a></li>
+				<li><a href="/misc/" style="text-decoration: none; color: yellow;">Misc</a></li>
+				<li><a href="/about/" style="text-decoration: none; color: yellow;">About</a></li>
+			</ul>
+		</div>
+
+
+
+
+		
+		<article>
+
+		</article>
+	</main>
+	<div class="main">
+		
+		<center>
+			<h1 id="tag_Scheduling is fun!">Scheduling is fun!</h1>
+		</center>
+		<style>
+    .scrollable-div {
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+
+    .tikzs {
+        text-align: center;
+        background-color: white;
+        width: fit-content;
+        margin: auto;
+        padding: 20px;
+        border-radius: 8px;
+        overflow-x: auto;
+
+    }
+
+    .tikzs svg {
+        overflow: visible !important;
+
+    }
+
+    .scroll-container {
+        overflow-x: auto;
+        width: 100%;
+        max-width: 100%;
+    }
+
+
+    .dark-mode {
+        background-color: #1a1a1a;
+        color: #ffffff;
+    }
+
+    .code-container {
+        max-width: 80%;
+        background-color: #282c34;
+
+        border: 1px solid #3a3f4a;
+
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
+        text-align: left;
+        margin-top: 20px;
+
+    }
+
+    .code-header {
+        text-align: right;
+        margin-bottom: 10px;
+    }
+
+    .copy-button {
+        background-color: #61dafb;
+
+        color: #fff;
+
+        border: none;
+        padding: 8px 12px;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    pre {
+        background-color: #2d333b;
+
+        padding: 15px;
+        border-radius: 4px;
+        overflow-x: auto;
+    }
+
+    code {
+        color: #abb2bf;
+
+        font-family: 'Courier New', monospace;
+    }
+
+    .keyword {
+        color: #c678dd;
+
+    }
+
+    .variable {
+        color: #d19a66;
+
+    }
+
+    .function {
+        color: #61dafb;
+
+    }
+
+    .string {
+        color: #98c379;
+
+    }
+
+    .comment {
+        color: #5c6370;
+
+        font-style: italic;
+    }
+
+    a {
+        text-decoration: none;
+        color: yellow;
+    }
+
+    @media (max-width: 600px) {
+        .code-container {
+            max-width: 100%;
+            overflow-x: auto;
+        }
+
+
+    }
+</style>
+<link rel="stylesheet" type="text/css" href="https://tikzjax.com/v1/fonts.css">
+<script src="https://tikzjax.com/v1/tikzjax.js"></script>
+<script>
+    function copyCode() {
+        const codeElement = document.querySelector('code');
+        const textArea = document.createElement('textarea');
+        textArea.value = codeElement.textContent;
+        document.body.appendChild(textArea);
+        textArea.select();
+        document.execCommand('copy');
+        document.body.removeChild(textArea);
+    }
+</script>
+
+<h1>Notation </h1>
+
+<span class="math">\(
+    i \in M
+    \)</span> : Set of machines
+
+
+
+<br>
+<span class="math">\(
+    j \in J
+    \)</span> : Set of jobs
+
+<br>
+<span class="math">\(
+    p_{i,j}
+    \)</span> : procssing time of job j in machine i
+<br>
+<span class="math">\(
+    C_{i,j}
+    \)</span> : Completion time of job j in machine i
+
+<br>
+<span class="math">\(
+    LST_{j}
+    \)</span> : Latest starting time of job j
+
+
+
+<h1>Intro</h1>
+<p>As a guy who is very passionate about combinatorial optimization, and as much as I kept editing the core of my
+    website's
+    layout, I thought about adding some spiciness
+    to my articles, even if it defies my minimalistic philosophies.</p>
+
+<p>Living here in Germany slowly and subconsiously turned me into a time-slave. Evil marketers did a really
+    good job at putting emphasis on time, creating a need for
+    goods and services that make me priorities being on time. </p>
+
+<p>Scheduling was something that I was a fan of, the goal of their science is to find the perfect sequence of tasks that
+    meets a set of requirements. Their motives may sound simple but the average scheduling puzzles are \(NP-hard\), our
+    current understanding on combinatorics encourages
+    the development of heuristical approaches to tackle the the hardships of investigating permutations by offering a
+    solution that is good enough. </p>
+
+<p>Cooking just began to slowly become an integral part of my life, my life style makes it hard for me to
+    innovate, I just keep cycling through a limited set of recipes. Old habits die hard, at least they do. When I feel
+    energetic, my dexterity goes top notch, enabling fast reactions
+    and quick manouvers across the kitchen, but sometimes I just brute force my structures without thinking, which can
+    result in a chunk of wasted time, and sometimes effort.</p>
+
+<p>In the theory of scheduling, if a given situation is properly formulated, you may gain access to tools that aid
+    you reach your goals, without having to rely on any form of soft experience. This can be achieved by understanding
+    the setup
+    and trying to perceive it with intelligence, after all, the methods of logistics aim to exploit all kinds of
+    information in order to fullfill an objective. I thought a lot about how to design a nice scheduling setup for a
+    cooking context, not chaining tasks as quick as possible may cause your food to catch a cold. </p>
+<p>After tinkering with lots of tools, I thought about simplifying the scheduling formulation in a way that reduces the
+    amount of constraints that I have to account for. What I will be proposing is the work of an
+    amateur, as of yet: \(P \,||\, \text{prec} \,,M_{j}||\, C_{\text{max}}\).</p>
+
+<h3> Small disclaimer: </h3> This work is purely an implementation of the scheduling theory. My intentions were focused
+only on seeing if I can pull this off with some Javascript / Hugo. Although it was a success, I need to add that you
+should cook at your own pace. Just take your time and never rush things up!
+
+<h1>The machines setup</h1>
+
+<p>Most of the parallel machine and single machine problems, are positioned in the NP- and P complete spectrum.
+    Precedence constraints are essential because you can't mix veggies before cutting them. the aim is to minimize the
+    global
+    completion time
+    or else I would miss the train. There would be no heuristics here to speak of, just a direct method, specifically a
+    list
+    scheduling algorithm since it has been proven by <a
+        href="https://www.sciencedirect.com/science/article/pii/0167637795000577">Shutten</a>(2003) that parallel
+    machine
+    problems with setup times or precedence constraints can be solved to optimality with the aformentioned algorithm,
+    Except it's not a list here that we are talking about but a graph of sorts: I will be traversing the graph and
+    checking for dependencies as I keep moving forward until I hit the last node.
+    <br>
+    As for the constraints here is how I dealt with some of these:
+<ul>
+    <li>Preemption: Instead of stopping the machine and resuming afterwards, I made it so that it is treated as \(n\)
+        number of phases, each of which will describe their states.</li>
+    <li>Setup times: These will either be modeled as a seperate task similarly to the previous constraint, or in some
+        occasions I might just combine everything together as a single task. </li>
+
+</ul>
+
+<br>My specs:
+<ul>
+    <li>Bauknecht oven with 2 slots</li>
+    <li>Panasonic NN E221MM</li>
+    <li>Schott Seran stove set</li>
+    <li>Unnamed toast machine</li>
+    <li>Me and my tools</li>
+</ul>
+
+
+</p>
+<h1>The formulation:</h1>
+<p>Before talking about the design let me define what a machine is. <b>Pretty much anything that processes a task on its
+        own without any active moderation from my end.</b> My kitchen is equipped with a stove, an oven, and microwave-
+    all of which can act on their own
+    provided
+    I initiate them - As for me, I have my own hands which will act as a medium to craft the best of the best.
+    Specs-wise,
+    I think the machines and I are modern enough. <br>
+    As for the precedence graph, I will not go into deep details on the chain of tasks unless it is necessary. The
+    quantity of my
+    descriptions should, in theory, not influence the makespan; micro tasks like "breaking an egg and then mixing it
+    up"
+    will be
+    summed up as "preparing the egg" for the sake of simplicity.
+
+</p>
+
+
+<h1>Example:</h1>
+
+<p>Here I will be showcasing a small example of how to model the Gantt chart of preparing an omelette sandwish.
+
+<h2>Tasks:</h2>
+<ol>
+    <li>
+
+        Prepare the egg
+    </li>
+    <li>
+        Cut the veggies
+    </li>
+    <li> Cook the egg </li>
+    <li> Prepare the bread </li>
+    <li> Stuff in the bread</li>
+</ol>
+</p>
+<p>
+<h2>Machines/Tasks set:
+
+</h2>
+These will be the tasks assigned to each machine:
+<ul>
+    <li>Me = {1,2,4,5}</li>
+    <li>Stove = {3}</li>
+</ul>
+</p>
+<p>And these can be modeled like so, because you can't stuff anything in the bread as long as your eggs aren't ready:
+</p>
+<div style="text-align: center; background-color: white; width: fit-content; margin: auto;
+
+
+padding: 20px;
+border-radius: 8px;">
+    <script type="text/tikz">
+            \begin{tikzpicture}
+
+        \node (1) at (0,0) {1};
+        \node (2) at (2,0){2};
+        \node (3) at (4,2){3};
+        \node (4) at (4,-2){4};
+        \node (5) at (6,0){5};
+
+
+        \draw[->, >=stealth] (1) -- (2);
+        \draw[->, >=stealth] (2) -- (3);
+        \draw[->, >=stealth] (2) -- (4);
+        \draw[->, >=stealth] (4) -- (5);
+        \draw[->, >=stealth] (3) -- (5);
+
+
+        \foreach \i in {1,...,5} {
+            \node[draw, circle] at (\i) {\i};
+        }
+    \end{tikzpicture}
+          </script>
+</div>
+
+<p>I will not attribute any processing times in this example, just picture an arbitrary number for each task for now.
+</p>
+
+
+<div class="scroll-container">
+    <div class="tikzs">
+        <g transform>
+            <script type="text/tikz">
+        \begin{tikzpicture}[scale=0.7]
+        \draw[->] (0,0) -- (14,0) node[right] {};
+    \draw[->] (0,0) -- (0,7) node[above] {};
+
+
+    \draw[gray!50, dashed, step=1] (0,0) grid (14,7);
+
+
+    \foreach \x in {1,2,...,14} {
+        \draw (\x,0) -- (\x,-0.2) node[below] {\x};
+    }
+
+
+    \foreach \y/\label in {3/Human, 7/Stove} {
+        \draw (0,\y) -- (-0.2,\y) node[left] {\label};
+    }
+    \draw[fill=blue!30] (0,0) rectangle (3,3) node[pos=0.5] {Egg};
+    \draw[fill=blue!30] (3,0) rectangle (5,3) node[pos=.5] {Cut};
+
+    \draw[fill=blue!30] (5,3) rectangle (10,7) node[pos=.5] {Cook};
+    \draw[fill=red!30] (5,0) rectangle (8,3) node[pos=.5] {Bread};
+    \draw[fill=blue!30] (10,0) rectangle (12,3) node[pos=.5] {Stuff};
+    \draw[fill=red!30, line width=1.5pt] (12,0) rectangle (12,7) node[pos=1, right=2mm] {$C_{max} = 12$};
+
+
+    \end{tikzpicture}
+      </script>
+    </div>
+</div>
+
+Tasks marked with red can be shifted to the right as long as they do not introduce any extra time to the total makespan.
+You can cut the bread anytime you want between the 5th and 7th
+time mark. These are called tasks with slack times, or in other literature as buffer times. Their times are computed
+using the following
+formula:
+<div class="scrollable-div">
+    \[ LST(j) = \max_{j' \in S(j)} \left( C_{i,j'} - p_{i,j'} \right) \quad \forall j \in J \]
+</div>
+
+
+
+
+
+<u>
+    <h2>Small observation:</h2>
+</u>
+A couple of people pointed out that I was cooking eggs the wrong way, more specifically, I put the eggs on a pan and let
+the pan do the rest @ 6/10
+heat. Apparently the popular belief recommends against this, instead one should agitate the egg as it heats up using a
+pressure
+tool. If that is the case then this isn't a Parallel machine schedule anymore but a single machine since I would then be
+actively
+doing all the cooking, increasing the total time up to 15. Despite all of this, I will keep this mistake up there for
+demonstrative purposes.
+
+<h1>About the computation</h1>
+
+
+Using a solver is totally unecessary since our list algorithm has a complexity of \(O(V + E)\). The following
+Javascript
+snippet will be plugged together with a module that generates Gantt charts, for now I am using Tikzjax but its slow
+rendering speed and its lack of CSS flexibility motivates me to seek another package. The code computes the Makespan and
+outputs
+the starting- and finishing times of each machine, all of which are calculated using the classic formula:
+<div class="scrollable-div">
+    $$C_{i,j} = \max\left(C_{i-1,j}, C_{i,j-1}\right) + p_{i,j} \quad \forall j \in J, i \in M$$
+</div>
+
+The data is extracted from the recipes's front matter and formulated as a list that contains all the information that I
+would need. Thanks to <a href="https://gohugo.io/"> Hugo's</a> flexibility, plugging in the input in Javascript
+made me write less code.
+
+
+<center>
+    <div class="code-container">
+        <div class="code-header">
+            <button class="copy-button" onclick="copyCode()">Copy Code</button>
+        </div>
+        <pre>
+            <code>{{ $tasks := .Params.tasks }}
+                <span class="keyword">var</span> <span class="variable">processSteps</span> = [
+  {{- range $index, $task := $tasks -}}
+    {
+      id: {{ $task.id }},
+      name: "{{ $task.name }}",
+      machine: "{{ $task.machine }}",
+      processing_time: {{ $task.processing_time }},
+      dependencies: [{{ range $task.dependencies }}{{ . }},{{ end }}],
+    },
+  {{- end -}}
+];
+
+<span class="function">function</span> <span class="variable">calculateSchedule</span>(<span class="variable">processSteps</span>) {
+    const <span class="variable">tasks</span> = <span class="variable">processSteps</span>.map((<span class="variable">step</span>, <span class="variable">index</span>) => ({
+        id: <span class="variable">index</span> + 1,
+        name: <span class="variable">step.name</span>,
+        machine: <span class="variable">step.machine</span>,
+        processingTime: <span class="variable">step.processing_time</span>,
+        dependencies: <span class="variable">step.dependencies</span>,
+        startTime: 0,
+        finishTime: 0,
+        lst: 0,
+    }));
+
+    for (const <span class="variable">task</span> of <span class="variable">tasks</span>) {
+        <span class="variable">task.startTime</span> = Math.max(...<span class="variable">task.dependencies</span>.map(<span class="variable">depId</span> => <span class="variable">tasks[depId - 1]</span>.finishTime), 0);
+        <span class="variable">task.finishTime</span> = <span class="variable">task.startTime</span> + <span class="variable">task.processingTime</span>;
+    }
+
+    for (const <span class="variable">task</span> of <span class="variable">tasks</span>) {
+        const <span class="variable">successors</span> = <span class="variable">tasks</span>.filter(<span class="variable">t</span> => <span class="variable">t.dependencies</span>.includes(<span class="variable">task.id</span>));
+        const <span class="variable">lstCandidates</span> = <span class="variable">successors</span>.map(<span class="variable">s</span> => <span class="variable">s.startTime</span> - <span class="variable">task.processingTime</span>);
+        <span class="variable">task.lst</span> = Math.max(...<span class="variable">lstCandidates</span>, 0);
+    }
+
+    const <span class="variable">makespan</span> = Math.max(...<span class="variable">tasks</span>.map(<span class="variable">task</span> => <span class="variable">task.finishTime</span>));
+
+    return { <span class="variable">makespan</span>, <span class="variable">tasks</span> };
+}
+
+const <span class="variable">scheduleResult</span> = <span class="variable">calculateSchedule</span>(<span class="variable">processSteps</span>);
+console.log(<span class="string">'Makespan:'</span>, <span class="variable">scheduleResult</span>.<span class="variable">makespan</span>);
+console.log(<span class="string">'Task Schedule:'</span>);
+<span class="variable">scheduleResult</span>.<span class="variable">tasks</span>.forEach(<span class="variable">task</span> => {
+    console.log(<span class="string">`${</span><span class="variable">task.name</span>}:</span> Start Time ${<span class="variable">task.startTime</span>}, Finish Time ${<span class="variable">task.finishTime</span>}, Machine ${<span class="variable">task.machine</span>}`);
+});
+</code>
+</pre>
+    </div>
+</center>
+
+
+
+
+
+
+
+
+
+<h1>Can a better formulation beat my makespan ?</h1>
+
+<p>I would like to see that, Everything that you have read so far was the effort of two days and is subject for
+    potential improvements. For now I am happy with the results, though if I get any new ideas, I will surely imeplement
+    provide updates. Feel free to submit an issue on the website's repo or send me an email and I will be content to
+    have a discussion on the matter.</p>
+<h1> References </h1>
+<p><i>J.M.J. Schutten</i>, List scheduling revisited, Operations Research Letters, Volume 18, Issue 4, 1996, Pages
+    167-170, ISSN 0167-6377, <a href="https://doi.org/10.1016/0167-6377(95)00057-7"
+        target="_blank">https://doi.org/10.1016/0167-6377(95)00057-7</a></p>
+
+<details>
+    <summary>Change log</summary>
+    <h2>11/02/2024</h2>
+    Conception added, every recipe now has a Gantt chart detailing the processing steps while aiming to minimize the
+    makespan subject to a kitchen setup.
+    <h2>17/02/2024</h2>
+    Added Slack times indicators! Tasks marked with red can be shifted freely as long as they do not exceed their latest
+    finishing times!
+
+</details>
+		
+
+	</div>
+
+	
+
+	
+
+	<footer>
+		<div class="social-icons">
+			<a href="https://twitter.com/Applethal" target="_blank"><img src="/Twitter_Logo_WhiteOnBlue-2425288278.png"
+					alt="" class="contact"></a>
+			<a href="https://open.spotify.com/user/n568fkbbfbobfth4ad6sq9yei" target="_blank"><img
+					src="/Spotify_App_Logo.svg.png" alt="" class="contact"></a>
+			<a href="https://github.com/Applethal" target="_blank"><img src="/GitHub-Mark.png" class="contact"></a><a href="/index.xml"><img src="/Generic_Feed-icon.svg.png" class="contact"
+					alt="RSS Feed" title="Subscribe via RSS for updates."></a>
+		</div>
+
+
+	</footer>
+
+	
+	
+</body>
+
+</html>

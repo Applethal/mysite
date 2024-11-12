@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+	<title>Mathematically Get the Brute-Force Upper Bound Number of Turns Needed to Finish a Turn-Based RPG Fight | Saads perfektewelt</title>
+	<link rel="canonical" href="//localhost:1313/">
+	<link rel='alternate' type='application/rss+xml' title="Saads perfektewelt RSS" href='/index.xml'>
+	<link rel='stylesheet' type='text/css' href='/style.css'>
+	
+	<link rel="icon" href="favicon.ico">
+	<script src="/js/scripts.js" defer></script>
+	<meta property="og:description" content="I am immortal! I have life insurance!">
+	
+	<meta name="keywords" content="Optimization , Operational research , Mathematics">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<meta property="og:image" content="/Splash.png">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+		rel="stylesheet">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="robots" content="index, follow">
+	<meta charset="utf-8">
+	<link rel="shortcut icon" href="//localhost:1313/favicon.ico" type="image/x-icon">
+
+
+	
+	<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+<script>
+    MathJax = {
+        tex: {
+            displayMath: [['\\[', '\\]'], ['$$', '$$']],  
+            inlineMath: [['\\(', '\\)']]                  
+        }
+    };
+</script>
+	
+
+</head>
+
+
+<body>
+
+	<main>
+		
+		<header>
+
+			<div class="Top" style="text-align: center;">
+    <h1 style="display: inline-block; text-align: center;" title="Lady bugs are a symbol of luck">Saads Perfektewelt
+        <div onclick="darkmode('#2C2C2C')" class="hehe" id="DarkModetext"
+            style="display: inline-block; margin-left: 5px;">
+            <div class="emoji-container" style="cursor: pointer;">&#128030;</div>
+        </div>
+    </h1>
+</div>
+		</header>
+		<div class="navigation" style="overflow-x: auto;
+
+        white-space: nowrap;
+">
+			<ul>
+				<li><a href="/" style="text-decoration: none; color: yellow;">Home</a></li>
+				<li><a href="/blog/" style="text-decoration: none; color: yellow;">Blog</a></li>
+				<li><a href="/recommendations/" style="text-decoration: none; color: yellow;">Recommendations</a></li>
+				<li><a href="/sandbox/" style="text-decoration: none; color: yellow;">Sandbox</a></li>
+				<li><a href="/misc/" style="text-decoration: none; color: yellow;">Misc</a></li>
+				<li><a href="/about/" style="text-decoration: none; color: yellow;">About</a></li>
+			</ul>
+		</div>
+
+
+
+
+		
+		<article>
+
+		</article>
+	</main>
+	<div class="main">
+		
+		<center>
+			<h1 id="tag_Mathematically get the brute-force upper bound number of turns needed to finish a turn-based RPG fight">Mathematically get the brute-force upper bound number of turns needed to finish a turn-based RPG fight</h1>
+		</center>
+		
+<style>
+    .scrollable-div {
+        overflow-x: auto;
+
+        white-space: nowrap;
+
+    }
+</style>
+
+<p> I love turn based RPG games, especially those where I have no control over the mobility of my characters, as these
+    reduce the problem size of my decisions, making me
+    only decide on actions and ignore positioning. Other than that I get to enjoy the privilege of taking all the time I
+    need in
+    order to make a decision. </p>
+
+<p>Weeks ago I was playing the original <a href="https://de.wikipedia.org/wiki/Final_Fantasy_VII">Final Fantasy VII</a>
+    for the first time in my life, and I somehow lost my patience
+    against a group of monsters. Wanting to breeze
+    through the game, I started to heuristically tinker ways in order to minimize the number of turns that it takes to
+    end my fights as quick as I can. I had to account
+    for my mana resource, especially since Final Fantasy VII's options in that regard were very costly back when I
+    reached
+    that chapter.</p>
+
+<p>I wondered how speedrunners come up with the all those strategies that allow them to reach the high skies of the
+    leaderboards; There is indeed potential for some Operational research! And that is what sparked the following idea:
+    We can use linear programming to determine:</p>
+
+<ul>
+    <li>The upper bound of the number of turns that it takes to finish a fight
+    <li>Which attacks to use on which enemy
+</ul>
+
+<p>What I will be presenting here, sadly, does not work for every game out there, <s> it specifically works only for the
+        aforementioned type of games with no
+        press turn gimmicks (Sorry Shin Megami Tensei fans)</s>. The model assumes that every member will move at the
+    same turn. It is sadly an upper bound because these games usually come with
+    RNG mechanics that may either be a hindrance, like evasion stats, or a blessing, like with critical hits. Other
+    than that, the output of an attack may appear to be an integer, but in most games, the output stems from a ceiling
+    function that considers many shenanigans, hence why some people may mention that their attacks could not reach a
+    range.</p>
+
+<h3>The model </h3>
+
+<p>Small disclaimer: This model will only work if you assume the following:
+<ul>
+    <li>You have enough mana to finish the fight</li>
+    <li>Your Party's HP is enough to tank through the fight</li>
+
+
+
+</ul>
+
+
+
+
+</p>
+
+
+<p>With that out of the way, Let's discuss the input data. To model this, I need the following sets:</p>
+
+
+
+<ul>
+    <li>\(c \in C\): Set of characters
+    <li>\(e \in E\): Set of enemies
+    <li>\(a,o,w \in A\): Set of attacks with \([a_1, a_2....a_n]\) \(\cup \) \([o_1,o_2....o_3]\)
+        . \(a\) are the single
+        target
+        attacks, while \(o\) represent the attacks that can hit multiple enemies .
+</ul>
+
+<p>As for the parameters, the model requires:</p>
+
+<ul>
+    <li>\(m_a\): The Mana/Stamina parameter of an attack \(a\)
+    <li>\(HP_e\): The HP of an enemy \(e\)
+    <li>\(p^c_{ae}\): The power coefficient of an attack \(a\) that the character \(c\) can apply to enemy \(e\)
+
+</ul>
+
+<p>The power of an attack is computed after considering the attack parameter of the character and adding up the enemy's
+    weakness factor. This varies of course from game to game, consult the game's manual for the formulas, some games
+    have this information public while some don't offer it and could use some years of reverse
+    engineering. </p>
+
+<p>With that out of the way, let's discuss how this is going to work. I decided to use a 3 index formulation, let
+    \(X_{ca}^{e}\) be the variable that determines the number of attacks \(a\) a character \(c\) is using on an enemy
+    \(e\), attacks that target multiple enemies will have a variable that contains only 2 indices, the attack \(a\) and
+    the character \(c\).</p>
+
+
+<p> Finally, the following objective function aims to minimize the number of attack actions, since all characters move
+    at the same turn. The output of the objective function will then be divided by the number of ally units that you
+    control and that's how you get the upper bound of the turns needed to finish the fight. This objective function
+    implicitly minimizes the number of turns if you think about it. With that out of the way, behold: </p>
+<div class="scrollable-div">
+    \[min Z = \sum\limits_{a \in A}{} \sum\limits_{c\in C}{} \sum\limits_{e\in E}{} X^c_{ae} + \sum\limits_{o \in A}
+    \sum\limits_{c\in C}{} {X^c_{o}}\]
+    \[\sum\limits_{a \in A}{X^c_{ae} \cdot p^c_{ae} } + \sum\limits_{a \in A}{X^c_{o} \cdot p^c_{oe} \geq HP_e} \quad
+    \forall e
+    \in E \]
+    \[
+    \sum\limits_{a \in A} X^c_{ae} \cdot m_{a} + \sum\limits_{o \in A} X^c_{o} \cdot m_{o} \leq M_c \quad \forall c \in
+    C
+    \]
+
+
+    \[X^c_{ae}, X^c_{o} \geq 0\]
+</div>
+
+
+<p>The objective function aims to minimize the number of attacks. The first constraint ensures that the chosen attacks
+    will be sufficient to eliminate the enemies, while the second constraint allows the model to choose the attacks that
+    can't outcredit the mana of each character. </p>
+
+
+<p>However, if you are playing <a href="https://en.wikipedia.org/wiki/The_Legend_of_Dragoon">Legend of Dragoon</a>
+    (Great game by the way), this model works only in scenarios where you
+    use a single character, since the game has an agility parameter that breaks linearity of turns.
+    And for that, you might need an extra constraint for the item spells; since these have no mana costs but have
+    limited usage
+    depending on how many of them your inventory contains, which ensures that the item spells \(i\) used
+    does not exceed their amounts, of course you might want to add the variable \(X^c_{i}\) to the first 2 constraints'
+    left
+    hand side and express its positivity in the last constraint of course. You can, if you want, get rid of the \(c\)
+    index
+    since you are using only character but that won't change the size of the problem.</p>
+
+\[X^c_{i} \leq amount_i \quad \forall i \in I\]
+
+<p>I have tried to see if I can include spells with cooldowns, which should use the following formulations, where
+    \(w_{a}\): The cooldown coefficient of attack \(a\) :
+    \[X_{ae}^c \cdot w_a \leq \sum\limits_{a' \in A, a' \neq a}{X_{a'e}^c} \quad \forall a \in A\]
+    \[X_{o}^c \cdot w_a \leq \sum\limits_{o' \in A, o' \neq o}{X_{o'e}^c} \quad \forall a \in A\]
+
+    The way these work is: If an attack variable with a cooldown goes active, then the model would use all the other
+    attacks
+    until their sum reaches the cooldown \(w_a\). Although this works, there might be scenarios where the model ends up
+    over-killing the HP of an enemy. One way to fix this is to introduce a weight to each variable in the objective
+    function with something like the ratio of the mana to the power of the attack \(\frac{\text{mana}}{\text{power}}\).
+</p>
+
+<p>If the abilities that come with a cooldown coefficient cause your character(s) to be immobilized for \(w\) amount of
+    turns (e.i. Attacks like Pokemon's hyper beam) instead of introducing a cooldown on the said attack, then the
+    formula
+    to get the number of turns transforms into this: </p>
+<div class="scrollable-div">
+    \[
+    \text{Turns} = \left\lceil \frac{\sum\limits_{a \in A}{} \sum\limits_{c\in C}{} \sum\limits_{e\in E}{} X^c_{ae}
+    \cdot
+    w_a + \sum\limits_{o \in A}
+    \sum\limits_{c\in C}{} {X^c_{o} \cdot w_a}}{|C|} \right\rceil
+    \]
+</div>
+<p>As for the Shin Megami combat Tensei system, the number of turns can be estimated by exploiting the press system's
+    rewarding
+    gimmick, which gives an extra turn for every critical hit/elemental piercing attacks. Assuming of course that you
+    have enough
+    mana for all the spells, then the amount of turns necessary to end the fight is:</p>
+<div class="scrollable-div">
+    \[
+    \text{Turns} = \left\lceil\frac{{Z - \text{effective spells}} }{|C|}\right\rceil 
+    \]
+</div>
+
+
+
+<h2>Closing words </h2>
+
+<p>As much as I enjoyed the making of this model, it's not perfect, and as mentioned before, it does not suit every game
+    design. I Was thinking about adding more gimmicks considering damage over time (e.i. <a
+        href="https://bulbapedia.bulbagarden.net/wiki/Toxic_(move)"></a>Pokemon's toxic), but these had
+    me consider using the big M constant, which would render my formulation weak if the wrong big M parameter is chosen.
+    I might update this in the future. <s>Even though I mentioned that this would not work for the Megaten games with
+        their
+        press turn system, the output should give you an idea about how long the fight could go</s>. Accounting for stat
+    boosts
+    mid-fights will turn it into a non-linear model, still, it does serve the job; I will passively see if there are any
+    improvements that I can do to account for those special cases. </p>
+
+
+
+<h2>Bonus: MMBN chips deck builder</h2>
+
+<p><a href="https://en.wikipedia.org/wiki/Mega_Man_Battle_Network">Mega man battle network (MMBN)</a> is a series that I grew up with, a favourite to say the least.
+It is a turn based JRPG made in the 00's that has some depth to its combat mechanics. I loved its character building aspect; the complexity of such challenges the
+    creativity of the player, so much so that there are many who posted their builds online, and no build is perfect. Not only you have to decide on your deck, you 
+    may also have to decide on what programs to install for your character, which adds lots of charm to its PVP. 
+</p>
+<p>Building decks follows a set of rules, the obvious being that you can't have more than 30 chips The rest of the constraints are game dependent (i.e. no 
+    more than 5 mega chips in a folder...etc..). The best approach is to have a deck containing chips that can be chained with no interuptions, meaning 
+    chips that can be picked together, hence why people recommend having a maximum of 3 different codes in a folder.
+</p>
+<p>Good builds usually come with a set of attacks that enable long combos. This is especially true since chaining combos is encouraged in the meta, as the more you immobilize 
+    your opponents, the better!. The motivation behind 
+writing this is to use linear programming as a tool to generate frame-efficient builds. Noting that the game runs at 60 fps, let this be the data input that we need:</p>
+
+<ul>
+    <li>\(i \in I\): Set of chips
+    <li>\(j \in J\): Set of chip codes
+    <li>\(c \in C\): Set of chip categories (Standard, Mega, Giga)
+        
+</ul>
+<p>The only parameters that I would require are the stun-lock numbers of each chip. These data can be extracted from the <a href=https://wiki.n1gp.net/>N1G wiki</a>. Let \(f_i\) be the stun-lock frame 
+parameter of a chip \(i\). For this entire setup I require two decision variables: </p>
+
+<ul>
+    <li>\(x_{i,j,c}\): Positive variable that decides upon choosing chip \(i\) with the code \(j\) from the category \(c\)
+    <li>\(y_j\): Positive variable that decides if the code \(j\) is chosen
+    
+        
+</ul>
+\[\max Z = \sum\limits_{i\in I}{}\sum\limits_{j\in J}{} \sum\limits_{c \in C}{x_{i,j,c} \cdot f_i} \]
+
+\[\sum\limits_{i\in I}{}\sum\limits_{j\in J}{} \sum\limits_{c \in C}{x_{i,j,c}} = 20\]
+
+\[x_{i,j,c} \leq y_j \quad \forall i \in I, j \in J\]
+
+\[\sum\limits_{j \in J / \{*\} }{y_j} \leq 2 \]
+
+\[\sum\limits_{j \in J}{x_{i,j,c}} \leq 3 \quad \forall i \in I\]
+
+\[\sum\limits_{MEGA \in C}{x_{i,j,MEGA}} \leq 5 \]
+
+\[\sum\limits_{GIGA \in C}{x_{i,j,GIGA}} \leq 1 \]
+
+<p> The objective function Z aims to maximize the stun lock potential of the deck. The first constraint prevents the program from picking more than 20 chips. You can set it to however you want, 
+I usually leave 10 cards for defensive options, which are not considered here in the formulation. The next 2 constraints limit the amount of chip codes that you may have, feel free to adjust it to 
+any number other than 2, I prefer having no more than 2 codes, asterisk codes are excluded from the constraint because they can be mixed with any code. Afterwards you've got game specific constraints, as
+of the latest 3 games in the series, I believe you can't have more than 3, 5 and 1 standard, mega and giga chips respectively (Unless you edit your character build with some NCP that enable more). Damage isn't everything! One 
+    con of this model is that it won't contain program advance combos due to the technicalities of the said combos, another issue is the fact that the average PvP person has the super armor NCP installed, which renders this entire 
+    model useless.
+</p>
+
+
+
+
+
+		
+
+	</div>
+
+	
+
+	
+
+	<footer>
+		<div class="social-icons">
+			<a href="https://twitter.com/Applethal" target="_blank"><img src="/Twitter_Logo_WhiteOnBlue-2425288278.png"
+					alt="" class="contact"></a>
+			<a href="https://open.spotify.com/user/n568fkbbfbobfth4ad6sq9yei" target="_blank"><img
+					src="/Spotify_App_Logo.svg.png" alt="" class="contact"></a>
+			<a href="https://github.com/Applethal" target="_blank"><img src="/GitHub-Mark.png" class="contact"></a><a href="/index.xml"><img src="/Generic_Feed-icon.svg.png" class="contact"
+					alt="RSS Feed" title="Subscribe via RSS for updates."></a>
+		</div>
+
+
+	</footer>
+
+	
+	
+</body>
+
+</html>
