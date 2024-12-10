@@ -3,7 +3,8 @@ title: "Mathematically get the brute-force upper bound number of turns needed to
 date: 2024-07-27
 
 tags: ["Optimization","Operational research","Mathematics"]
-Summary: "Is this how speedrunners plan their routes ? Post's picture taken from xkcd's 1445th comic. Bonus paragraph for MMBN fans included"
+Summary: "Is this how speedrunners plan their routes ? Post's picture taken from xkcd's 1445th comic. Bonus paragraph
+for MMBN fans included"
 draft: false
 
 ---
@@ -170,7 +171,7 @@ draft: false
     mana for all the spells, then the amount of turns necessary to end the fight is:</p>
 <div class="scrollable-div">
     \[
-    \text{Turns} = \left\lceil\frac{{Z - \text{effective spells}} }{|C|}\right\rceil 
+    \text{Turns} = \left\lceil\frac{{Z - \text{effective spells}} }{|C|}\right\rceil
     \]
 </div>
 
@@ -193,33 +194,42 @@ draft: false
 
 <h2>Bonus: MMBN chips deck builder</h2>
 
-<p><a href="https://en.wikipedia.org/wiki/Mega_Man_Battle_Network">Mega man battle network (MMBN)</a> is a series that I grew up with, a favourite to say the least.
-It is a turn based JRPG made in the 00's that has some depth to its combat mechanics. I loved its character building aspect; the complexity of such challenges the
-    creativity of the player, so much so that there are many who posted their builds online, and no build is perfect. Not only you have to decide on your deck, you 
-    may also have to decide on what programs to install for your character, which adds lots of charm to its PVP. 
+<p><a href="https://en.wikipedia.org/wiki/Mega_Man_Battle_Network">Mega man battle network (MMBN)</a> is a series that I
+    grew up with, a favourite to say the least.
+    It is a turn based JRPG made in the 00's that has some depth to its combat mechanics. I loved its character building
+    aspect; the complexity of such challenges the
+    creativity of the player, so much so that there are many who posted their builds online, and no build is perfect.
+    Not only you have to decide on your deck, you
+    may also have to decide on what programs to install for your character, which adds lots of charm to its PVP.
 </p>
-<p>Building decks follows a set of rules, the obvious being that you can't have more than 30 chips The rest of the constraints are game dependent (i.e. no 
-    more than 5 mega chips in a folder...etc..). The best approach is to have a deck containing chips that can be chained with no interuptions, meaning 
+<p>Building decks follows a set of rules, the obvious being that you can't have more than 30 chips The rest of the
+    constraints are game dependent (i.e. no
+    more than 5 mega chips in a folder...etc..). The best approach is to have a deck containing chips that can be
+    chained with no interuptions, meaning
     chips that can be picked together, hence why people recommend having a maximum of 3 different codes in a folder.
 </p>
-<p>Good builds usually come with a set of attacks that enable long combos. This is especially true since chaining combos is encouraged in the meta, as the more you immobilize 
-    your opponents, the better!. The motivation behind 
-writing this is to use linear programming as a tool to generate frame-efficient builds. Noting that the game runs at 60 fps, let this be the data input that we need:</p>
+<p>Good builds usually come with a set of attacks that enable long combos. This is especially true since chaining combos
+    is encouraged in the meta, as the more you immobilize
+    your opponents, the better!. The motivation behind
+    writing this is to use linear programming as a tool to generate frame-efficient builds. Noting that the game runs at
+    60 fps, let this be the data input that we need:</p>
 
 <ul>
     <li>\(i \in I\): Set of chips
     <li>\(j \in J\): Set of chip codes
     <li>\(c \in C\): Set of chip categories (Standard, Mega, Giga)
-        
+
 </ul>
-<p>The only parameters that I would require are the stun-lock numbers of each chip. These data can be extracted from the <a href=https://wiki.n1gp.net/>N1G wiki</a>. Let \(f_i\) be the stun-lock frame 
-parameter of a chip \(i\). For this entire setup I require two decision variables: </p>
+<p>The only parameters that I would require are the stun-lock numbers of each chip. These data can be extracted from the
+    <a href=https://wiki.n1gp.net />N1G wiki</a>. Let \(f_i\) be the stun-lock frame
+    parameter of a chip \(i\). For this entire setup I require two decision variables: </p>
 
 <ul>
-    <li>\(x_{i,j,c}\): Positive variable that decides upon choosing chip \(i\) with the code \(j\) from the category \(c\)
+    <li>\(x_{i,j,c}\): Positive variable that decides upon choosing chip \(i\) with the code \(j\) from the category
+        \(c\)
     <li>\(y_j\): Positive variable that decides if the code \(j\) is chosen
-    
-        
+
+
 </ul>
 \[\max Z = \sum\limits_{i\in I}{}\sum\limits_{j\in J}{} \sum\limits_{c \in C}{x_{i,j,c} \cdot f_i} \]
 
@@ -235,14 +245,15 @@ parameter of a chip \(i\). For this entire setup I require two decision variable
 
 \[\sum\limits_{GIGA \in C}{x_{i,j,GIGA}} \leq 1 \]
 
-<p> The objective function Z aims to maximize the stun lock potential of the deck. The first constraint prevents the program from picking more than 20 chips. You can set it to however you want, 
-I usually leave 10 cards for defensive options, which are not considered here in the formulation. The next 2 constraints limit the amount of chip codes that you may have, feel free to adjust it to 
-any number other than 2, I prefer having no more than 2 codes, asterisk codes are excluded from the constraint because they can be mixed with any code. Afterwards you've got game specific constraints, as
-of the latest 3 games in the series, I believe you can't have more than 3, 5 and 1 standard, mega and giga chips respectively (Unless you edit your character build with some NCP that enable more). Damage isn't everything! One 
-    con of this model is that it won't contain program advance combos due to the technicalities of the said combos, another issue is the fact that the average PvP person has the super armor NCP installed, which renders this entire 
+<p> The objective function Z aims to maximize the stun lock potential of the deck. The first constraint prevents the
+    program from picking more than 20 chips. You can set it to however you want,
+    I usually leave 10 cards for defensive options, which are not considered here in the formulation. The next 2
+    constraints limit the amount of chip codes that you may have, feel free to adjust it to
+    any number other than 2, I prefer having no more than 2 codes, asterisk codes are excluded from the constraint
+    because they can be mixed with any code. Afterwards you've got game specific constraints, as
+    of the latest 3 games in the series, I believe you can't have more than 3, 5 and 1 standard, mega and giga chips
+    respectively (Unless you edit your character build with some NCP that enable more). Damage isn't everything! One
+    con of this model is that it won't contain program advance combos due to the technicalities of the said combos,
+    another issue is the fact that the average PvP person has the super armor NCP installed, which renders this entire
     model useless.
 </p>
-
-
-
-
