@@ -1,9 +1,9 @@
 ---
-Title: Scheduling is fun!
+Title: How I dynamically generate Gantt charts for my recipes
 math: true
 summary: "Dynamically formulate and visualize a recipe's processing Gantt chart using nothing but mathematics,
-schedulign theory and bits of programing. Basic scheduling theory is required to enjoy this article."
-tags: ["Operational research", "Scheduling", "Mathematics", "Programing"]
+scheduling theory and bits of programming. Basic scheduling theory is required to enjoy this article."
+tags: ["Operational research", "Scheduling", "Mathematics", "Programming"]
 Date: 2024-02-11
 ---
 <style>
@@ -155,7 +155,7 @@ Date: 2024-02-11
 <br>
 <span class="math">\(
     p_{i,j}
-    \)</span> : procssing time of job j in machine i
+    \)</span> : processing time of job j in machine i
 <br>
 <span class="math">\(
     C_{i,j}
@@ -174,31 +174,31 @@ Date: 2024-02-11
     layout, I thought about adding some spiciness
     to my articles, even if it defies my minimalistic philosophies.</p>
 
-<p>Living here in Germany slowly and subconsiously turned me into a time-slave. Evil marketers did a really
+<p>Living here in Germany slowly and subconsciously turned me into a time-slave. Evil marketers did a really
     good job at putting emphasis on time, creating a need for
-    goods and services that make me priorities being on time. </p>
+    goods and services that make me priorities rhythm before myself. </p>
 
-<p>Scheduling was something that I was a fan of, the goal of their science is to find the perfect sequence of tasks that
-    meets a set of requirements. Their motives may sound simple but the average scheduling puzzles are \(NP-hard\), our
+<p>Scheduling was something that I was a fan of, the goal of their science is to come up with strategies and solution
+methods to solve scheduling problems. Their motives may sound simple but the average scheduling puzzles are \(NP-hard\), our
     current understanding on combinatorics encourages
-    the development of heuristical approaches to tackle the the hardships of investigating permutations by offering a
+    the development of heuristic approaches to tackle the hardships of investigating permutations by offering a
     solution that is good enough. </p>
 
 <p>Cooking just began to slowly become an integral part of my life, my life style makes it hard for me to
     innovate, I just keep cycling through a limited set of recipes. Old habits die hard, at least they do. When I feel
     energetic, my dexterity goes top notch, enabling fast reactions
-    and quick manouvers across the kitchen, but sometimes I just brute force my structures without thinking, which can
+    and quick maneuvers across the kitchen, but sometimes I just brute force my structures without thinking, which can
     result in a chunk of wasted time, and sometimes effort.</p>
 
 <p>In the theory of scheduling, if a given situation is properly formulated, you may gain access to tools that aid
     you reach your goals, without having to rely on any form of soft experience. This can be achieved by understanding
     the setup
     and trying to perceive it with intelligence, after all, the methods of logistics aim to exploit all kinds of
-    information in order to fullfill an objective. I thought a lot about how to design a nice scheduling setup for a
+    information in order to fulfill an objective. I thought a lot about how to design a nice scheduling setup for a
     cooking context, not chaining tasks as quick as possible may cause your food to catch a cold. </p>
 <p>After tinkering with lots of tools, I thought about simplifying the scheduling formulation in a way that reduces the
     amount of constraints that I have to account for. What I will be proposing is the work of an
-    amateur, as of yet: \(P \,||\, \text{prec} \,,M_{j}||\, C_{\text{max}}\).</p>
+    amateur, as of yet:</p>
 
 <h3> Small disclaimer: </h3> This work is purely an implementation of the scheduling theory. My intentions were focused
 only on seeing if I can pull this off with some Javascript / Hugo. Although it was a success, I need to add that you
@@ -206,24 +206,13 @@ should cook at your own pace. Just take your time and never rush things up!
 
 <h1>The machines setup</h1>
 
-<p>Most of the parallel machine and single machine problems, are positioned in the NP- and P complete spectrum.
-    Precedence constraints are essential because you can't mix veggies before cutting them. the aim is to minimize the
-    global
-    completion time
-    or else I would miss the train. There would be no heuristics here to speak of, just a direct method, specifically a
-    list
-    scheduling algorithm since it has been proven by <a
-        href="https://www.sciencedirect.com/science/article/pii/0167637795000577">Shutten</a>(2003) that parallel
-    machine
-    problems with setup times or precedence constraints can be solved to optimality with the aformentioned algorithm,
-    Except it's not a list here that we are talking about but a graph of sorts: I will be traversing the graph and
-    checking for dependencies as I keep moving forward until I hit the last node.
-    <br>
-    As for the constraints here is how I dealt with some of these:
+<p>This setup assumes the following characteristics:
 <ul>
+
+    <li>The sequencing of each task is known, the task assignment for each machine is known, what is unknown however is the makespan</li>
     <li>Preemption: Instead of stopping the machine and resuming afterwards, I made it so that it is treated as \(n\)
         number of phases, each of which will describe their states.</li>
-    <li>Setup times: These will either be modeled as a seperate task similarly to the previous constraint, or in some
+    <li>Setup times: These will either be modeled as a separate task similarly to the previous constraint, or in some
         occasions I might just combine everything together as a single task. </li>
 
 </ul>
@@ -247,7 +236,7 @@ should cook at your own pace. Just take your time and never rush things up!
     I initiate them - As for me, I have my own hands which will act as a medium to craft the best of the best.
     Specs-wise,
     I think the machines and I are modern enough. <br>
-    As for the precedence graph, I will not go into deep details on the chain of tasks unless it is necessary. The
+    Concerning  the precedence graph, I will not go into deep details on the chain of tasks unless it is necessary. The
     quantity of my
     descriptions should, in theory, not influence the makespan; micro tasks like "breaking an egg and then mixing it
     up"
@@ -259,7 +248,7 @@ should cook at your own pace. Just take your time and never rush things up!
 
 <h1>Example:</h1>
 
-<p>Here I will be showcasing a small example of how to model the Gantt chart of preparing an omelette sandwish.
+<p>Here I will be showcasing a small example of how to model the Gantt chart of preparing an omelet sandwich.
 
 <h2>Tasks:</h2>
 <ol>
@@ -316,7 +305,7 @@ border-radius: 8px;">
           </script>
 </div>
 
-<p>I will not attribute any processing times in this example, just picture an arbitrary number for each task for now.
+<p>I will not attribute any processing times in this example, just picture any arbitrary number for each task for now.
 </p>
 
 
@@ -354,7 +343,7 @@ border-radius: 8px;">
     </div>
 </div>
 
-Tasks marked with red can be shifted to the right as long as they do not introduce any extra time to the total makespan.
+Tasks marked with red can be shifted to the right as long as they do not introduce any extra time to the total makespan by exceeding the white space in their front.
 You can cut the bread anytime you want between the 5th and 7th
 time mark. These are called tasks with slack times, or in other literature as buffer times. Their times are computed
 using the following
@@ -374,7 +363,7 @@ A couple of people pointed out that I was cooking eggs the wrong way, more speci
 the pan do the rest @ 6/10
 heat. Apparently the popular belief recommends against this, instead one should agitate the egg as it heats up using a
 pressure
-tool. If that is the case then this isn't a Parallel machine schedule anymore but a single machine since I would then be
+tool. If that is the case then becomes a single machine since I would then be
 actively
 doing all the cooking, increasing the total time up to 15. Despite all of this, I will keep this mistake up there for
 demonstrative purposes.
@@ -382,10 +371,10 @@ demonstrative purposes.
 <h1>About the computation</h1>
 
 
-Using a solver is totally unecessary since our list algorithm has a complexity of \(O(V + E)\). The following
+Using a solver is totally unnecessary since the sequencing is already fixed, meaning all I need is a topological sort which has a complexity of \(O(V + E)\). The following
 Javascript
 snippet will be plugged together with a module that generates Gantt charts, for now I am using Tikzjax but its slow
-rendering speed and its lack of CSS flexibility motivates me to seek another package. The code computes the Makespan and
+rendering speed and its lack of CSS flexibility makes me want to seek another package. The code computes the Makespan and
 outputs
 the starting- and finishing times of each machine, all of which are calculated using the classic formula:
 <div class="scrollable-div">
@@ -465,17 +454,16 @@ console.log(<span class="string">'Task Schedule:'</span>);
 
 <h1>Can a better formulation beat my makespan ?</h1>
 
-<p>I would like to see that, Everything that you have read so far was the effort of two days and is subject for
-    potential improvements. For now I am happy with the results, though if I get any new ideas, I will surely imeplement
+<p>I would like to see that! Everything that you have read so far was the effort of two days and is subject for
+    potential improvements. For now I am happy with the results, though if I get any new ideas, I will surely implement
     provide updates. Feel free to submit an issue on the website's repo or send me an email and I will be content to
     have a discussion on the matter.</p>
-<h1> References </h1>
-<p><i>J.M.J. Schutten</i>, List scheduling revisited, Operations Research Letters, Volume 18, Issue 4, 1996, Pages
-    167-170, ISSN 0167-6377, <a href="https://doi.org/10.1016/0167-6377(95)00057-7"
-        target="_blank">https://doi.org/10.1016/0167-6377(95)00057-7</a></p>
+
 
 <details>
     <summary>Change log</summary>
+    <h2>28/12/2024</h2>
+    An acquaintance of mine, who happens to teach scheduling have read this post here, indicating that what I did does not fall in the parallel machine category. The post is now edited to reflect a general implantation without diving deeper into the specifics of the problem, as I could not myself find the correct one. I looked up many variants and none was satisfactory with respect to the setup. Until I find the correct formulation and for the sake of consistency, I'll keep this post in this state.
     <h2>11/02/2024</h2>
     Conception added, every recipe now has a Gantt chart detailing the processing steps while aiming to minimize the
     makespan subject to a kitchen setup.
