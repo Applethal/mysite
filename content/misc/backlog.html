@@ -31,6 +31,7 @@ tags: ["Achievements", "Creativity"]
 
   details[open] summary {
     border-radius: 5px 5px 0 0;
+    margin-bottom: 20px;
   }
 
   details {
@@ -38,12 +39,22 @@ tags: ["Achievements", "Creativity"]
     border-radius: 5px;
   }
 
+  /* Light green background for .done details */
+  details.done {
+    background: lightgreen;
+  }
+
+  /* Retain default summary styling for .done */
+  details.done summary {
+    background-color: #000000;
+    color: white;
+  }
+
   /* extra styles */
 
   * {
     box-sizing: border-box;
   }
-
 
   article>*:first-child {
     margin: 0;
@@ -66,6 +77,7 @@ tags: ["Achievements", "Creativity"]
   }
 </style>
 
+
 <p>Quite often, especially at night, I get creative ideas that burn me with passion. Sadly, the majority of such get
   stuck in a W.I.P. phase or -even worse- do not end up being executed. This is usually the case due to routine
   constraints, which is part of what makes an adult, my important priorities exhaust my energy and by extension my time,
@@ -80,10 +92,10 @@ tags: ["Achievements", "Creativity"]
 
 
 
-<details>
-  <summary>Drawing a mixture of famous cartoon cats surfing together -- 12/11/2024 Status: Pending </summary>
+<details class="done">
+  <summary>Drawing a mixture of famous cartoon cats surfing together -- 12/11/2024 Status: Done @ 08/01/2025 </summary>
   <article>
-
+    <p>UPDATE: Done, the artwork can be seen here: https://applethal.com/blog/surfing_cats/ </p>
     <p>Years ago and specifically in my third week in Ergotherapy, to train the dexterity of my hands and teach myself
       focus, the therapy woman proposed that we start with a painting activity. Back then, I haven't had any painting
       chores since more than a decade. I had little to no support on how to paint but I had no limit on what I could
@@ -112,6 +124,9 @@ tags: ["Achievements", "Creativity"]
         href="https://typemoon.fandom.com/wiki/Neco-Arc">Neco Arc</a>, <a
         href="https://en.wikipedia.org/wiki/Sylvester_the_Cat">Sylvester</a> and <a
         href="https://fr.wikipedia.org/wiki/Nyan_Cat">Nyan Cat.</a></p>
+
+
+
 
   </article>
 </details>
