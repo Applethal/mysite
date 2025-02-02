@@ -66,15 +66,28 @@
 
 		</article>
 	</main>
-	<div class="main">
-		{{ block "main" . }}
-		<center>
-			<h1 id="tag_{{ .Title }}">{{ block "title" . }}{{ end }}</h1>
-		</center>
-		{{ .Content }}
-		{{ end }}
+<div class="main">
+    {{ block "main" . }}
+    <center>
+        <h1 id="tag_{{ .Title }}">{{ block "title" . }}{{ end }}</h1>
+    </center>
+    {{ .Content }}
 
-	</div>
+    <h2 id="references-title" style="display: none;">References</h2>
+    <ul id="references-list"></ul>
+
+
+
+    {{ end }}
+</div>
+
+
+
+
+
+
+
+
 
 	{{ block "footer" . }}
 

@@ -32,3 +32,24 @@ function darkmode() {
         topElement.style.color = 'rgb(255, 255, 255)';
     }
 }
+
+document.addEventListener("DOMContentLoaded", function () {
+    let links = Array.from(document.querySelectorAll(".main a"))
+    .map(a => a.href)
+    .filter(href => href);
+
+    links = [...new Set(links)];
+
+    if (links.length > 0) {
+        document.getElementById("references-title").style.display = "block";
+        let list = document.getElementById("references-list");
+        links.forEach(link => {
+            let li = document.createElement("li");
+            let a = document.createElement("a");
+            a.href = link;
+            a.textContent = link;
+            li.appendChild(a);
+            list.appendChild(li);
+        });
+    }
+});
