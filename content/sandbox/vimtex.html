@@ -1,0 +1,68 @@
+---
+title: "The way everyone should edit .Tex files"
+date: 2024-03-20
+
+tags: ["Tutorial","Latex","Math"]
+Summary: And why I think it is superior!
+
+---
+
+
+<p>Since quite some time I have been using <a href="https://www.overleaf.com/">Overleaf</a>, the servers of which can sometimes cause you to risk having a bad grade in your university works. By 2022, they started aggressively pushing popups every time their compiler was slow, telling me to pay for a subscription to mitigate the slow compiling times. I found out later that my university hosts an Overleaf image that is accessible only by VPN; sadly it is out of date and does not support the Lua shenanigans, which some templates favoured, for some reason. Irritated by this, I sought a Texeditor and started toying with it. I used <a href="https://www.texstudio.org/">Texstudio</a>, which was already installed in the university's computer hub. Given my minimal purposes, it felt overwhelming to look at the interface and having to learn about all the different options; the only accessibility option I found was zooming to help with my eyes, other than that, using it as a compiler felt no different from Overleaf, other than the fact that I no longer was threatened to give any pennies to a company for including a small graph composed of 5 nodes.<\p>
+
+<p>Few Google searches later and I learned that you may compile .Tex files using <a href="https://neovim.io/">Neovim</a>. The software is not accessible to everyone, as it comes with a learning curve that discourages everyone from using it. But I am not writing this article to discourage you, in fact, I am writing it with the hopes that many will ditch Overleaf and all those GUI solutions. Sadly, no available tutorial is going to point you exactly what you should do and where to go, they just throw in some instructions which I find not too beginner friendly, they are written in that way to incite reading the documentations. In the Linux community, it is crime to make contributions that medicate the latter purpose, not everyone has the time and energy to deal with reading countless pages to achieve a small goal. The only expected requirements is to know how to edit a text file using Neovim, that's it! Learning how to install plugins puts you in sort of a tutorial hell if you just want to know how to compile documents and nothing more, but finding quick tutorials on how to get used to Neovim's keystrokes is quite accessible, this is the only thing required. </p>
+
+<p>Before starting let me sum up why I think this approach is better than using Overleaf or anything similar to Texstudio:</p>
+
+<ul>
+  <li>It requires no internet access.</li>
+  <li>Blazing fast compilation: Neovim uses less CPU overhead, this is because unlike GUIs, Neovim requires nothing but a terminal to load, that's it!</li>
+  <li>Live compilation (Sorta): The setup I will show here compiles documents continuously, changes to the document appear right after you save.</li>
+  <li>Very minimal: I have full control over which packages I wish to use, unlike Texstudio most unecessary packages get installed. The total installation size does not even exceed 1 GB.</li>
+</ul>
+
+
+<h2>Tutorial:</h2>
+
+<p>This is where the tutorial starts. </p>
+<h4>1 - Install Neovim</h4>
+
+<p>Install Neovim on your system, self explanatory. </p>
+
+<h4>2 - Install a plugin manager</h4>
+
+<p>The choice is yours here, I use Nvchad. I will link <a href="https://nvchad.com/docs/quickstart/install">here</a> a url on how to install it.</p>
+
+<h4>3 (Optional) - Install a custom terminal emulator</h4>
+
+<p>Konsole is the default terminal on arch. <a href="https://alacritty.org/">Alacritty</a> on the other hand makes the text much more readable for my eyes when editing on Neovim. Feel free to skip this step.</p>
+
+<h4>4 - Install Vimtex, zathura and Latexmk</h4>
+
+<p><a href="https://github.com/lervag/vimtex">Vimtex is going to be the plugin that does all the magic.</a>It depends on having a compiler to work with. Use <a href="https://www.cantab.net/users/johncollins/latexmk/index.html">Latexmk</a> for such purpose. <a href="https://pwmt.org/projects/zathura/installation/">Zathura</a> on the other hand is going to be your PDF viewer, it will synergies with Vimtex. Although you can edit the pdf viewer in the config, I recommend Zathura due to how minimalistic it is.</p>
+
+<h4>Final steps</h4>
+
+<p>Finally, head to where your neovim config resides. Arch users should have it by default in ~/.config/nvim. In the Vimtex repo, it is mentioned that this is a simple task of adding a couple of lines to the plugins folder. It assumes that you know how to install plugins. The way to do it is to wrap this in a return statement, since that syntax is reserved for the lua language, which won't execute anything unless you return what's in that code block. Create a .lua file in that folder and name it anything, for convenience I named it vimtex.lua. There you might want to put the code like so: </p>
+
+<script>
+  return {
+    {
+      "lervag/vimtex",
+      lazy: false,     // we don't want to lazy load VimTeX
+      // tag: "v2.15", // uncomment to pin to a specific release
+      init: function() {
+        // VimTeX configuration goes here, e.g.
+        vim.g.vimtex_view_method = "zathura";
+      }
+    },
+  }
+</script>
+
+<p>That's it, the final step required here is to simply boot neovim and open the commandline using the ":" symbol and type "Lazy". Next press the corresponding buttons to sync and install the plugin as Lazy will pick up the plugin you just installed, that's it!</p>
+
+
+
+<h4>How to use it</h4>
+
+<p>Simply create a .tex file and open it using Neovim. in normal mode, simply press "\" and it will open up a small side menu, press "l" then twice and it will start live compilation. Latexmk does not come with every single package, should the compiler throw an error saying that it is missing a package, simply install it and recompile again. This is why I like this setup, it gives me all the control I need and it is quite fast. Teaching yourself how to get around Neovim also comes with the benefit of boosting your productivity, which is honestly a big plus in my book!</p>
