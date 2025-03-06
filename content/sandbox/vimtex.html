@@ -1,6 +1,6 @@
 ---
 title: "The way everyone should edit .Tex files"
-date: 2024-03-20
+date: 2025-03-06
 
 tags: ["Tutorial","Latex","Math"]
 Summary: And why I think it is superior!
@@ -45,19 +45,20 @@ Summary: And why I think it is superior!
 
 <p>Finally, head to where your neovim config resides. Arch users should have it by default in ~/.config/nvim. In the Vimtex repo, it is mentioned that this is a simple task of adding a couple of lines to the plugins folder. It assumes that you know how to install plugins. The way to do it is to wrap this in a return statement, since that syntax is reserved for the lua language, which won't execute anything unless you return what's in that code block. Create a .lua file in that folder and name it anything, for convenience I named it vimtex.lua. There you might want to put the code like so: </p>
 
-<script>
-  return {
-    {
-      "lervag/vimtex",
-      lazy: false,     // we don't want to lazy load VimTeX
-      // tag: "v2.15", // uncomment to pin to a specific release
-      init: function() {
-        // VimTeX configuration goes here, e.g.
-        vim.g.vimtex_view_method = "zathura";
-      }
-    },
-  }
-</script>
+<pre><code>
+return {
+  {
+    "lervag/vimtex",
+    lazy = false,     -- we don't want to lazy load VimTeX
+    -- tag = "v2.15", -- uncomment to pin to a specific release
+    init = function()
+      -- VimTeX configuration goes here, e.g.
+      vim.g.vimtex_view_method = "zathura"
+    end
+  },
+}
+</code></pre>
+
 
 <p>That's it, the final step required here is to simply boot neovim and open the commandline using the ":" symbol and type "Lazy". Next press the corresponding buttons to sync and install the plugin as Lazy will pick up the plugin you just installed, that's it!</p>
 
