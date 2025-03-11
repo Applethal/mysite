@@ -9,6 +9,29 @@
 
 }
 
+
+#references-list {
+max-height: 200px;
+overflow-y: auto;
+padding-left: 20px;
+}
+
+#references-list li {
+overflow-wrap: anywhere;
+word-break: break-word;
+max-width: 100%;
+list-style: none;
+counter-increment: list-counter;
+position: relative;
+padding-left: 25px;
+}
+
+#references-list li::before {
+content: counter(list-counter) ". ";
+position: absolute;
+left: 0;
+}
+
 .tikzs svg {
 	overflow: visible !important;
 	position: static !important;

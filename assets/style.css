@@ -9,6 +9,29 @@
 
 }
 
+
+#references-list {
+max-height: 200px;
+overflow-y: auto;
+padding-left: 20px;
+}
+
+#references-list li {
+overflow-wrap: anywhere;
+word-break: break-word;
+max-width: 100%;
+list-style: none;
+counter-increment: list-counter;
+position: relative;
+padding-left: 25px;
+}
+
+#references-list li::before {
+content: counter(list-counter) ". ";
+position: absolute;
+left: 0;
+}
+
 .tikzs svg {
 	overflow: visible !important;
 	position: static !important;
@@ -19,7 +42,6 @@
 	width: 100%;
 	max-width: 100%;
 }
-
 
 img {
 	max-width: 100%;
@@ -34,6 +56,11 @@ footer {
 	clear: both;
 }
 
+a {
+	text-decoration: none;
+	color: yellow;
+}
+
 /* For TAGLIST.HTML */
 .taglist {
 	text-align: center;
@@ -42,22 +69,22 @@ footer {
 
 /* For NEXTPREV.HTML */
 #nextprev {
-	/* The container for both the previous and next articles. */
+/* The container for both the previous and next articles. */
 }
 
 #prevart {
-	float: left;
-	text-align: left;
+float: left;
+text-align: left;
 }
 
 #nextart {
-	float: right;
-	text-align: right;
+float: right;
+text-align: right;
 }
 
 #nextart,
 #prevart {
-	max-width: 33%;
+max-width: 33%;
 }
 
 
@@ -84,15 +111,11 @@ footer {
 	text-decoration: none;
 }
 
-a {
-	text-decoration: none;
-	color: yellow;
-}
-
 .Top {
 	background-color: #332929;
 	color: rgb(255, 255, 255);
 	font-size: smaller;
+	margin-bottom: 10px;
 
 }
 
@@ -107,6 +130,9 @@ body {
 
 .navigation {
 	text-align: center;
+	padding-top: 1px;
+	padding-bottom: 1px;
+	margin-bottom: 10px;
 }
 
 .navigation ul {
@@ -118,6 +144,18 @@ body {
 
 .navigation ul li {
 	margin: 0 10px;
+	font-size: 16px;
+
+}
+
+
+@media only screen and (max-width: 600px) {
+	.navigation ul li {
+		font-size: 14px;
+
+		margin: 0 10px;
+
+	}
 }
 
 .contact {
@@ -176,7 +214,7 @@ body {
 .postpicture {
 	height: 120px;
 	width: 120px;
-	padding: 0 40px 40px 0;
+	padding: 40px;
 	float: right;
 }
 
@@ -189,10 +227,6 @@ body {
 .intro {
 	text-align: center;
 	margin-bottom: 50px;
-}
-
-.test {
-	color: aqua;
 }
 
 @keyframes shake {
@@ -214,7 +248,6 @@ body {
 	animation: shake 0.1s;
 	animation-iteration-count: infinite;
 }
-
 .emoji-container:hover {
 	animation: shake 0.1s;
 	animation-iteration-count: infinite;
