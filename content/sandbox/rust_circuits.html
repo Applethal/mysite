@@ -1,4 +1,4 @@
- ---
+---
 title: "Rust (the game) circuits"
 date: 2025-05-28
 
@@ -7,53 +7,113 @@ Summary: A small repo where I will keep some fancy electrical circuits
 
 ---
 
-<h3>Disclaimer:</h3><p>The circuits in the article were all made in <a href="https://www.rustrician.io/">Rustician website</a>. The XML code of each circuit can be found in my <a href="https://github.com/Applethal/rust_circuits">Repo</a>.</p>
+<h3>Disclaimer:</h3>
+<p>The circuits in the article were all made in <a href="https://www.rustrician.io/">Rustician website</a>. The XML code
+  of each circuit can be found in my <a href="https://github.com/Applethal/rust_circuits">Repo</a>.</p>
 
-<p>I have a love and hate relationship with the creative side of <a href="https://store.steampowered.com/app/252490/Rust/">Rust</a>. I dedicated a huge chunk of my time into its creative side rather than its core loop. I recently got into its electrical programming and learned about how fun it is to solve lots of niche problems and even optimize many workflows using logic. My very favourite part in all of this, is that I never had any prior knowledge in the area of electrical engineering, yet I could manage to grasp many concepts using nothing but knowledge taken from discrete mathematics.</p>
+<p>I have a love and hate relationship with the creative side of <a
+    href="https://store.steampowered.com/app/252490/Rust/">Rust</a>. I dedicated a huge chunk of my time into its
+  creative side rather than its core loop. I recently got into its electrical programming and learned about how fun it
+  is to solve lots of niche problems and even optimize many workflows using logic. My very favourite part in all of
+  this, is that I never had any prior knowledge in the area of electrical engineering, yet I could manage to grasp many
+  concepts using nothing but knowledge taken from discrete mathematics.</p>
 
-<p>The reason behind the making of this repo is to have my own space where I can store circuits that me and a couple of friends have made. I will try to describe the story behind the making of each circuit from the perspective of a non-engineer.</p>
+<p>The reason behind the making of this repo is to have my own space where I can store circuits that me and a couple of
+  friends have made. I will try to describe the story behind the making of each circuit from the perspective of a
+  non-engineer.</p>
 
 
-<h2>One power source source powering multiple batteries. Author: Saad Nordine</h2>
+<h2>One power source source powering multiple batteries. Author: Me</h2>
 
-<p>2 days ago as of the writing of this article, I have had the idea of one power source that fills multiple batteries instead of having one source for each battery, what spawned this desire was my realization that batteries have a port that passes a signal when the battery reports having full capacity. My very first thought was to use a couple of OR switches, only to realize that an XOR switch has only one output. Basically all the logical gates take up to 2 inputs and have only 1 output port. I kept digging through the options at my disposal and found out that I could use a memory cell, which can be compared to a switch in your living room that delivers power to 1 out of 2 light bulbs, think of it as a XOR but with 2 output. After toying a lot with this item, I came up with this circuit:
+<p>2 days ago as of the writing of this article, I have had the idea of one power source that fills multiple batteries
+  instead of having one source for each battery, what spawned this desire was my realization that batteries have a port
+  that passes a signal when the battery reports having full capacity. My very first thought was to use a couple of OR
+  switches, only to realize that an XOR switch has only one output. Basically all the logical gates take up to 2 inputs
+  and have only 1 output port. I kept digging through the options at my disposal and found out that I could use a memory
+  cell, which can be compared to a switch in your living room that delivers power to 1 out of 2 light bulbs, think of it
+  as a XOR but with 2 output. After toying a lot with this item, I came up with this circuit:
 </p>
 
 <div style="text-align: center;">
-  <img src="/rust_circuits/image.png">
+  <img src="/rust_circuits/Battery/image.png">
   <p style="color: #888; font-size: 14px;">One power source circuit with 2 batteries</p>
 </div>
 
-<p>What this circuit does is simple: When the cell is set to 0 (initial state), power is delivered to the first battery, when the battery fully loads, it signals the memory cell to deliver the power to the next battery by turning setting the memory cell to 1, by the time that one loads, power is delivered again to the first battery using the same logic. This can by the way be further optimized by removing the branches and connect everything using 1 memory cells for maximum juice because these use 0 Watts and deliver all the power delivered to them.</p>
+<p>What this circuit does is simple: When the cell is set to 0 (initial state), power is delivered to the first battery,
+  when the battery fully loads, it signals the memory cell to deliver the power to the next battery by turning setting
+  the memory cell to 1, by the time that one loads, power is delivered again to the first battery using the same logic.
+  This can by the way be further optimized by removing the branches and connect everything using 1 memory cells for
+  maximum juice because these use 0 Watts and deliver all the power delivered to them.</p>
 
 
 
 <div style="text-align: center;">
-  <img src="/rust_circuits/2batteries_optimized.png">
+  <img src="/rust_circuits/Battery/2batteries_optimized.png">
   <p style="color: #888; font-size: 14px;">One power source circuit with 2 batteries - optimized circuit</p>
 </div>
 
-<p>A good friend of mine then declared that we may try harder and add support for more than 2 batteries. This was somewhat challenging, especially for a rookie like me. 
-Throughout my tries, I learned that the memory cell keeps its state even when receiving no power. I could not find any examples online of such scheme, 
-especially since the very few who have the knowledge necessary, are sadly more invested in building defense focused circuits. 
-I later noticed that a memory cell accepts logic allowing it to reset its state back to 0, after some brainstorming, I came up with this:</p>
+<p>A good friend of mine then declared that we may try harder and add support for more than 2 batteries. This was
+  somewhat challenging, especially for a rookie like me.
+  Throughout my tries, I learned that the memory cell keeps its state even when receiving no power. I could not find any
+  examples online of such scheme,
+  especially since the very few who have the knowledge necessary, are sadly more invested in building defense focused
+  circuits.
+  I later noticed that a memory cell accepts logic allowing it to reset its state back to 0, after some brainstorming, I
+  came up with this:</p>
 
 
 
 <div style="text-align: center;">
-  <img src="/rust_circuits/morebatteries.png">
+  <img src="/rust_circuits/Battery/morebatteries.png">
   <p style="color: #888; font-size: 14px;">Support for more batteries added!</p>
 </div>
 
-<p>The best I could do is to sequentially charge each battery one by one, simply put, given a set of battery \(B\), a battery will start charging only when its predecessor is fully charged.  The receipt for this whole circuit demands a memory cell 
-for each battery, and an electrical branch for each 2 batteries. The splitter at the end can be substituted with a couple of branches for more efficiency since resetting the cells requires only 1 Watt anyways. 
-In this example a splitter was used because I had 3 batteries to work with.  When all the batteries are fully charged,  the memory cell states will keep resetting back to 0 to ensure that the loop will never stop.</p>
+<p>The best I could do is to sequentially charge each battery one by one, simply put, given a set of battery \(B\), a
+  battery will start charging only when its predecessor is fully charged. The receipt for this whole circuit demands a
+  memory cell
+  for each battery, and an electrical branch for each 2 batteries. The splitter at the end can be substituted with a
+  couple of branches for more efficiency since resetting the cells requires only 1 Watt anyways.
+  In this example a splitter was used because I had 3 batteries to work with. When all the batteries are fully charged,
+  the memory cell states will keep resetting back to 0 to ensure that the loop will never stop.</p>
 
 
 <div style="text-align: center;">
-  <img src="/rust_circuits/morebatteries_improved.png">
+  <img src="/rust_circuits/Battery/morebatteries_improved.png">
   <p style="color: #888; font-size: 14px;">Support for more batteries added! - Improved</p>
 </div>
 
-<p>This reverse root combiner system may be used for multiple purposes I suppose. I see it being used potentially for defensive purposes where each battery will act as a tool to power-up the turrets of a given floor when a detection logic is triggered for instance. The main core of this build is to have a 
-proper backup system which ensures that energy flow is distributed to multiple storage containers without having to invest too much on multiple power sources, I have seen people installing a wind turbine for each battery, which honestly takes up lots of space.</p>
+<p>This reverse root combiner system may be used for multiple purposes I suppose. I see it being used potentially for
+  defensive purposes where each battery will act as a tool to power-up the turrets of a given floor when a detection
+  logic is triggered for instance. The main core of this build is to have a
+  proper backup system which ensures that energy flow is distributed to multiple storage containers without having to
+  invest too much on multiple power sources, I have seen people installing a wind turbine for each battery, which
+  honestly takes up lots of space.</p>
+
+
+<h2>Tesla trap + door state reset . Author: Me + a friend </h2>
+
+
+<p>I'll keep things short in here, we essentially wanted a circuit that traps lured people after they enter a specific
+  room. Simply put, once the player enters the room, the door shuts off and a tesla coil starts running until the person
+  perishes. Achieving this is quite easy, as all it takes is a pressure pad that conducts electricity to a branch that
+  goes
+  to the door controller and the tesla coil. The difficult part however is to reset the state of the circuit, making it
+  so that
+  the end result is to have the doors being opened again. I spent some time trying to do this using a memory cell, I
+  realized that
+  there is no way to use the pressure pad alone to trigger any electrical logic, it can only fire up if it takes an
+  input, nor that the door controllers' states get reset after receiving 0 power. At first I thought I could use the
+  heartbeat sensor but it suffers from the same design shenanigans. My friend
+  and I somehow
+  made it work using a XOR gate where we set a default state of having the doors open, the XOR gate was the key all
+  along, as once we make it so that it
+  receives power from both a power source and a branch predeceased by a pressure pad, we ensure that
+  the tesla coils and the door mechanism won't switch to its intended active state unless a player steps on it.
+
+</p>
+
+
+<div style="text-align: center;">
+  <img src="/rust_circuits/Tesla/Tesla.png">
+  <p style="color: #888; font-size: 14px;">Tesla coil trap</p>
+</div>
