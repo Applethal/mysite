@@ -92,14 +92,19 @@ document.getElementById('contact-form').addEventListener('submit', async (e) => 
       body: formData
     });
     
+    const result = await response.json();
+    console.log('Server response:', result);
+    
     if (response.ok) {
       alert('Message sent successfully!');
       e.target.reset();
     } else {
-      alert('Failed to send message. Please try again.');
+      alert(`Failed to send message: ${result.error}. Details: ${result.details || 'No details available'}`);
+      console.error('Error details:', result);
     }
   } catch (error) {
-    alert('Error sending message. Please try again.');
+    console.error('Network error:', error);
+    alert('Network error. Please check the console and try again.');
   }
 });
 </script>
