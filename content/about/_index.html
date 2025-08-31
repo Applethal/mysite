@@ -72,21 +72,29 @@ disableListTemplate: true
   feels good to meet an acquaintance who shares my
   taste. I can't however give a general image on what I listen to, but you could say that I try to listen to multiple
   genres. </p>
+  
+<h2>Contact </h2>  
+<p>Reaching me can be done either by contacting me through my personal mail address nordine@rptu.de or you may also fill the following form. I will not store your information, though I will require your email address only if I may need 
+to send you a response. You may use a non-existing address and my system will still send me your submission, in case you do not wish to use your personal credentials. Please expect some slow response times when using this form here, as I haven't set 
+a notifcation system up but I will surely check my box from time to time, my personal email address is however the best way to reach me out. A German version of my resume can be found <a href="\lebenslauf_Saad_Nordine.pdf"> in case 
+you require my skills.</p>
 
 
 <div class="container">
     <form id="contact-form">
-        <div class="form-group">
-            <label for="name">Name:</label>
-            <input type="text" id="name" name="name" required>
-        </div>
-        <div class="form-group">
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" required>
+        <div class="form-row">
+            <div class="form-group half">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            <div class="form-group half">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+            </div>
         </div>
         <div class="form-group">
             <label for="message">Message:</label>
-            <textarea id="message" name="message" rows="4" required></textarea>
+            <textarea id="message" name="message" rows="6" required></textarea>
         </div>
         <div class="form-group">
             <input type="submit" value="Submit">
@@ -94,6 +102,30 @@ disableListTemplate: true
     </form>
     <div id="status"></div>
 </div>
+
+<style>
+.form-row {
+    display: flex;
+    gap: 15px;
+}
+
+.form-group.half {
+    flex: 1;
+}
+
+.form-group textarea {
+    width: 100%;
+    resize: vertical;
+    box-sizing: border-box;
+}
+
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group textarea {
+    width: 100%;
+    box-sizing: border-box;
+}
+</style>
 
 <script>
 document.getElementById('contact-form').addEventListener('submit', async (e) => {
