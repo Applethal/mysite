@@ -73,14 +73,14 @@ disableListTemplate: true
   taste. I can't however give a general image on what I listen to, but you could say that I try to listen to multiple
   genres. </p>
   
-<h2>Contact </h2>  
+<h1>Contact </h1>  
 <p>Reaching me can be done either by contacting me through my personal mail address nordine@rptu.de or you may also fill the following form. I will not store your information, though I will require your email address only if I may need 
 to send you a response. You may use a non-existing address and my system will still send me your submission, in case you do not wish to use your personal credentials. Please expect some slow response times when using this form here, as I haven't set 
 a notifcation system up but I will surely check my box from time to time, my personal email address is however the best way to reach me out. A German version of my resume can be found <a href="\lebenslauf_Saad_Nordine.pdf">here</a> in case 
 you require my skills.</p>
 
 
-<h1>Contact Form</h1>
+<h2>Contact Form</h2>
     
     <form id="contactForm">
         <div>
@@ -127,8 +127,10 @@ you require my skills.</p>
                     statusDiv.style.color = 'green';
                     this.reset();
                 } else {
-                    statusDiv.textContent = 'Failed to send message. Please try again.';
+                    const errorText = await response.text();
+                    statusDiv.textContent = `Failed to send message: ${errorText}`;
                     statusDiv.style.color = 'red';
+                    console.log('Error details:', errorText);
                 }
             } catch (error) {
                 statusDiv.textContent = 'Error sending message. Please try again.';
