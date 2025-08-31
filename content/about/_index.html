@@ -74,78 +74,30 @@ disableListTemplate: true
   genres. </p>
 
 
-    <form id="contactForm">
-        <div>
-            <label for="name">Name</label>
-            <input type="text" id="name" name="name" required>
-        </div>
-        
-        <div>
-            <label for="email">Email</label>
-            <input type="email" id="email" name="email" required>
-        </div>
-        
-        <div>
-            <label for="subject">Subject</label>
-            <input type="text" id="subject" name="subject">
-        </div>
-        
-        <div>
-            <label for="message">Message</label>
-            <textarea id="message" name="message" required></textarea>
-        </div>
-        
-        <button type="submit" id="submitBtn">Send Message</button>
-    </form>
-    
-    <div id="responseMessage" style="display: none;"></div>
+<form id="contact-form" method="POST" action="https://applethal.com/api/">
+  <label>Name</label>
+  <input type="text" name="name" required>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            document.getElementById('contactForm').addEventListener('submit', async function(e) {
-            e.preventDefault();
-            
-            const submitBtn = document.getElementById('submitBtn');
-            const responseMessage = document.getElementById('responseMessage');
-            
-            submitBtn.disabled = true;
-            submitBtn.textContent = 'Sending...';
-            responseMessage.style.display = 'none';
-            
-            const formData = new FormData(this);
-            const data = {
-                name: formData.get('name'),
-                email: formData.get('email'),
-                subject: formData.get('subject') || 'No Subject',
-                message: formData.get('message')
-            };
-            
-            try {
-                const response = await fetch('/api/contact', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(data)
-                });
-                
-                if (response.ok) {
-                    responseMessage.textContent = 'Message sent successfully!';
-                    responseMessage.style.display = 'block';
-                    responseMessage.style.color = 'green';
-                    this.reset();
-                } else {
-                    throw new Error('Failed to send message');
-                }
-                
-            } catch (error) {
-                responseMessage.textContent = 'Error sending message. Please try again.';
-                responseMessage.style.display = 'block';
-                responseMessage.style.color = 'red';
-            }
-            
-            submitBtn.disabled = false;
-            submitBtn.textContent = 'Send Message';
-        });
-    });
-    </script>
+  <label>Email</label>
+  <input type="email" name="email" required>
+
+  <label>Message</label>
+  <textarea name="message" required></textarea>
+
+  <button type="submit">Send</button>
+</form>
+
+<div id="form-status"></div>
+
+<script>
+  const form = document.getElementById("contact-form");
+  const statusDiv = document.getElementById("form-status");
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const formData = new FormData(form);
+    const response = await fetch(form.action, { method: "POST", body: formData });
+    statusDiv.innerText = await response.text();
+    form.reset();
+  });
+</script>
