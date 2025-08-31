@@ -74,30 +74,3 @@ disableListTemplate: true
   genres. </p>
 
 
-<form id="contact-form" method="POST" action="https://api.applethal.com"">
-  <label>Name</label>
-  <input type="text" name="name" required>
-
-  <label>Email</label>
-  <input type="email" name="email" required>
-
-  <label>Message</label>
-  <textarea name="message" required></textarea>
-
-  <button type="submit">Send</button>
-</form>
-
-<div id="form-status"></div>
-
-<script>
-  const form = document.getElementById("contact-form");
-  const statusDiv = document.getElementById("form-status");
-
-  form.addEventListener("submit", async (e) => {
-    e.preventDefault();
-    const formData = new FormData(form);
-    const response = await fetch(form.action, { method: "POST", body: formData });
-    statusDiv.innerText = await response.text();
-    form.reset();
-  });
-</script>
