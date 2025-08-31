@@ -74,37 +74,37 @@ disableListTemplate: true
   genres. </p>
 
 
-<form id="contact-form" action="/api/contact" method="POST">
-  <input type="text" name="name" placeholder="Your Name" required>
-  <input type="email" name="email" placeholder="Your Email" required>
-  <textarea name="message" placeholder="Your Message" required></textarea>
-  <button type="submit">Send Message</button>
-</form>
+<!-- <form id="contact-form" action="/api/contact" method="POST"> -->
+  <!-- <input type="text" name="name" placeholder="Your Name" required> -->
+  <!-- <input type="email" name="email" placeholder="Your Email" required> -->
+  <!-- <textarea name="message" placeholder="Your Message" required></textarea> -->
+  <!-- <button type="submit">Send Message</button> -->
+<!-- </form> -->
 
-<script>
-document.getElementById('contact-form').addEventListener('submit', async (e) => {
-  e.preventDefault();
-  const formData = new FormData(e.target);
+<!-- <script> -->
+<!-- document.getElementById('contact-form').addEventListener('submit', async (e) => { -->
+  <!-- e.preventDefault(); -->
+  <!-- const formData = new FormData(e.target); -->
   
-  try {
-    const response = await fetch('/api/contact', {
-      method: 'POST',
-      body: formData
-    });
+  <!-- try { -->
+    <!-- const response = await fetch('/api/contact', { -->
+      <!-- method: 'POST', -->
+      <!-- body: formData -->
+    <!-- }); -->
     
-    const result = await response.json();
-    console.log('Server response:', result);
+    <!-- const result = await response.json(); -->
+    <!-- console.log('Server response:', result); -->
     
-    if (response.ok) {
-      alert('Message sent successfully!');
-      e.target.reset();
-    } else {
-      alert(`Failed to send message: ${result.error}. Details: ${result.details || 'No details available'}`);
-      console.error('Error details:', result);
-    }
-  } catch (error) {
-    console.error('Network error:', error);
-    alert('Network error. Please check the console and try again.');
-  }
-});
-</script>
+    <!-- if (response.ok) { -->
+      <!-- alert('Message sent successfully!'); -->
+      <!-- e.target.reset(); -->
+    <!-- } else { -->
+      <!-- alert(`Failed to send message: ${result.error}. Details: ${result.details || 'No details available'}`); -->
+      <!-- console.error('Error details:', result); -->
+    <!-- } -->
+  <!-- } catch (error) { -->
+    <!-- console.error('Network error:', error); -->
+    <!-- alert('Network error. Please check the console and try again.'); -->
+  <!-- } -->
+<!-- }); -->
+<!-- </script> -->
