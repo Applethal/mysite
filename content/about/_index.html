@@ -74,67 +74,7 @@ disableListTemplate: true
   genres. </p>
   
 <h1>Contact </h1>  
-<p>Reaching me can be done either by contacting me through my personal mail address nordine@rptu.de or you may also fill the following form. I will not store your information, though I will require your email address only if I may need 
-to send you a response. You may use a non-existing address and my system will still send me your submission, in case you do not wish to use your personal credentials. Please expect some slow response times when using this form here, as I haven't set 
-a notifcation system up but I will surely check my box from time to time, my personal email address is however the best way to reach me out. A German version of my resume can be found <a href="\lebenslauf_Saad_Nordine.pdf">here</a> in case 
+<p>Reaching me can be done by contacting me through my personal mail address nordine@rptu.de. A German version of my resume can be found <a href="\lebenslauf_Saad_Nordine.pdf">here</a> in case 
 you require my skills.</p>
 
 
-<h2>Contact Form</h2>
-    
-    <form id="contactForm">
-        <div>
-            <label for="name">Name:</label><br>
-            <input type="text" id="name" name="name" required>
-        </div>
-        <br>
-        
-        <div>
-            <label for="email">Email:</label><br>
-            <input type="email" id="email" name="email" required>
-        </div>
-        <br>
-        
-        <div>
-            <label for="message">Message:</label><br>
-            <textarea id="message" name="message" rows="5" cols="40" required></textarea>
-        </div>
-        <br>
-        
-        <button type="submit">Send Message</button>
-    </form>
-    
-    <div id="status"></div>
-
-    <script>
-        document.getElementById('contactForm').addEventListener('submit', async function(e) {
-            e.preventDefault();
-            
-            const statusDiv = document.getElementById('status');
-            statusDiv.textContent = 'Sending...';
-            
-            const formData = new FormData(this);
-            
-            try {
-                // Replace this URL with your actual worker URL
-                const response = await fetch('https://contact-form-handler.megamanbnet.workers.dev/', {
-                    method: 'POST',
-                    body: formData
-                });
-                
-                if (response.ok) {
-                    statusDiv.textContent = 'Message sent successfully!';
-                    statusDiv.style.color = 'green';
-                    this.reset();
-                } else {
-                    const errorText = await response.text();
-                    statusDiv.textContent = `Failed to send message: ${errorText}`;
-                    statusDiv.style.color = 'red';
-                    console.log('Error details:', errorText);
-                }
-            } catch (error) {
-                statusDiv.textContent = 'Error sending message. Please try again.';
-                statusDiv.style.color = 'red';
-            }
-        });
-    </script>
