@@ -72,3 +72,34 @@ disableListTemplate: true
   feels good to meet an acquaintance who shares my
   taste. I can't however give a general image on what I listen to, but you could say that I try to listen to multiple
   genres. </p>
+
+
+<form id="contact-form" action="/api/contact" method="POST">
+  <input type="text" name="name" placeholder="Your Name" required>
+  <input type="email" name="email" placeholder="Your Email" required>
+  <textarea name="message" placeholder="Your Message" required></textarea>
+  <button type="submit">Send Message</button>
+</form>
+
+<script>
+document.getElementById('contact-form').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const formData = new FormData(e.target);
+  
+  try {
+    const response = await fetch('/api/contact', {
+      method: 'POST',
+      body: formData
+    });
+    
+    if (response.ok) {
+      alert('Message sent successfully!');
+      e.target.reset();
+    } else {
+      alert('Failed to send message. Please try again.');
+    }
+  } catch (error) {
+    alert('Error sending message. Please try again.');
+  }
+});
+</script>
