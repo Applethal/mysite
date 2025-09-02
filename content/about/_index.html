@@ -72,9 +72,41 @@ disableListTemplate: true
   feels good to meet an acquaintance who shares my
   taste. I can't however give a general image on what I listen to, but you could say that I try to listen to multiple
   genres. </p>
-  
-<h1>Contact </h1>  
-<p>Reaching me can be done by contacting me through my personal mail address nordine@rptu.de. A German version of my resume can be found <a href="\lebenslauf_Saad_Nordine.pdf">here</a> in case 
+
+<h1>Contact </h1>
+<p>Reaching me can be done by contacting me through my personal mail address nordine@rptu.de. A German version of my resume can be found <a href="\lebenslauf_Saad_Nordine.pdf">here</a> in case
 you require my skills.</p>
 
 
+
+<form id="contact-form">
+  <div>
+    <label>Name<input type="text" name="name" required /></label>
+  </div>
+  <div>
+    <label>Email<input type="email" name="email" required /></label>
+  </div>
+  <div>
+    <label>Message<textarea name="message" required></textarea></label>
+  </div>
+  <button type="submit">Send!</button>
+</form>
+
+<script>
+document.getElementById('contact-form').addEventListener('submit', async (e) => {
+  e.preventDefault();
+
+  const formData = new FormData(e.target);
+  const data = Object.fromEntries(formData);
+
+  const response = await fetch('/contact', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(data)
+  });
+
+  if (response.redirected) {
+    window.location.href = response.url;
+  }
+});
+</script>
