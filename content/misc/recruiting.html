@@ -7,6 +7,19 @@ Summary: Saad vs the machines
 
 ---
 
+
+<style>
+.code-block {
+  background-color: #1e1e1e; /* dark background */
+  color: #ffffff;            /* white text */
+  padding: 16px;
+  border-radius: 8px;
+  font-family: monospace;
+  white-space: pre;
+  line-height: 1.5;
+}
+</style>
+
 <p>In 2017 I began playing lots of Pokemon gen 7's random team matches in the Pokemon Showdown website. The idea of building a team was something I did not consider until watching lots of videos on how the meta works as of that generation. The complexity of making a team raises exponentially as we keep moving generations. As of generation 7, the number of possible combinations is a \(\binom{809}{6} = 382197543688324\), next you have to pick 4 moves for each of these 6 chosen team members, the space of which depends on which Pokemons you chose, you then pick an item out of approx. 500 holding items, you then choose an ability out of a maximum of 3 for each of the 6 chosen mons, and finally you adjust their stats by allocating 508 stat units across 6 different stats, all of which (except for Shedinja who has a locked HP stat of 1) can at most have 254 stat units. And if you so wish to include the gendering, nicknaming and shinyness then that makes the problem even more complex. There is a whole lot of min-maxing involved here in building a team here, especially with the additional constraint that limits which team members you are allowed to pick in a usage-based bracket, which depicts which pokemons you are not allowed to choose.</p>
 
 <p>Considering all of these dimensions leads usually to a headache due to the non-convexity of the problem, hence why people rely on observing the common patterns in the meta, which usually consists of picking the mons with the highest base-stats and best offensive/support moves. I always wanted to have an all-around team, yet I wanted something that offers surprises, something that stands-out, a team that only a few may know how to respond to. </p>
@@ -16,14 +29,14 @@ Summary: Saad vs the machines
 <pre>
 <code>
 
-artist (Smeargle) @ Choice Scarf  
-Ability: Own Tempo  
-EVs: 252 HP / 4 SpD / 252 Spe  
-Timid Nature  
-IVs: 0 Atk  
-- Spore  
-- Switcheroo  
-- Imprison  
+artist (Smeargle) @ Choice Scarf
+Ability: Own Tempo
+EVs: 252 HP / 4 SpD / 252 Spe
+Timid Nature
+IVs: 0 Atk
+- Spore
+- Switcheroo
+- Imprison
 - Transform
 
 
@@ -40,26 +53,26 @@ IVs: 0 Atk
 <pre>
 <code>
 
-psychiatre (Xatu) @ Focus Sash  
-Ability: Magic Bounce  
-EVs: 252 HP / 4 SpD / 252 Spe  
-Timid Nature  
-IVs: 0 Atk  
-- Skill Swap  
-- Light Screen  
-- Reflect  
+psychiatre (Xatu) @ Focus Sash
+Ability: Magic Bounce
+EVs: 252 HP / 4 SpD / 252 Spe
+Timid Nature
+IVs: 0 Atk
+- Skill Swap
+- Light Screen
+- Reflect
 - Thunder Wave
 
-pain (Shuckle) @ Rocky Helmet  
-Ability: Contrary  
-Shiny: Yes  
-Happiness: 0  
-EVs: 248 HP / 8 Atk / 252 SpD  
-Careful Nature  
-IVs: 0 Atk  
-- Sweet Scent  
-- Toxic  
-- Infestation  
+pain (Shuckle) @ Rocky Helmet
+Ability: Contrary
+Shiny: Yes
+Happiness: 0
+EVs: 248 HP / 8 Atk / 252 SpD
+Careful Nature
+IVs: 0 Atk
+- Sweet Scent
+- Toxic
+- Infestation
 - Rest
 </code>
 </pre>
@@ -69,14 +82,14 @@ IVs: 0 Atk
 
 <pre>
 <code>
-10000 iq (Alakazam-Mega) @ Alakazite  
-Ability: Magic Guard  
-EVs: 252 SpA / 4 SpD / 252 Spe  
-Timid Nature  
-IVs: 0 Atk  
-- Psyshock  
-- Energy Ball  
-- Dazzling Gleam 
+10000 iq (Alakazam-Mega) @ Alakazite
+Ability: Magic Guard
+EVs: 252 SpA / 4 SpD / 252 Spe
+Timid Nature
+IVs: 0 Atk
+- Psyshock
+- Energy Ball
+- Dazzling Gleam
 - Shadow Ball
 </code>
 </pre>
@@ -86,14 +99,14 @@ IVs: 0 Atk
 
 <pre>
 <code>
-final boss (Clefable) @ Firium Z  
-Ability: Unaware  
-EVs: 252 HP / 252 SpA / 4 SpD  
-Modest Nature  
-IVs: 0 Atk  
-- Flamethrower  
-- Rest  
-- Cosmic Power  
+final boss (Clefable) @ Firium Z
+Ability: Unaware
+EVs: 252 HP / 252 SpA / 4 SpD
+Modest Nature
+IVs: 0 Atk
+- Flamethrower
+- Rest
+- Cosmic Power
 - Stored Power
 
 </code>
