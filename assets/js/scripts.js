@@ -34,22 +34,33 @@ function darkmode() {
 }
 
 document.addEventListener("DOMContentLoaded", function () {
+
+    if (window.hugoParams && window.hugoParams.disable_references) {
+        return;
+    }
+
+
+    const referencesTitle = document.getElementById("references-title");
+    const referencesList = document.getElementById("references-list");
+
+    if (!referencesTitle || !referencesList) {
+        return;
+    }
+
     let links = Array.from(document.querySelectorAll(".main a"))
     .map(a => a.href)
     .filter(href => href);
-
     links = [...new Set(links)];
 
     if (links.length > 0) {
-        document.getElementById("references-title").style.display = "block";
-        let list = document.getElementById("references-list");
+        referencesTitle.style.display = "block";
         links.forEach(link => {
             let li = document.createElement("li");
             let a = document.createElement("a");
             a.href = link;
             a.textContent = link;
             li.appendChild(a);
-            list.appendChild(li);
+            referencesList.appendChild(li);
         });
     }
 });

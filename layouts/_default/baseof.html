@@ -73,18 +73,18 @@
     </center>
     {{ .Content }}
 
+    {{ if not .Params.disable_references }}
     <h2 id="references-title" style="display: none;">References</h2>
-
-	<ul id="references-list" style="overflow-y: auto; max-height: 100%; padding: 0; margin: 0; word-wrap: break-word;"></ul>
-
-
-
-
-
-
+    <ul id="references-list" style="overflow-y: auto; max-height: 100%; padding: 0; margin: 0; word-wrap: break-word;"></ul>
+    {{ end }}
     {{ end }}
 </div>
 
+<script>
+window.hugoParams = {
+    disable_references: {{ .Params.disable_references | default false }}
+};
+</script>
 
 
 
